@@ -3,10 +3,12 @@ Router.route('/', function () {
   this.render('Home', {data: {title: 'My Title'}});
 });
 
+Router.route('/about');
+
 // when you navigate to "/one" automatically render the template named "One".
-Router.route('/one');
+Router.route('/register');
 
 // when you navigate to "/two" automatically render the template named "Two".
-Router.route('/two');
+Router.route('/contact');
 
 
