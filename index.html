@@ -11,42 +11,7 @@
   {{> map}}
   {{> SearchMap}}
   <br>
-
-
 </template>
-
-<template name="About">
-  {{> Nav}}
-
-  <div class="content-container">
-  
-    <h1>Pimp my carroça</h1>
-  </div>
-</template>
-
-
-<template name="Register">
-  {{> Nav}}
-
-  <div class="content-container">
-    <h1>Cadastre-se</h1>
-
-    {{> addCarroceiroForm}}
-
-  </div>
-  <!-- Create account and login with meteor here or elsewhere? https://www.meteor.com/accounts -->
-</template>
-
-<template name="Contact">
-  {{> Nav}}
-
-  <div class="content-container">
-    <h1>Contato</h1>
-    <!-- Link to website.
-    Form to fill out? -->
-  </div>
-</template>
-
 
 
 <template name="addressGeoAutoComplete">
@@ -66,50 +31,6 @@
 </template>
 
 
-<template name="addCarroceiroForm">
-  <!-- Necessary data includes what's on this form: http://www.burrosemrabo.com.br/voluntarios/ -->
-  <!-- Also: what type of recyclable materials do they pick up? -->
-  <!-- Autocomplete with Google maps, address: https://atmospherejs.com/jeremy/geocomplete -->
-  <div class="registration-form">
-    <form>
 
-      <!-- Name -->
-      <div class="form-group">
-        <label>Nome</label>
-        <input type="text" class="form-control" placeholder="Nome" name="carroceiroName">
-      </div>
-
-      <!-- Address  -->
-      <div class="form-group">
-        <label>Endereço</label>
-        {{> addressGeoAutoComplete}}
-      </div>
-
-      <!-- Services -->
-      <div class="form-group">
-        <label>Que tipo de serviços voce faz?</label>
-        <div class="checkbox">
-          <div class="radio">
-            <label>
-              <input type="checkbox" id="inlineCheckbox1" value="option1"> Material 1
-            </label>
-          </div>
-          <div class="radio">
-            <label>
-              <input type="checkbox" id="inlineCheckbox2" value="option2"> Material 2
-            </label>
-          </div>
-          <div class="radio">
-            <label>
-              <input type="checkbox" id="inlineCheckbox3" value="option3"> Material 3
-            </label>
-          </div>
-        </div>
-      </div>
-
-      <input type="submit" id="submit-registration" class="form-control" value="Add Carroceiro">
-    </form>
-  </div>
-</template>
 
 
