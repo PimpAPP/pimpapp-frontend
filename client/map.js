@@ -109,6 +109,8 @@ Template.addressGeoAutoComplete.onRendered(function() {
 
 // TODO: figure out how to write helper functions in java,
 // and reuse code that puts marker + info window on map
+// Illustration-only --> shows that can add markers to the map
+// at locations from database + include infowindows.
 Template.viewCarroceiros.events({
   'submit form': function(event) {
     event.preventDefault();
@@ -118,6 +120,7 @@ Template.viewCarroceiros.events({
       console.log('test');
       var map = GoogleMaps.maps.map.instance
       var address = carroceiro.address;
+      var name = carroceiro.name;
 
       // Code from Google Developers
       var geocoder = new google.maps.Geocoder();
@@ -128,6 +131,16 @@ Template.viewCarroceiros.events({
               map: map,
               position: results[0].geometry.location
           });
+
+          var contentString = "Name: "+ name;
+          marker.info = new google.maps.InfoWindow({
+            content: contentString
+          });      
+
+          google.maps.event.addListener(marker, 'click', function() {
+            marker.info.open(map, marker);
+          });
+
         } else {
           alert("Geocode was not successful for the following reason: " + status);
         }

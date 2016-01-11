@@ -20,11 +20,25 @@
 }
 
 .map-search-form input{
-    width: 50%;
     height: 2em;
     margin: 2px;
 }
 
+
+/* Forms for illustration only */
+#geocomplete {
+    width:50em;
+}
+
+#go-to-address {
+    width: 10em;
+}
+
+#view-carroceiros-button {
+    margin-left: 2em;
+    margin-bottom: 5em;
+    width: 40em;
+}
 
 /* Registration specifications */
 .registration-form input {

@@ -23,23 +23,21 @@
 
 <template name="SearchMap">
   <div class="map-search-form">
-    <form>
+    <form class="form-inline">
       <div class="form-group">
         {{> addressGeoAutoComplete}}
-        <input type="submit" class="form-control" value="Go here">
+        <input type="submit" id="go-to-address" class="form-control" value="Go here">
       </div>
     </form>
   </div>
 </template>
 
 <template name="viewCarroceiros">
-  <div>
-    <form>
-      <div class="form-group">
-        <input type="submit" class="form-control" value="VIEW">
-      </div>
-    </form>
-  </div>
+  <!-- TODO: allow filters etc.? -->
+  <form>
+      <input type="submit" id="view-carroceiros-button" class="btn-default form-control" value="VEJA CARROÇEIROS NO MAPA">
+  </form>
+
 </template>
 
 
