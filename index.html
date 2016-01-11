@@ -23,32 +23,25 @@
 
   <h1>Cadastre-se</h1>
 
-  {{> addPlayerForm}}
+  {{> addCarroceiroForm}}
+  <!-- Create account and login with meteor here or elsewhere? https://www.meteor.com/accounts -->
 </template>
 
 <template name="Contact">
   {{> Nav}}
 
   <h1>Contato</h1>
+  <!-- Link to website.
+  Form to fill out? -->
 </template>
 
 
-<template name="addPlayerForm">
+<template name="addCarroceiroForm">
   <form>
-    Name: <input type="text" name="playerName"><br>
-    Age: <input type="number" name="age"><br>
-    <input type="submit" value="Add Player">
+    Name: <input type="text" name="carroceiroName"><br>
+    Location: <input type="text" name="carroceiroLocation"><br>
+    <input type="submit" value="Add Carroceiro">
   </form>
 </template>
 
 
-
-<template name="map">
-  <div class="map-container">
-    {{#unless geolocationError}}
-      {{> googleMap name="map" options=mapOptions}}
-    {{else}}
-      Geolocation failed: {{geolocationError}}
-    {{/unless}}
-  </div>
-</template>
