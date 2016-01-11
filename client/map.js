@@ -41,6 +41,16 @@ Template.map.onCreated(function() {
       // Center and zoom the map view onto the current position.
       map.instance.setCenter(marker.getPosition());
       map.instance.setZoom(MAP_ZOOM);
+
+      // TESTING INFO WINDOW -- HOW TO USE:
+      var contentString = "some text";
+      var infowindow = new google.maps.InfoWindow({
+        content: contentString
+      });      
+      marker.addListener('click', function() {
+        infowindow.open(map.instance, marker);
+      });
+
     });
   });
 });
@@ -89,7 +99,8 @@ Template.addressForm.events({
         } else {
           alert("Geocode was not successful for the following reason: " + status);
         }
-      });      
+      });
+
     }
 })
 
