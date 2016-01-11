@@ -72,15 +72,8 @@ Template.map.helpers({
   }
 });
 
-Template.addressForm.onRendered(function() {
-    this.autorun(function () {
-    if (GoogleMaps.loaded()) {
-      $("input").geocomplete();
-    }
-  });
-});
 
-Template.addressForm.events({
+Template.SearchMap.events({
   'submit form': function(event) {
       event.preventDefault();
       var address = event.target.desiredAddress.value;
@@ -103,5 +96,15 @@ Template.addressForm.events({
 
     }
 })
+
+
+Template.addressGeoAutoComplete.onRendered(function() {
+    this.autorun(function () {
+    if (GoogleMaps.loaded()) {
+      $("#geocomplete").geocomplete();
+    }
+  });
+});
+
 
 

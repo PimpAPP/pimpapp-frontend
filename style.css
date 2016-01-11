@@ -2,6 +2,13 @@
     margin-bottom: 50px;
 }
 
+.content-container {
+    margin: 2em;
+    padding-top: 1em;
+}
+
+
+/* Map specifications */
 .map-container {
     width: 100%;
     max-width: 100%;
@@ -17,3 +24,18 @@
     height: 2em;
     margin: 2px;
 }
+
+
+/* Registration specifications */
+.registration-form input {
+    width: 50em;
+}
+
+#submit-registration {
+    width: 15em;
+}
+
+.checkbox input {
+    margin-bottom: 1em;
+}
+
