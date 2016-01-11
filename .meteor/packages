@@ -24,3 +24,5 @@ ecmascript
 iron:router
 twbs:bootstrap
 jeremy:geocomplete
+accounts-password
+useraccounts:bootstrap
