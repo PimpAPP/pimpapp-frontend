@@ -25,3 +25,4 @@ check
 ecmascript
 iron:router
 twbs:bootstrap
+jeremy:geocomplete

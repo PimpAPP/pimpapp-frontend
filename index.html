@@ -9,12 +9,16 @@
   {{> Nav}}
   
   {{> map}}
+  {{> addressForm}}
+  <br>
+
+
 </template>
 
 <template name="About">
   {{> Nav}}
   
-  <h1>About</h1>
+  <h1>Pimp my carroça</h1>
 </template>
 
 
@@ -35,8 +39,20 @@
   Form to fill out? -->
 </template>
 
+<template name="addressForm">
+  <div class="map-search-form">
+    <form>
+      <input type="text" name="desiredAddress">
+      <input type="submit" value="Go here">
+    </form>
+  </div>
+</template>
+
 
 <template name="addCarroceiroForm">
+  <!-- Necessary data includes what's on this form: http://www.burrosemrabo.com.br/voluntarios/ -->
+  <!-- Also: what type of recyclable materials do they pick up? -->
+  <!-- Autocomplete with Google maps, address: https://atmospherejs.com/jeremy/geocomplete -->
   <form>
     Name: <input type="text" name="carroceiroName"><br>
     Location: <input type="text" name="carroceiroLocation"><br>

@@ -1,8 +1,17 @@
 
+/*
+If using Google API key, do not include it here.
+Use Meteor.settings.
+http://joshowens.me/environment-settings-and-security-with-meteor-js/
+*/
+
 var MAP_ZOOM = 15;
 
+
 Meteor.startup(function() {
-  GoogleMaps.load();
+  GoogleMaps.load({
+    libraries: 'places'
+  });
 });
 
 Template.map.onCreated(function() {
@@ -52,4 +61,36 @@ Template.map.helpers({
     }
   }
 });
+
+Template.addressForm.onRendered(function() {
+    this.autorun(function () {
+    if (GoogleMaps.loaded()) {
+      $("input").geocomplete();
+    }
+  });
+});
+
+Template.addressForm.events({
+  'submit form': function(event) {
+      event.preventDefault();
+      var address = event.target.desiredAddress.value;
+      console.log(address);
+      var map = GoogleMaps.maps.map.instance
+
+      // Code from Google Developers
+      var geocoder = new google.maps.Geocoder();
+      geocoder.geocode( { 'address': address}, function(results, status) {
+        if (status == google.maps.GeocoderStatus.OK) {
+          map.setCenter(results[0].geometry.location);
+          var marker = new google.maps.Marker({
+              map: map,
+              position: results[0].geometry.location
+          });
+        } else {
+          alert("Geocode was not successful for the following reason: " + status);
+        }
+      });      
+    }
+})
+
 
