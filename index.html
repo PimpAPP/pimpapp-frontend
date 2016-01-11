@@ -1,0 +1,48 @@
+<head>
+  <title>PimpApp</title>
+</head>
+
+<body>
+</body>
+
+<template name="Home">
+  {{> Nav}}
+  
+  {{> map}}
+  
+</template>
+
+<template name="One">
+  {{> Nav}}
+
+  <h1>Page One</h1>
+
+  {{> addPlayerForm}}
+</template>
+
+<template name="Two">
+  {{> Nav}}
+
+  <h1>Page Two</h1>
+</template>
+
+
+<template name="addPlayerForm">
+  <form>
+    Name: <input type="text" name="playerName"><br>
+    Age: <input type="number" name="age"><br>
+    <input type="submit" value="Add Player">
+  </form>
+</template>
+
+
+
+<template name="map">
+  <div class="map-container">
+    {{#unless geolocationError}}
+      {{> googleMap name="map" options=mapOptions}}
+    {{else}}
+      Geolocation failed: {{geolocationError}}
+    {{/unless}}
+  </div>
+</template>
