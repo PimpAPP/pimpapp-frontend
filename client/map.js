@@ -7,6 +7,7 @@ http://joshowens.me/environment-settings-and-security-with-meteor-js/
 
 var MAP_ZOOM = 15;
 
+Meteor.subscribe('carroceiros');
 
 Meteor.startup(function() {
   GoogleMaps.load({
@@ -105,6 +106,35 @@ Template.addressGeoAutoComplete.onRendered(function() {
     }
   });
 });
+
+// TODO: figure out how to write helper functions in java,
+// and reuse code that puts marker + info window on map
+Template.viewCarroceiros.events({
+  'submit form': function(event) {
+    event.preventDefault();
+    console.log('here');
+    var Carroceiros = CarroceiroData.find().fetch();
+    Carroceiros.forEach(function(carroceiro){
+      console.log('test');
+      var map = GoogleMaps.maps.map.instance
+      var address = carroceiro.address;
+
+      // Code from Google Developers
+      var geocoder = new google.maps.Geocoder();
+      geocoder.geocode( { 'address': address}, function(results, status) {
+        if (status == google.maps.GeocoderStatus.OK) {
+          map.setCenter(results[0].geometry.location);
+          var marker = new google.maps.Marker({
+              map: map,
+              position: results[0].geometry.location
+          });
+        } else {
+          alert("Geocode was not successful for the following reason: " + status);
+        }
+      });      
+    });
+  }  
+})
 
 
 

@@ -1,5 +1,11 @@
-
 CarroceiroData = new Mongo.Collection('carroceiros');
+
+if (Meteor.isServer) {
+  Meteor.publish('carroceiros', function() {
+    return CarroceiroData.find();
+  });
+}
+
 
 if (Meteor.isClient) {
   Template.addCarroceiroForm.events({
