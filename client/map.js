@@ -110,6 +110,7 @@ function addCatadoresToMap() {
     var map = GoogleMaps.maps.map.instance
     var address = catador.address
     var name = catador.name;
+    var telephone = catador.telephone;
 
     // add marker
     var marker = new google.maps.Marker({
@@ -120,6 +121,9 @@ function addCatadoresToMap() {
 
     // add infowindow
     var contentString = "Name: "+ name;
+    contentString += "<br>";
+    contentString += "Telephone: " + telephone;
+
     marker.info = new google.maps.InfoWindow({
       content: contentString
     });      
