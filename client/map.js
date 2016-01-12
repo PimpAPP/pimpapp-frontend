@@ -43,14 +43,7 @@ Template.map.onCreated(function() {
       map.instance.setCenter(marker.getPosition());
       map.instance.setZoom(MAP_ZOOM);
 
-      // TESTING INFO WINDOW -- HOW TO USE:
-      var contentString = "some text";
-      var infowindow = new google.maps.InfoWindow({
-        content: contentString
-      });      
-      marker.addListener('click', function() {
-        infowindow.open(map.instance, marker);
-      });
+      addCatadoresToMap();
 
     });
   });
@@ -74,6 +67,7 @@ Template.map.helpers({
 });
 
 
+// Go to specified address
 Template.SearchMap.events({
   'submit form': function(event) {
       event.preventDefault();
@@ -98,7 +92,7 @@ Template.SearchMap.events({
     }
 })
 
-
+// Autocompletes the address searched
 Template.addressGeoAutoComplete.onRendered(function() {
     this.autorun(function () {
     if (GoogleMaps.loaded()) {
@@ -107,47 +101,36 @@ Template.addressGeoAutoComplete.onRendered(function() {
   });
 });
 
-// TODO: figure out how to write helper functions in java,
-// and reuse code that puts marker + info window on map
-// Illustration-only --> shows that can add markers to the map
-// at locations from database + include infowindows.
-Template.viewCarroceiros.events({
-  'submit form': function(event) {
-    event.preventDefault();
-    console.log('here');
-    var Carroceiros = CarroceiroData.find().fetch();
-    Carroceiros.forEach(function(carroceiro){
-      console.log('test');
-      var map = GoogleMaps.maps.map.instance
-      var address = carroceiro.address;
-      var name = carroceiro.name;
 
-      // Code from Google Developers
-      var geocoder = new google.maps.Geocoder();
-      geocoder.geocode( { 'address': address}, function(results, status) {
-        if (status == google.maps.GeocoderStatus.OK) {
-          map.setCenter(results[0].geometry.location);
-          var marker = new google.maps.Marker({
-              map: map,
-              position: results[0].geometry.location
-          });
+// Adds markers for catadores and associated info windows
+function addCatadoresToMap() {
+  Catadores.find().fetch().forEach(function(catador) {
+    
+    // retrieve relevant data
+    var map = GoogleMaps.maps.map.instance
+    var address = catador.address
+    var name = catador.name;
 
-          var contentString = "Name: "+ name;
-          marker.info = new google.maps.InfoWindow({
-            content: contentString
-          });      
-
-          google.maps.event.addListener(marker, 'click', function() {
-            marker.info.open(map, marker);
-          });
-
-        } else {
-          alert("Geocode was not successful for the following reason: " + status);
-        }
-      });      
+    // add marker
+    var marker = new google.maps.Marker({
+        map: map,
+        position: {lat: address.lat, lng: address.lng},
+        icon: 'https://dl.dropboxusercontent.com/u/6293956/cart.png'
     });
-  }  
-})
+
+    // add infowindow
+    var contentString = "Name: "+ name;
+    marker.info = new google.maps.InfoWindow({
+      content: contentString
+    });      
+
+    // open infowindow on click
+    google.maps.event.addListener(marker, 'click', function() {
+      marker.info.open(map, marker);
+    });
+
+  });  
+}
 
 
 

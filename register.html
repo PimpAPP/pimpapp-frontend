@@ -26,12 +26,10 @@
       {{> pevForm }}
     {{/if}}
   {{/if}}
-
 </template>
 
-
+<!-- Form to pick what to register -->
 <template name="selectCarroceiroType">
-<!--   {{> quickForm collection="CarroceiroType" id="demo" schema=schemaFromJSON type="insert"}} -->
   <label>O que você quer cadastrar?</label><br>
   <label class="radio-inline">
     <input type="radio" name="inlineRadioOptions" id="catador-radio" value="option1"> Catador
@@ -44,14 +42,32 @@
   </label>  
 </template>
 
+
+<!-- Form to register catador -->
 <template name="catadorForm">
-  {{> quickForm collection="Catadores" id="insertCatadorForm" type="insert"}}
+  {{#autoForm collection="Catadores" id="insertCatadorForm" type="insert"}}
+  <fieldset>
+    <legend>Add a Catador</legend>
+    {{> afQuickField name='name'}}
+    {{> afQuickField name='address' type="googleplace"}}
+    {{> afQuickField name='telephone'}}
+    {{> afQuickField name='whatsapp'}}
+  </fieldset>
+  <button type="submit" class="btn btn-primary">Insert</button>
+  {{/autoForm}}
+
+  <!-- The quickForm includes the fields automatically, but doesn't
+  support Google Place autocomplete -->
+  <!-- {{> quickForm collection="Catadores" id="insertCatadorForm" type="insert"}} -->
 </template>
 
+
+<!-- Form to register cooperativa -->
 <template name="cooperativaForm">
   {{> quickForm collection="Cooperativas" id="insertCooperativaForm" type="insert"}}
 </template>
 
+<!-- Form to register ponto de entrega -->
 <template name="pevForm">
   {{> quickForm collection="PontoDeEntregas" id="insertPevForm" type="insert"}}
 </template>

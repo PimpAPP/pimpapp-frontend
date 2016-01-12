@@ -1,3 +1,3 @@
-Meteor.publish('catadores', function() {
-    return Catadores.find();
-});
+// Meteor.publish('catadores', function() {
+//     return Catadores.find();
+// });
