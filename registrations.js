@@ -89,7 +89,7 @@ Cooperativas.attachSchema(new SimpleSchema({
     max: 200
   },
   address: {
-    type: String,
+    type: AddressSchema,
     label: "Endereço"
   },
   telephone: {
@@ -114,7 +114,7 @@ PontoDeEntregas.attachSchema(new SimpleSchema({
     max: 200
   },
   address: {
-    type: String,
+    type: AddressSchema,
     label: "Endereço"
   },
   hours: {

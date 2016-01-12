@@ -55,19 +55,37 @@
   </fieldset>
   <button type="submit" class="btn btn-primary">Insert</button>
   {{/autoForm}}
-
   <!-- The quickForm includes the fields automatically, but doesn't
   support Google Place autocomplete -->
   <!-- {{> quickForm collection="Catadores" id="insertCatadorForm" type="insert"}} -->
 </template>
 
-
 <!-- Form to register cooperativa -->
 <template name="cooperativaForm">
-  {{> quickForm collection="Cooperativas" id="insertCooperativaForm" type="insert"}}
+  <!-- {{> quickForm collection="Cooperativas" id="insertCooperativaForm" type="insert"}} -->
+  {{#autoForm collection="Cooperativas" id="insertCooperativaForm" type="insert"}}
+  <fieldset>
+    <legend>Add a Cooperativa</legend>
+    {{> afQuickField name='name'}}
+    {{> afQuickField name='address' type="googleplace"}}
+    {{> afQuickField name='telephone'}}
+    {{> afQuickField name='hours'}}
+    {{> afQuickField name='coleta'}}
+  </fieldset>
+  <button type="submit" class="btn btn-primary">Insert</button>
+  {{/autoForm}}  
 </template>
 
 <!-- Form to register ponto de entrega -->
 <template name="pevForm">
-  {{> quickForm collection="PontoDeEntregas" id="insertPevForm" type="insert"}}
+  <!-- {{> quickForm collection="PontoDeEntregas" id="insertPevForm" type="insert"}} -->
+  {{#autoForm collection="PontoDeEntregas" id="insertPevForm" type="insert"}}
+  <fieldset>
+    <legend>Add a ponto de entrega</legend>
+    {{> afQuickField name='name'}}
+    {{> afQuickField name='address' type="googleplace"}}
+    {{> afQuickField name='hours'}}
+  </fieldset>
+  <button type="submit" class="btn btn-primary">Insert</button>
+  {{/autoForm}}    
 </template>

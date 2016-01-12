@@ -44,6 +44,7 @@ Template.map.onCreated(function() {
       map.instance.setZoom(MAP_ZOOM);
 
       addCatadoresToMap();
+      addCooperativasToMap();
 
     });
   });
@@ -104,37 +105,66 @@ Template.addressGeoAutoComplete.onRendered(function() {
 
 // Adds markers for catadores and associated info windows
 function addCatadoresToMap() {
+  var icon = 'https://dl.dropboxusercontent.com/u/6293956/cart.png';
+
   Catadores.find().fetch().forEach(function(catador) {
     
     // retrieve relevant data
-    var map = GoogleMaps.maps.map.instance
     var address = catador.address
     var name = catador.name;
     var telephone = catador.telephone;
 
-    // add marker
-    var marker = new google.maps.Marker({
-        map: map,
-        position: {lat: address.lat, lng: address.lng},
-        icon: 'https://dl.dropboxusercontent.com/u/6293956/cart.png'
-    });
-
-    // add infowindow
+    // create infowindow string
     var contentString = "Name: "+ name;
     contentString += "<br>";
     contentString += "Telephone: " + telephone;
 
-    marker.info = new google.maps.InfoWindow({
-      content: contentString
-    });      
+    addMarkerInfowindow(address, icon, contentString);
+  });  
+}
 
-    // open infowindow on click
-    google.maps.event.addListener(marker, 'click', function() {
-      marker.info.open(map, marker);
-    });
+// Adds markers for cooperativas and associated info windows
+function addCooperativasToMap() {
+  var icon = 'https://dl.dropboxusercontent.com/u/6293956/cooperativa.jpg';
 
+  Cooperativas.find().fetch().forEach(function(coop) {
+    
+    // retrieve relevant data
+    var address = coop.address
+    var name = coop.name;
+    var telephone = coop.telephone;
+    var hours = coop.hours;
+    var coleta = coop.coleta;
+
+    // create infowindow string
+    var contentString = "Name: "+ name;
+    contentString += "<br>";
+    contentString += "Telephone: " + telephone;
+    contentString += "<br>";
+    contentString += "Hours: " + hours;
+
+    addMarkerInfowindow(address, icon, contentString);
   });  
 }
 
 
+// Adds marker and associated info window to map
+function addMarkerInfowindow(addressObject, iconUrl, contentString) {
+  var map = GoogleMaps.maps.map.instance;
+  var marker = new google.maps.Marker({
+    map: map,
+    position: {lat: addressObject.lat, lng: addressObject.lng},
+    icon: iconUrl
+  });
+
+  // add info window
+  marker.info = new google.maps.InfoWindow({
+    content: contentString
+  });  
+
+  // open infowindow on click
+  google.maps.event.addListener(marker, 'click', function() {
+    marker.info.open(map, marker);
+  });      
+}
 
