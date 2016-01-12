@@ -3,11 +3,16 @@
 
   <div class="content-container">
     <h1>Cadastre-se</h1>
-    {{> addCarroceiroForm}}
+    {{#if currentUser}}
+      {{> addCarroceiroForm}}
+    {{/if}}
+    <!-- TODO: make proper if/else work -->
+    {{#unless currentUser}}
+      <p>Sign in first.</p>
+    {{/unless}}
   </div>
   <!-- Create account and login with meteor here or elsewhere? https://www.meteor.com/accounts -->
 </template>
-
 
 <template name="addCarroceiroForm">
   <!-- Necessary data includes what's on this form: http://www.burrosemrabo.com.br/voluntarios/ -->
