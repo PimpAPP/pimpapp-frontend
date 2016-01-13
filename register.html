@@ -53,9 +53,13 @@
   <fieldset>
     <legend>Add a Catador</legend>
     {{> afQuickField name='name'}}
-    {{> afQuickField name='address' type="googleplace"}}
     {{> afQuickField name='telephone'}}
     {{> afQuickField name='whatsapp'}}
+    {{> afQuickField name='address' type="googleplace"}}
+    {{> afQuickField name='region'}}
+    {{> afQuickField name='carrocaPimpada'}}
+    {{> afQuickField name='motorizedVehicle'}}
+
   </fieldset>
   <button type="submit" class="btn btn-primary">Insert</button>
   {{/autoForm}}
@@ -74,6 +78,7 @@
     {{> afQuickField name='address' type="googleplace"}}
     {{> afQuickField name='telephone'}}
     {{> afQuickField name='hours'}}
+    {{> afQuickField name='site'}}
     {{> afQuickField name='coleta'}}
   </fieldset>
   <button type="submit" class="btn btn-primary">Insert</button>

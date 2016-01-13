@@ -71,6 +71,18 @@ Catadores.attachSchema(new SimpleSchema({
     type: AddressSchema,
     label: "Endereço"
   },
+  region: {
+    type: String,
+    label: 'Trabalha em qual região?'
+  },
+  carrocaPimpada: {
+    type: Boolean,
+    label: 'Tem sua carroça pimpada?'
+  },
+  motorizedVehicle: {
+    type: Boolean,
+    label: 'Utiliza veículo motorizado?'
+  },
   telephone: {
     type: Number,
     label: "Telefone"
@@ -101,6 +113,10 @@ Cooperativas.attachSchema(new SimpleSchema({
     type: String,
     label: "Horário de atendimento"
   },
+  site: {
+    type: String,
+    label: "Site"
+  },  
   coleta: {
     type: Boolean,
     label: "Faz coleta?"
@@ -158,6 +174,7 @@ if (Meteor.isClient) {
   });
 
   // Starts page fresh with no form before selecting type
+  // (Alternative is to select the appropriate checkbox to keep previous selection)
   Template.addCarroceiroForm.onCreated(function() {
     delete Session.keys[carroceiroType];
   });
