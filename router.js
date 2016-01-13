@@ -3,12 +3,21 @@ Router.route('/', function () {
   this.render('Home', {data: {title: 'My Title'}});
 });
 
+// NAVBAR MENU ITEMS
 Router.route('/about');
 
-// when you navigate to "/one" automatically render the template named "One".
+Router.route('/services');
+
+Router.route('/collaborate');
+
+Router.route('/materials');
+
 Router.route('/register');
 
-// when you navigate to "/two" automatically render the template named "Two".
 Router.route('/contact');
+
+
+// ROUTING ELSEWHERE
+Router.route('/catadorprofile');
 
 

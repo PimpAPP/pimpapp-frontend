@@ -1,0 +1,19 @@
+<template name="Catadorprofile">
+  {{> Nav}}
+
+  <div class="content-container">
+    <p>Dynamically render profile content here that is specific to the selected carroceiro.
+    </p>
+    {{> imageView}}
+  </div>
+</template>
+
+<template name="imageView">
+  <div class="carroceiroPicture">
+    {{#each images}}
+      <div>
+        <a href="{{this.url}}" target="_blank"><img src="{{this.url store='thumbs' uploading='/images/uploading.gif' storing='/images/storing.gif'}}" alt="" class="thumbnail" /></a>
+      </div>
+    {{/each}}
+  </div>
+</template>
