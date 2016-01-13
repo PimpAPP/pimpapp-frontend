@@ -4,6 +4,19 @@ var cooperativa = "Cooperativa";
 var pontodeentrega = "Ponto de Entrega";
 var carroceiroType = 'selectedCarroceiroType'
 
+// FS collection to store files
+// In the future, use S3 or Dropbox instead of FileSystem
+// Documentation: https://github.com/CollectionFS/Meteor-CollectionFS
+Images = new FS.Collection("images", {
+  stores: [new FS.Store.FileSystem("images", {path: "~/uploads"})]
+});
+
+Images.allow({
+  'insert': function (userId, doc) {
+    // add custom authentication code here
+    return true;
+  }
+});
 
 AddressSchema = new SimpleSchema({
   fullAddress: {
@@ -90,6 +103,25 @@ Catadores.attachSchema(new SimpleSchema({
   whatsapp: {
     type: Boolean,
     label: "Tem Whatsapp"
+  },
+  picture: {
+    type: String,
+    autoform: {
+      afFieldInput: {
+        type: 'fileUpload',
+        collection: 'Images',
+        label: 'Choose file',
+        onBeforeInsert: function() {
+          return function(fileObj) {
+            var file = new FS.File(fileObj);
+            
+            // TODO: set name or modify filedata here
+            file.name("new name");
+            return file;
+          }
+        }
+      }
+    }
   }
 }));
 

@@ -113,11 +113,17 @@ function addCatadoresToMap() {
     var address = catador.address
     var name = catador.name;
     var telephone = catador.telephone;
+    // var picture = catador.picture
+    var img_src
+    var image = '<img border="0" align="left" src="' + img_src + '">'
+
 
     // create infowindow string
     var contentString = "Name: "+ name;
     contentString += "<br>";
     contentString += "Telephone: " + telephone;
+    contentString += "<br>";
+    contentString += Images.find();
 
     addMarkerInfowindow(address, icon, contentString);
   });  

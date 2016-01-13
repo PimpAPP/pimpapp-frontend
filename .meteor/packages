@@ -33,3 +33,6 @@ autopublish
 lukemadera:autoform-googleplace
 service-configuration
 google
+yogiben:autoform-file
+cfs:standard-packages
+cfs:filesystem
