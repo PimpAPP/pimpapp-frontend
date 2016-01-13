@@ -117,19 +117,20 @@ function addCatadoresToMap() {
     
     // retrieve picture
     var picture_id = catador.picture;
-    console.log(picture_id);
-    var catador_img_name = Images.findOne({'_id': picture_id}).name();
+    Session.set("currentPictureID", picture_id);
+    // console.log(picture_id);
+    // var catador_img_name = Images.findOne({'_id': picture_id}).name();
     // var img_src = '/img/images-' + picture_id+ '-' + catador_img_name;
     // img_src = '/img/' + picture_id;
-    var img_src = "/cfs/files/" + picture_id;
-    var img_string = '<a href='+ img_src +'><img style="width: 60px" ' + 'src="' + img_src + '"></a>';
+    // var img_src = "/cfs/files/" + picture_id;
+    // var img_string = '<a href='+ img_src +'><img style="width: 60px" ' + 'src="' + img_src + '"></a>';
 
     // create infowindow string
     var contentString = "Name: "+ name;
     contentString += "<br>";
     contentString += "Telephone: " + telephone;
     contentString += "<br>";
-    contentString += img_string;
+    // contentString += img_string;
     addMarkerInfowindow(address, icon, contentString);
   });  
 }
@@ -199,3 +200,8 @@ function addMarkerInfowindow(addressObject, iconUrl, contentString) {
   });      
 }
 
+Template.imageView.helpers({
+  images: function () {
+    return Images.find({'_id': Session.get("currentPictureID")}); // Where Images is an FS.Collection instance
+  }
+});

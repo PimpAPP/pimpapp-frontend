@@ -29,7 +29,6 @@ accounts-ui
 aldeed:autoform
 aldeed:collection2
 insecure
-autopublish
 lukemadera:autoform-googleplace
 service-configuration
 google

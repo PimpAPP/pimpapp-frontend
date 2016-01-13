@@ -34,26 +34,14 @@
     width: 10em;
 }
 
-#view-carroceiros-button {
-    margin-left: 2em;
-    margin-bottom: 5em;
-    width: 40em;
-}
 
 /* Registration specifications */
-/*.registration-form input {
-    width: 50em;
-}
-
-#submit-registration {
-    width: 15em;
-}
-
-.checkbox input {
-    margin-bottom: 1em;
-}
-*/
 .carroceiroTypeSelection {
     margin-bottom: 2em;
 }
 
+/**/
+
+.carroceiroPicture {
+    
+}

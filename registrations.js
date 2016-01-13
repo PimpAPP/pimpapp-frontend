@@ -6,12 +6,12 @@ var carroceiroType = 'selectedCarroceiroType';
 
 var photoID = 'photoID';
 
+
 // FS collection to store files
 Images = new FS.Collection("images", {
   // stores: [new FS.Store.FileSystem("images", {path: "img"})]
   stores: [new FS.Store.FileSystem("images")]
 });
-
 
 Images.allow({
   insert: function(){
@@ -27,6 +27,8 @@ Images.allow({
     return true;
   }
 });
+
+
 
 
 AddressSchema = new SimpleSchema({
@@ -125,27 +127,42 @@ Catadores.attachSchema(new SimpleSchema({
       }
     }
   },
-  favoriteColor: {
-      type: String,
-      allowedValues: ['red', 'green', 'blue'],
-      autoform: {
-        options: [
-          {label: "Coleta de material reciclável (papel, vidro, latas, embalagens, vidro, embalagem longa vida, etc.)", 
-            value: "recyclable"},
-          {label: "Coleta de Resíduo de Construção Civil (entulho, tintas, madeira, etc.)", 
-            value: "construction"},
-          {label: "Frete e Carreto", value: "frete"},  
-          {label: "Coleta de Resíduos Volumosos (sofá, geladeira, fogão, etc.)", 
-            value: "volumosos"},
-          {label: "Coleta de ferro e metais (cobre, alumínio, etc.)", 
-            value: "metals"},
-          {label: "Coleta de resíduos eletroeletrônicos (computadores, pilhas, baterias, etc.)", 
-            value: "electronics"},
-          {label: "Coleta de Outros materiais", value: "otherMaterials"}
-        ]
-      },
-      label: 'Serviços prestados'
-    }  
+
+  recyclable: {
+    type: Boolean,
+    label: "Coleta de material reciclável (papel, vidro, latas, embalagens, vidro, embalagem longa vida, etc.)"
+  },
+
+  construction: {
+    type: Boolean,
+    label: "Coleta de Resíduo de Construção Civil (entulho, tintas, madeira, etc.)"
+  }  
+
+  // Ideal method --> But difficulty making it work
+  // services: {
+  //     type: String,
+  //     // allowedValues: ['recylable', 'construction', 'frete', 'volumosos', 
+  //     //   'metals', 'electronics', 'otherMaterials'],
+  //     optional: true,
+  //     autoform: {
+  //       options: [
+  //         {label: "Coleta de material reciclável (papel, vidro, latas, embalagens, vidro, embalagem longa vida, etc.)", 
+  //           value: "recyclable"},
+  //         {label: "Coleta de Resíduo de Construção Civil (entulho, tintas, madeira, etc.)", 
+  //           value: "construction"},
+  //         {label: "Frete e Carreto", 
+  //           value: "frete"},  
+  //         {label: "Coleta de Resíduos Volumosos (sofá, geladeira, fogão, etc.)", 
+  //           value: "volumosos"},
+  //         {label: "Coleta de ferro e metais (cobre, alumínio, etc.)", 
+  //           value: "metals"},
+  //         {label: "Coleta de resíduos eletroeletrônicos (computadores, pilhas, baterias, etc.)", 
+  //           value: "electronics"},
+  //         {label: "Coleta de Outros materiais", 
+  //           value: "otherMaterials"}
+  //       ]
+  //     },
+  //     label: 'Serviços prestados'  
 }));
 
 
