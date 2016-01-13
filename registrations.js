@@ -2,6 +2,7 @@
 var catador = "Catador";
 var cooperativa = "Cooperativa";
 var pontodeentrega = "Ponto de Entrega";
+var carroceiroType = 'selectedCarroceiroType'
 
 
 AddressSchema = new SimpleSchema({
@@ -130,30 +131,35 @@ if (Meteor.isClient) {
 
   Template.selectCarroceiroType.events({
     'change #catador-radio': function(event) {
-      Session.set("selectedCarroceiroType", catador);
+      Session.set(carroceiroType, catador);
       console.log('selected catador');
     }, 
     'change #cooperativa-radio': function(event) {
-      Session.set("selectedCarroceiroType", cooperativa);
+      Session.set(carroceiroType, cooperativa);
       console.log('selected cooperativa');
     }, 
     'change #pev-radio': function(event) {
-      Session.set("selectedCarroceiroType", pontodeentrega);
+      Session.set(carroceiroType, pontodeentrega);
       console.log('selected pev');
     },     
   });
 
-
+  // Helper functions to dteermine which form to show
   Template.addCarroceiroForm.helpers({
     'showCatadorForm': function() {
-      return (catador == Session.get("selectedCarroceiroType"));
+      return (catador == Session.get(carroceiroType));
     },
     'showCooperativaForm': function() {
-      return (cooperativa == Session.get("selectedCarroceiroType"));
+      return (cooperativa == Session.get(carroceiroType));
     },
     'showPevForm': function() {
-      return (pontodeentrega == Session.get("selectedCarroceiroType"));
+      return (pontodeentrega == Session.get(carroceiroType));
     },    
+  });
+
+  // Starts page fresh with no form before selecting type
+  Template.addCarroceiroForm.onCreated(function() {
+    delete Session.keys[carroceiroType];
   });
 
 }

@@ -17,13 +17,17 @@
 <template name="addCarroceiroForm">
   {{> selectCarroceiroType}}
 
+  <!-- TODO (non-urgent): only show form when a type of
+  carroceiro is selected. So on submit, remove selection. -->
   {{#if showCatadorForm}}
     {{> catadorForm}}
   {{else}}
     {{#if showCooperativaForm}}
       {{> cooperativaForm}}
     {{else}}    
-      {{> pevForm }}
+      {{#if showPevForm}}
+        {{> pevForm }}
+        {{/if}}
     {{/if}}
   {{/if}}
 </template>
