@@ -8,7 +8,24 @@ var photoID = 'photoID';
 
 // FS collection to store files
 Images = new FS.Collection("images", {
-  stores: [new FS.Store.FileSystem("images", {path: "img"})]
+  // stores: [new FS.Store.FileSystem("images", {path: "img"})]
+  stores: [new FS.Store.FileSystem("images")]
+});
+
+
+Images.allow({
+  insert: function(){
+    return true;
+  },
+  update: function(){
+    return true;
+  },
+  remove: function(){
+    return true;
+  },
+  download: function(){
+    return true;
+  }
 });
 
 
@@ -107,7 +124,28 @@ Catadores.attachSchema(new SimpleSchema({
         label: 'Choose file'
       }
     }
-  }
+  },
+  favoriteColor: {
+      type: String,
+      allowedValues: ['red', 'green', 'blue'],
+      autoform: {
+        options: [
+          {label: "Coleta de material reciclável (papel, vidro, latas, embalagens, vidro, embalagem longa vida, etc.)", 
+            value: "recyclable"},
+          {label: "Coleta de Resíduo de Construção Civil (entulho, tintas, madeira, etc.)", 
+            value: "construction"},
+          {label: "Frete e Carreto", value: "frete"},  
+          {label: "Coleta de Resíduos Volumosos (sofá, geladeira, fogão, etc.)", 
+            value: "volumosos"},
+          {label: "Coleta de ferro e metais (cobre, alumínio, etc.)", 
+            value: "metals"},
+          {label: "Coleta de resíduos eletroeletrônicos (computadores, pilhas, baterias, etc.)", 
+            value: "electronics"},
+          {label: "Coleta de Outros materiais", value: "otherMaterials"}
+        ]
+      },
+      label: 'Serviços prestados'
+    }  
 }));
 
 
