@@ -110,21 +110,22 @@ function addCatadoresToMap() {
   Catadores.find().fetch().forEach(function(catador) {
     
     // retrieve relevant data
-    var address = catador.address
+    var address = catador.address;
     var name = catador.name;
     var telephone = catador.telephone;
-    // var picture = catador.picture
-    var img_src
-    var image = '<img border="0" align="left" src="' + img_src + '">'
-
+    
+    // retrieve picture
+    var picture_id = catador.picture;
+    var catador_img_name = Images.findOne({'_id': picture_id}).name();
+    var img_src = 'img/images-' + picture_id+ '-' + catador_img_name;
+    var img_string = '<img style="width: 60px" ' + 'src="' + img_src + '">';
 
     // create infowindow string
     var contentString = "Name: "+ name;
     contentString += "<br>";
     contentString += "Telephone: " + telephone;
     contentString += "<br>";
-    contentString += Images.find();
-
+    contentString += img_string;
     addMarkerInfowindow(address, icon, contentString);
   });  
 }
