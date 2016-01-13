@@ -116,8 +116,10 @@ function addCatadoresToMap() {
     
     // retrieve picture
     var picture_id = catador.picture;
+    console.log(picture_id);
     var catador_img_name = Images.findOne({'_id': picture_id}).name();
-    var img_src = 'img/images-' + picture_id+ '-' + catador_img_name;
+    // var img_src = '/img/images-' + picture_id+ '-' + catador_img_name;
+    img_src = '/cfs/files/images/' + picture_id;
     var img_string = '<img style="width: 60px" ' + 'src="' + img_src + '">';
 
     // create infowindow string

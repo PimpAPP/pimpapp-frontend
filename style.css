@@ -41,7 +41,7 @@
 }
 
 /* Registration specifications */
-.registration-form input {
+/*.registration-form input {
     width: 50em;
 }
 
@@ -50,6 +50,10 @@
 }
 
 .checkbox input {
+    margin-bottom: 1em;
+}
+*/
+.carroceiroTypeSelection {
     margin-bottom: 1em;
 }
 

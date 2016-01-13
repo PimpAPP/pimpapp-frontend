@@ -7,8 +7,6 @@ var carroceiroType = 'selectedCarroceiroType';
 var photoID = 'photoID';
 
 // FS collection to store files
-// In the future, use S3 or Dropbox instead of FileSystem
-// Documentation: https://github.com/CollectionFS/Meteor-CollectionFS
 Images = new FS.Collection("images", {
   stores: [new FS.Store.FileSystem("images", {path: "img"})]
 });
