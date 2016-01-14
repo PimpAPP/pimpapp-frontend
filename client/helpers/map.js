@@ -1,15 +1,4 @@
 
-/*
-If using Google API key, do not include it here.
-Use Meteor.settings.
-http://joshowens.me/environment-settings-and-security-with-meteor-js/
-*/
-
-
-currentPictureID = "currentPictureID";
-var selectedCarroceiroID = "currentCarroceiroID";
-
-
 var MAP_ZOOM = 15;
 
 Meteor.subscribe('carroceiros');
@@ -48,14 +37,15 @@ Template.map.onCreated(function() {
       map.instance.setCenter(marker.getPosition());
       map.instance.setZoom(MAP_ZOOM);
 
+      // Add markers for catadores, cooperatives, and ponto de entregas
       addCatadoresToMap();
       addCooperativasToMap();
       addPevsToMap();
-
     });
   });
 });
 
+// Helper functions for geolocation on the map
 Template.map.helpers({
   geolocationError: function() {
     var error = Geolocation.error();
@@ -115,16 +105,13 @@ function addCatadoresToMap() {
 
   Catadores.find().fetch().forEach(function(catador) {
     
-    // retrieve relevant data
-    var address = catador.address;
-    var name = catador.name;
-    var telephone = catador.telephone;
+    // used to retrieve data for catador on profile
     var carroceiroID = catador._id;
-    
-    // retrieve picture
-    var picture_id = catador.picture;
-    Session.set(currentPictureID, picture_id);
 
+    // retrieve data for marker
+    var name = catador.name;
+    var address = catador.address;
+    
     // create infowindow string
     var contentString = "Name: "+ name;
     contentString += "<br>";

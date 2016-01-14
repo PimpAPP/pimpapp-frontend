@@ -1,15 +1,12 @@
 
-// TODO: make variables like this stored elsewhere so that they are defined only once
-// rather than in each file
-
-var currentPictureID = "currentPictureID";
-var selectedCarroceiroID = "currentCarroceiroID";
+// Variables:
+// selectedCarroceiroID is defined in lib/str_variables.js
 
 Template.imageView.helpers({
   images: function () {
-    var img = Images.find({'_id': Session.get(currentPictureID)});
-    console.log("Returning image from collection");
-    console.log(Images.findOne({'_id': Session.get(currentPictureID)}));
+    // retrieve picture for selected catador
+    var catador = Catadores.findOne(Session.get(selectedCarroceiroID));
+    var img = Images.find({'_id': catador.picture});
     return img;
   }
 });
@@ -19,7 +16,7 @@ Template.imageView.helpers({
 // design general way of storing carroceiro id and retrieve correct object
 // idea: create separate profile for catador, cooperativa, ponto de entrega
 //      then this takes care of it?
-Template.ProfileDetails.helpers({
+Template.CatadorDetails.helpers({
   
   name: function() {
     var catador = Catadores.findOne(Session.get(selectedCarroceiroID));
