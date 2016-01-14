@@ -5,6 +5,11 @@ Use Meteor.settings.
 http://joshowens.me/environment-settings-and-security-with-meteor-js/
 */
 
+
+currentPictureID = "currentPictureID";
+var selectedCarroceiroID = "currentCarroceiroID";
+
+
 var MAP_ZOOM = 15;
 
 Meteor.subscribe('carroceiros');
@@ -114,16 +119,18 @@ function addCatadoresToMap() {
     var address = catador.address;
     var name = catador.name;
     var telephone = catador.telephone;
+    var carroceiroID = catador._id;
     
     // retrieve picture
     var picture_id = catador.picture;
-    Session.set("currentPictureID", picture_id);
+    Session.set(currentPictureID, picture_id);
 
     // create infowindow string
     var contentString = "Name: "+ name;
     contentString += "<br>";
     contentString += "<a href='/catadorprofile'> Veja mais</a>";
-    addMarkerInfowindow(address, icon, contentString);
+    
+    addMarkerInfowindow(address, icon, contentString, carroceiroID);
   });  
 }
 
@@ -146,6 +153,7 @@ function addCooperativasToMap() {
     contentString += "Telephone: " + telephone;
     contentString += "<br>";
     contentString += "Hours: " + hours;
+
 
     addMarkerInfowindow(address, icon, contentString);
   });  
@@ -173,7 +181,7 @@ function addPevsToMap() {
 
 
 // Adds marker and associated info window to map
-function addMarkerInfowindow(addressObject, iconUrl, contentString) {
+function addMarkerInfowindow(addressObject, iconUrl, contentString, carroceiroID) {
   var map = GoogleMaps.maps.map.instance;
   var marker = new google.maps.Marker({
     map: map,
@@ -184,10 +192,13 @@ function addMarkerInfowindow(addressObject, iconUrl, contentString) {
   // add info window
   marker.info = new google.maps.InfoWindow({
     content: contentString
-  });  
+  });
+
+  marker.carroceiroID = carroceiroID;
 
   // open infowindow on click
   google.maps.event.addListener(marker, 'click', function() {
+    Session.set(selectedCarroceiroID, marker.carroceiroID);
     marker.info.open(map, marker);
   });      
 }

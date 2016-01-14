@@ -1,18 +1,34 @@
+<!-- TODO: Instead create separate profile pages for users,
+So that it is possible to share a link to a user profile -->
+
 <template name="Catadorprofile">
   {{> Nav}}
 
   <div class="content-container">
-    <p>Dynamically render profile content here that is specific to the selected carroceiro.
-    </p>
+    <h2>Profile</h2>
+    {{> ProfileDetails}}
     {{> imageView}}
   </div>
 </template>
 
+
+<template name="ProfileDetails">
+  <h4>Nome</h4> 
+  {{name}}
+  <h4>Telefone</h4>
+  {{telephone}}
+  <h4>WhatsApp?</h4> 
+  {{whatsapp}}
+
+</template>
+
 <template name="imageView">
   <div class="carroceiroPicture">
+    <h4>Photo</h4>
     {{#each images}}
       <div>
-        <a href="{{this.url}}" target="_blank"><img src="{{this.url store='thumbs' uploading='/images/uploading.gif' storing='/images/storing.gif'}}" alt="" class="thumbnail" /></a>
+<!--         <a href="{{this.url}}" target="_blank"><img src="{{this.url store='thumbs' uploading='/images/uploading.gif' storing='/images/storing.gif'}}" alt="" class="thumbnail" /></a> -->
+        <a href="{{this.url}}" target="_blank"><img src="{{this.url}}" alt=""></a>        
       </div>
     {{/each}}
   </div>
