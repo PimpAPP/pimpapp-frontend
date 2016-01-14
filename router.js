@@ -14,8 +14,6 @@ Router.route('/materials');
 
 Router.route('/register');
 
-Router.route('/contact');
-
 
 // ROUTING ELSEWHERE
 Router.route('/catadorprofile');

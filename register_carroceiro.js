@@ -2,7 +2,8 @@
 var catador = "Catador";
 var cooperativa = "Cooperativa";
 var pontodeentrega = "Ponto de Entrega";
-var carroceiroType = 'selectedCarroceiroType';
+
+var carroceiroType ="selectedCarroceiroType";
 
 var photoID = 'photoID';
 
@@ -319,10 +320,7 @@ PontoDeEntregas.attachSchema(new SimpleSchema({
 }));
 
 
-
-
 if (Meteor.isClient) {
-
   Template.selectCarroceiroType.events({
     'change #catador-radio': function(event) {
       Session.set(carroceiroType, catador);
@@ -356,7 +354,4 @@ if (Meteor.isClient) {
   Template.addCarroceiroForm.onCreated(function() {
     delete Session.keys[carroceiroType];
   });
-
 }
-
-
