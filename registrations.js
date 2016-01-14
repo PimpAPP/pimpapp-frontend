@@ -119,26 +119,51 @@ Catadores.attachSchema(new SimpleSchema({
   },
   picture: {
     type: String,
+    label: "Foto",
     autoform: {
       afFieldInput: {
         type: 'fileUpload',
         collection: 'Images',
-        label: 'Choose file'
+        label: 'Escolha um foto'
       }
     }
   },
 
-  recyclable: {
+  // services
+  services_recyclable: {
     type: Boolean,
     label: "Coleta de material reciclável (papel, vidro, latas, embalagens, vidro, embalagem longa vida, etc.)"
   },
 
-  construction: {
+  services_construction: {
     type: Boolean,
-    label: "Coleta de Resíduo de Construção Civil (entulho, tintas, madeira, etc.)"
-  }  
-
-  // Ideal method --> But difficulty making it work
+    label: "Coleta de resíduo de construção civil (entulho, tintas, madeira, etc.)"
+  },
+  services_freight: {
+    type: Boolean,
+    label: "Frete e carreto"
+  },
+  services_furniture: {
+    type: Boolean,
+    label: "Coleta de resíduos Volumosos (sofá, geladeira, fogão, etc.)"
+  },
+  services_metals: {
+    type: Boolean,
+    label: "Coleta de ferro e metais (cobre, alumínio, etc.)"
+  },
+  services_electronics: {
+    type: Boolean,
+    label: "Coleta de resíduos eletroeletrônicos (computadores, pilhas, baterias, etc.)"
+  },
+  services_other_materials: {
+    type: Boolean,
+    label: "Coleta de outros materiais;"
+  },
+  services_metals: {
+    type: Boolean,
+    label: "Coleta de ferro e metais (cobre, alumínio, etc.)"
+  },   
+  // Ideal method --> But difficult making it work
   // services: {
   //     type: String,
   //     // allowedValues: ['recylable', 'construction', 'frete', 'volumosos', 
@@ -163,6 +188,10 @@ Catadores.attachSchema(new SimpleSchema({
   //       ]
   //     },
   //     label: 'Serviços prestados'  
+  observations: {
+    type: String,
+    label: 'Observações: (campo texto)'
+  }
 }));
 
 
@@ -192,7 +221,46 @@ Cooperativas.attachSchema(new SimpleSchema({
   coleta: {
     type: Boolean,
     label: "Faz coleta?"
+  },
+
+  // Materials they receive
+  receive_paper: {
+    type: Boolean,
+    label: "Papel (jornal, revista, papel branco, papelão, etc.)"
+  },
+  receive_glass: {
+    type: Boolean,
+    label: "Vidro (garrafas, embalagens, etc.)"
+  },
+  receive_metal: {
+    type: Boolean,
+    label: "Metal (latas de alumínio, embalagem de marmita, etc.)"
+  },
+  receive_plastic: {
+    type: Boolean,
+    label: "Plástico (embalagens, canos, etc.)"
+  },
+  receive_furniture: {
+    type: Boolean,
+    label: "Volumosos  (sofá, geladeira, fogão, etc.)"
+  },
+  receive_electronics: {
+    type: Boolean,
+    label: "Eletroeletrônicos (computadores, pilhas, baterias, etc.)"
+  },
+  receive_wood: {
+    type: Boolean,
+    label: "Madeira"
+  },
+  receive_waste: {
+    type: Boolean,
+    label: "Sucata (ferro, alumínio, metais, etc.)"
+  },
+  receive_other: {
+    type: Boolean,
+    label: "Outros (embalagem longa vida, etc.)"
   }
+
 }));
 
 PontoDeEntregas = new Mongo.Collection("pontodeentregas");
@@ -209,7 +277,45 @@ PontoDeEntregas.attachSchema(new SimpleSchema({
   hours: {
     type: String,
     label: "Horário de atendimento"
-  }
+  },
+
+  // Materials they receive
+  receive_paper: {
+    type: Boolean,
+    label: "Papel (jornal, revista, papel branco, papelão, etc.)"
+  },
+  receive_glass: {
+    type: Boolean,
+    label: "Vidro (garrafas, embalagens, etc.)"
+  },
+  receive_metal: {
+    type: Boolean,
+    label: "Metal (latas de alumínio, embalagem de marmita, etc.)"
+  },
+  receive_plastic: {
+    type: Boolean,
+    label: "Plástico (embalagens, canos, etc.)"
+  },
+  receive_furniture: {
+    type: Boolean,
+    label: "Volumosos  (sofá, geladeira, fogão, etc.)"
+  },
+  receive_electronics: {
+    type: Boolean,
+    label: "Eletroeletrônicos (computadores, pilhas, baterias, etc.)"
+  },
+  receive_construction: {
+    type: Boolean,
+    label: "Resíduo de Construção Civil (entulho, madeira, ferro, tintas, aluminio, etc.)"
+  },  
+  receive_waste: {
+    type: Boolean,
+    label: "Sucata (ferro, alumínio, metais, etc.)"
+  },
+  receive_other: {
+    type: Boolean,
+    label: "Outros (embalagem longa vida, etc.)"
+  }  
 }));
 
 

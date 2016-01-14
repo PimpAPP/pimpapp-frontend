@@ -53,7 +53,7 @@
 <template name="catadorForm">
   {{#autoForm collection="Catadores" id="insertCatadorForm" type="insert"}}
   <fieldset>
-    <legend>Add a Catador</legend>
+    <legend>Cadastre um catador</legend>
     {{> afQuickField name='name'}}
     {{> afQuickField name='telephone'}}
     {{> afQuickField name='whatsapp'}}
@@ -62,9 +62,16 @@
     {{> afQuickField name='carrocaPimpada'}}
     {{> afQuickField name='motorizedVehicle'}}
     
-    <label>What type of services?</label>
-    {{> afQuickField name="recyclable"}}
-    {{> afQuickField name="construction"}}
+    <label>Serviços prestados</label>
+    {{> afQuickField name="services_recyclable"}}
+    {{> afQuickField name="services_construction"}}
+    {{> afQuickField name="services_freight"}}
+    {{> afQuickField name="services_furniture"}}
+    {{> afQuickField name="services_metals"}}
+    {{> afQuickField name="services_electronics"}}
+    {{> afQuickField name="services_other_materials"}}
+
+    {{> afQuickField name="services_metals"}}
 
     {{> afQuickField name="picture"}}
 
@@ -88,6 +95,19 @@
     {{> afQuickField name='hours'}}
     {{> afQuickField name='site'}}
     {{> afQuickField name='coleta'}}
+
+    <label>Tipos de materiais que recebe</label>
+    {{> afQuickField name='receive_paper'}}
+    {{> afQuickField name='receive_glass'}}
+    {{> afQuickField name='receive_metal'}}
+    {{> afQuickField name='receive_plastic'}}
+    {{> afQuickField name='receive_furniture'}}
+    {{> afQuickField name='receive_electronics'}}
+    {{> afQuickField name='receive_wood'}}
+    {{> afQuickField name='receive_waste'}}
+    {{> afQuickField name='receive_other'}}
+
+
   </fieldset>
   <button type="submit" class="btn btn-primary">Insert</button>
   {{/autoForm}}  
@@ -102,6 +122,18 @@
     {{> afQuickField name='name'}}
     {{> afQuickField name='address' type="googleplace"}}
     {{> afQuickField name='hours'}}
+
+    <label>Tipos de materiais que recebe</label>
+    {{> afQuickField name='receive_paper'}}
+    {{> afQuickField name='receive_glass'}}
+    {{> afQuickField name='receive_metal'}}
+    {{> afQuickField name='receive_plastic'}}
+    {{> afQuickField name='receive_furniture'}}
+    {{> afQuickField name='receive_electronics'}}
+    {{> afQuickField name='receive_construction'}}
+    {{> afQuickField name='receive_waste'}}
+    {{> afQuickField name='receive_other'}}
+
   </fieldset>
   <button type="submit" class="btn btn-primary">Insert</button>
   {{/autoForm}}    
