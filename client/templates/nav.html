@@ -9,7 +9,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="/">PimpApp</a>
+          <a class="navbar-brand" href="/">PimpAPP</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -26,7 +26,7 @@
 
           <!-- If need to create dropdowns: https://atmospherejs.com/lookback/dropdowns -->
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="/login">Login/Cadastro</a></li>
+            <li>{{> accountButtons}}</li>
           </ul>          
         </div><!-- /.navbar-collapse -->
       </div><!-- / container-fluid -->
@@ -34,3 +34,23 @@
   </div>
 
 </template>
+
+<template name="accountButtons">
+  {{#if currentUser}}
+    {{> LogoutButton}}
+  {{else}}
+    {{> LoginButton}}
+  {{/if}}
+</template>
+
+<template name="LoginButton">
+  <a href="/login">Cadastro/Login</a>
+</template>
+
+<template name="LogoutButton">
+  <a href="/logout">Logout</a>
+</template>
+
+
+
+

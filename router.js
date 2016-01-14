@@ -17,6 +17,13 @@ Router.route('/registercarroceiro');
 Router.route('/login');
 
 
+
+Router.route('/logout', function () {
+  Meteor.logout();
+  this.render('Home');
+});
+
+
 // ROUTING ELSEWHERE
 Router.route('/catadorprofile');
 

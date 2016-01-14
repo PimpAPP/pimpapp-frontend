@@ -1,3 +1,7 @@
+// TODO: Add hooks to autoforms to add which user registered
+// the carroceiro.
+
+// Test user accounts
 
 var catador = "Catador";
 var cooperativa = "Cooperativa";
@@ -355,3 +359,8 @@ if (Meteor.isClient) {
     delete Session.keys[carroceiroType];
   });
 }
+
+
+
+
+
