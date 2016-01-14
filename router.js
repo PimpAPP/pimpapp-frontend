@@ -12,7 +12,9 @@ Router.route('/collaborate');
 
 Router.route('/materials');
 
-Router.route('/register');
+Router.route('/registercarroceiro');
+
+Router.route('/login');
 
 
 // ROUTING ELSEWHERE

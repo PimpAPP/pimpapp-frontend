@@ -1,0 +1,9 @@
+<template name="Login">
+  {{> Nav}}
+
+  <div class="content-container">
+    {{#unless currentUser}}
+      {{> atForm state='signUp'}}
+    {{/unless}}
+  </div>
+</template>

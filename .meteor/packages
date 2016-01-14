@@ -35,3 +35,4 @@ google
 yogiben:autoform-file
 cfs:standard-packages
 cfs:filesystem
+useraccounts:bootstrap
