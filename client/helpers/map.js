@@ -41,6 +41,7 @@ Template.map.onCreated(function() {
       addCatadoresToMap();
       addCooperativasToMap();
       addPevsToMap();
+
     });
   });
 });
