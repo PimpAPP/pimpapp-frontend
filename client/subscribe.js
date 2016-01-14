@@ -5,3 +5,5 @@
 Meteor.subscribe('images');
 
 Meteor.subscribe('catadores');
+
+Meteor.subscribe('cooperativas');

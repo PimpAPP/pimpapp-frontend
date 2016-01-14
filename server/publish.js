@@ -5,3 +5,7 @@ Meteor.publish('catadores', function() {
 Meteor.publish('images', function() {
     return Images.find();
 });
+
+Meteor.publish('cooperativas', function() {
+    return Cooperativas.find();
+})

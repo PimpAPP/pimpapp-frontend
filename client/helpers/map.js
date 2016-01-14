@@ -115,7 +115,8 @@ function addCatadoresToMap() {
     // create infowindow string
     var contentString = "Name: "+ name;
     contentString += "<br>";
-    contentString += "<a href='/catadorprofile'> Veja mais</a>";
+    contentString += "<a href='/catadorprofile/" + carroceiroID + "''>";
+    contentString += "Veja mais</a>";
     
     addMarkerInfowindow(address, icon, contentString, carroceiroID);
   });  
