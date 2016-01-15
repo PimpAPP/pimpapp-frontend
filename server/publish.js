@@ -8,4 +8,8 @@ Meteor.publish('images', function() {
 
 Meteor.publish('cooperativas', function() {
     return Cooperativas.find();
+});
+
+Meteor.publish('pontodeentregas', function() {
+    return PontoDeEntregas.find();
 })

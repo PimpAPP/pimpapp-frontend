@@ -7,3 +7,5 @@ Meteor.subscribe('images');
 Meteor.subscribe('catadores');
 
 Meteor.subscribe('cooperativas');
+
+Meteor.subscribe('pontodeentregas');

@@ -1,14 +1,14 @@
 
 var MAP_ZOOM = 15;
 
-Meteor.subscribe('carroceiros');
-
+// Load GoogleMaps on startup
 Meteor.startup(function() {
   GoogleMaps.load({
     libraries: 'places'
   });
 });
 
+// Create map and geolocate
 Template.map.onCreated(function() {
   var self = this;
 
@@ -107,7 +107,7 @@ function addCatadoresToMap() {
   Catadores.find().fetch().forEach(function(catador) {
     
     // used to retrieve data for catador on profile
-    var carroceiroID = catador._id;
+    var catadorID = catador._id;
 
     // retrieve data for marker
     var name = catador.name;
@@ -116,10 +116,10 @@ function addCatadoresToMap() {
     // create infowindow string
     var contentString = "Name: "+ name;
     contentString += "<br>";
-    contentString += "<a href='/catadorprofile/" + carroceiroID + "''>";
+    contentString += "<a href='/catadorprofile/" + catadorID + "''>";
     contentString += "Veja mais</a>";
     
-    addMarkerInfowindow(address, icon, contentString, carroceiroID);
+    addMarkerInfowindow(address, icon, contentString);
   });  
 }
 
@@ -136,12 +136,17 @@ function addCooperativasToMap() {
     var hours = coop.hours;
     var coleta = coop.coleta;
 
+    var cooperativaID = coop._id;
+
     // create infowindow string
     var contentString = "Name: "+ name;
     contentString += "<br>";
     contentString += "Telephone: " + telephone;
     contentString += "<br>";
     contentString += "Hours: " + hours;
+    contentString += "<br>";
+    contentString += "<a href='/cooperativaprofile/" + cooperativaID + "''>";
+    contentString += "Veja mais</a>";    
 
 
     addMarkerInfowindow(address, icon, contentString);
@@ -153,15 +158,21 @@ function addPevsToMap() {
 
   PontoDeEntregas.find().fetch().forEach(function(pev) {
     
+
     // retrieve relevant data
     var name = pev.name;
     var hours = pev.hours;
     var address = pev.address;
 
+    var pevID = pev._id;
+
     // create infowindow string
     var contentString = "Name: "+ name;
     contentString += "<br>";
     contentString += "Hours: " + hours;
+    contentString += "<br>";
+    contentString += "<a href='/pevprofile/" + pevID + "''>";
+    contentString += "Veja mais</a>";       
 
     addMarkerInfowindow(address, icon, contentString);
 
@@ -170,7 +181,7 @@ function addPevsToMap() {
 
 
 // Adds marker and associated info window to map
-function addMarkerInfowindow(addressObject, iconUrl, contentString, carroceiroID) {
+function addMarkerInfowindow(addressObject, iconUrl, contentString) {
   var map = GoogleMaps.maps.map.instance;
   var marker = new google.maps.Marker({
     map: map,
@@ -183,11 +194,9 @@ function addMarkerInfowindow(addressObject, iconUrl, contentString, carroceiroID
     content: contentString
   });
 
-  marker.carroceiroID = carroceiroID;
 
   // open infowindow on click
   google.maps.event.addListener(marker, 'click', function() {
-    Session.set(selectedCarroceiroID, marker.carroceiroID);
     marker.info.open(map, marker);
   });      
 }

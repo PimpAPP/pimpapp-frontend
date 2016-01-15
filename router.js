@@ -24,9 +24,19 @@ Router.route('/logout', function () {
 
 
 // ROUTING ELSEWHERE
-Router.route('/catadorprofile');
+// Router.route('/catadorprofile');
 
 // given a url like "/catadorprofile/<id>
 Router.route('/catadorprofile/:_id', function () {
   this.render('/catadorprofile');
+});
+
+// given a url like "/cooperativaprofile/<id>
+Router.route('/cooperativaprofile/:_id', function () {
+  this.render('/cooperativaprofile');
+});
+
+// given a url like "/pevprofile/<id>
+Router.route('/pevprofile/:_id', function () {
+  this.render('/pevprofile');
 });

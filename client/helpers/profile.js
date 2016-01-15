@@ -24,12 +24,8 @@ Template.CatadorDetails.helpers({
   
   whatsapp: function() {
     var catador = Catadores.findOne(getCatadorIdFromUrl());
-    if (catador.whatsapp) {
-      return "Sim";
-    }
-    else {
-      return 'Não';
-    }
+    var returnVal = (catador.whatsapp)? 'Sim' : 'Não';
+    return returnVal;
   }
 });
 
