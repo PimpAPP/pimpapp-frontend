@@ -8,11 +8,16 @@
 
 <template name="Home">
   {{> Nav}}
-  
+
   {{> map}}
   {{> SearchMap}}
-
-  <br>
+<!-- 
+  <div class="panel panel-default">
+    <div class="panel-body">
+      {{> map}}
+    </div>
+    <div class="panel-footer">{{> SearchMap}}</div>
+  </div> -->
 </template>
 
 
@@ -22,13 +27,15 @@
 
 
 <template name="SearchMap">
-  <div class="map-search-form">
-    <form class="form-inline">
-      <div class="form-group">
-        {{> addressGeoAutoComplete}}
-        <input type="submit" id="go-to-address" class="form-control" value="Go here">
-      </div>
-    </form>
+  <div class="search-address">
+    <div class="map-search-form">
+      <form class="form-inline">
+        
+          {{> addressGeoAutoComplete}}
+          <input type="submit" id="go-to-address" class="form-control" value="Go here">
+        
+      </form>
+    </div>
   </div>
 </template>
 

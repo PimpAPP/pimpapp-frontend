@@ -1,3 +1,14 @@
+html, body {
+    height: 100%;
+    width: 100%;
+    overflow-x: hidden;
+}
+
+body {
+  position: relative
+}
+
+
 .nav-container {
     margin-bottom: 50px;
 }
@@ -11,27 +22,24 @@
 /* Map specifications */
 .map-container {
     width: 100%;
-    max-width: 100%;
-    height: 40em;
+    height: 90%;
 }
 
-.map-search-form {
-    margin: 2em;
+.search-address.form-group {
+    width: 100%;
 }
 
-.map-search-form input{
-    height: 2em;
-    margin: 2px;
-}
-
-
-/* Forms for illustration only */
 #geocomplete {
-    width:50em;
+    width: 90%;
+    padding: 0;
+    margin: 0;
+
 }
 
 #go-to-address {
-    width: 10em;
+    width: 6%;
+    padding: 0;
+    margin: 0;
 }
 
 
