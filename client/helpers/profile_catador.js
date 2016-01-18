@@ -4,6 +4,7 @@
 Template.imageView.helpers({
   images: function () {
     // retrieve picture for selected catador
+    console.log('tries to retrieve images');
     var catador = Catadores.findOne(getCatadorIdFromUrl());
     var img = Images.find({'_id': catador.picture});
     return img;
