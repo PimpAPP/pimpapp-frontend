@@ -30,13 +30,14 @@ Template.map.onCreated(function() {
         map: map.instance
     });
     map.instance.setCenter(marker.getPosition());
-
+    
     self.autorun(function() {
       // add markers for catadores, cooperatives, and ponto de entregas
       // must be in autorun, because subscriptions maybe not received yet
       addCatadoresToMap();
       addCooperativasToMap();
-      addPevsToMap();           
+      addPevsToMap();     
+      
 
     });
 

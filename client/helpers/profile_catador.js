@@ -7,6 +7,7 @@ Template.imageView.helpers({
     var catador = Catadores.findOne(getCatadorIdFromUrl());
     var img = Images.find({'_id': catador.picture});
     return img;
+
   }
 });
 
@@ -18,11 +19,16 @@ Template.CatadorDetails.helpers({
     return catador.name;
   },
 
-  telephone: function() {
+  telephone1: function() {
     var catador = Catadores.findOne(getCatadorIdFromUrl());
-    return catador.telephone;
+    return catador.telephone1;
   },
-  
+
+  telephone2: function() {
+    var catador = Catadores.findOne(getCatadorIdFromUrl());
+    return catador.telephone2;
+  },
+
   whatsapp: function() {
     var catador = Catadores.findOne(getCatadorIdFromUrl());
     var returnVal = (catador.whatsapp)? 'Sim' : 'Não';
