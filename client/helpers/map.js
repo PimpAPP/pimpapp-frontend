@@ -102,7 +102,7 @@ Template.addressGeoAutoComplete.onRendered(function() {
 
 // Adds markers for catadores and associated info windows
 function addCatadoresToMap() {
-  var icon = 'https://dl.dropboxusercontent.com/u/6293956/cart.png';
+  var icon = catador_icon_source;
 
   Catadores.find().fetch().forEach(function(catador) {
     
@@ -125,7 +125,7 @@ function addCatadoresToMap() {
 
 // Adds markers for cooperativas and associated info windows
 function addCooperativasToMap() {
-  var icon = 'https://dl.dropboxusercontent.com/u/6293956/cooperativa.jpg';
+  var icon = cooperativa_icon_source;
 
   Cooperativas.find().fetch().forEach(function(coop) {
     
@@ -154,7 +154,7 @@ function addCooperativasToMap() {
 }
 
 function addPevsToMap() {
-  var icon = "https://dl.dropboxusercontent.com/u/6293956/pev.jpg";
+  var icon = pev_icon_source;
 
   PontoDeEntregas.find().fetch().forEach(function(pev) {
     
