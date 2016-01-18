@@ -11,6 +11,10 @@ So that it is possible to share a link to a user profile -->
   </div>
 </template>
 
+<!-- while subscriptions are loading, display this -->
+<template name="loadingcatadorprofile">
+  Loading catador profile
+</template>
 
 <template name="CatadorDetails">
   <h4>Nome</h4> 
@@ -19,6 +23,8 @@ So that it is possible to share a link to a user profile -->
   {{telephone}}
   <h4>WhatsApp?</h4> 
   {{whatsapp}}
+  <h4>Endereço</h4>
+  {{address}}
   <h4>Utiliza veículo motorizado??</h4> 
   {{motorizedVehicle}}
   <h4>Serviços prestados</h4>
@@ -31,7 +37,6 @@ So that it is possible to share a link to a user profile -->
     <h4>Photo</h4>
     {{#each images}}
       <div>
-<!--         <a href="{{this.url}}" target="_blank"><img src="{{this.url store='thumbs' uploading='/images/uploading.gif' storing='/images/storing.gif'}}" alt="" class="thumbnail" /></a> -->
         <a href="{{this.url}}" target="_blank"><img src="{{this.url}}" alt=""></a>        
       </div>
     {{/each}}

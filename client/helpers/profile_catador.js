@@ -1,4 +1,6 @@
 
+
+
 Template.imageView.helpers({
   images: function () {
     // retrieve picture for selected catador
@@ -27,6 +29,11 @@ Template.CatadorDetails.helpers({
     return returnVal;
   },
 
+  address: function() {
+    var catador = Catadores.findOne(getCatadorIdFromUrl());
+    return catador.address.fullAddress;
+  },
+
   motorizedVehicle: function() {
     var catador = Catadores.findOne(getCatadorIdFromUrl());
     var returnVal = (catador.motorizedVehicle)? 'Sim' : 'Não';
@@ -49,9 +56,7 @@ Template.CatadorDetails.helpers({
     var servicesString = services.join(", ");
     
     return servicesString;
-
   }
-
 });
 
 
@@ -67,7 +72,6 @@ function getCatadorIdFromUrl() {
 
   // pathname takes form /catadorprofile/<id>
   var id = pathname.split('/catadorprofile/')[1]
-
   return id;
-}
+};
 

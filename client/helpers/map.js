@@ -24,36 +24,26 @@ Template.map.onCreated(function() {
       }
     }
 
-    // If the marker doesn't yet exist, create it.
-    if (! marker) {
-      marker = new google.maps.Marker({
+    // create marker at coordinates
+    marker = new google.maps.Marker({
         position: new google.maps.LatLng(latLng.lat, latLng.lng),
         map: map.instance
-      });
-    }
-    // The marker already exists, so we'll just change its position.
-    else {
-      marker.setPosition(latLng);
-    }
-
-    // Center and zoom the map view onto the current position.
+    });
     map.instance.setCenter(marker.getPosition());
-    map.instance.setZoom(MAP_ZOOM);
 
-    addCatadoresToMap();
-    addCooperativasToMap();
-    addPevsToMap();    
-  
+    self.autorun(function() {
+      // add markers for catadores, cooperatives, and ponto de entregas
+      // must be in autorun, because subscriptions maybe not received yet
+      addCatadoresToMap();
+      addCooperativasToMap();
+      addPevsToMap();           
 
-    // self.autorun(function() {
-    //   // Add markers for catadores, cooperatives, and ponto de entregas
-    //   // TODO: is this the right place to do this?
+    });
 
-    // });
   });
 });
 
-// Helper functions for geolocation on the map
+// helper functions for geolocation on the map
 Template.map.helpers({
 
   mapOptions: function() {
@@ -66,7 +56,7 @@ Template.map.helpers({
         'lng': -46.6782626
       }
     }
-    // Initialize the map once we have the latLng.
+    // initialize the map once we have the latLng.
     if (GoogleMaps.loaded() && latLng) {
       return {
         center: new google.maps.LatLng(latLng.lat, latLng.lng),
@@ -78,12 +68,11 @@ Template.map.helpers({
 });
 
 
-// Go to specified address
+// go to specified address
 Template.SearchMap.events({
   'submit form': function(event) {
       event.preventDefault();
       var address = event.target.desiredAddress.value;
-      console.log(address);
       var map = GoogleMaps.maps.map.instance
 
       // Code from Google Developers
@@ -103,7 +92,7 @@ Template.SearchMap.events({
     }
 })
 
-// Autocompletes the address searched
+// autocompletes the address searched
 Template.addressGeoAutoComplete.onRendered(function() {
     this.autorun(function () {
     if (GoogleMaps.loaded()) {
@@ -113,19 +102,16 @@ Template.addressGeoAutoComplete.onRendered(function() {
 });
 
 
-// Adds markers for catadores and associated info windows
+// adds markers for catadores and associated info windows
 function addCatadoresToMap() {
   var icon = catador_icon_source;
 
   Catadores.find().fetch().forEach(function(catador) {
     
-    console.log('adding catadores');
-    // used to retrieve data for catador on profile
-    var catadorID = catador._id;
-
     // retrieve data for marker
     var name = catador.name;
     var address = catador.address;
+    var catadorID = catador._id;
     
     // create infowindow string
     var contentString = "Name: "+ name;
@@ -135,9 +121,9 @@ function addCatadoresToMap() {
     
     addMarkerInfowindow(address, icon, contentString);
   });  
-}
+};
 
-// Adds markers for cooperativas and associated info windows
+// adds markers for cooperativas and associated info windows
 function addCooperativasToMap() {
   var icon = cooperativa_icon_source;
 
@@ -149,7 +135,6 @@ function addCooperativasToMap() {
     var telephone = coop.telephone;
     var hours = coop.hours;
     var coleta = coop.coleta;
-
     var cooperativaID = coop._id;
 
     // create infowindow string
@@ -162,22 +147,19 @@ function addCooperativasToMap() {
     contentString += "<a href='/cooperativaprofile/" + cooperativaID + "''>";
     contentString += "Veja mais</a>";    
 
-
     addMarkerInfowindow(address, icon, contentString);
   });  
-}
+};
 
 function addPevsToMap() {
   var icon = pev_icon_source;
 
   PontoDeEntregas.find().fetch().forEach(function(pev) {
-    
 
     // retrieve relevant data
     var name = pev.name;
     var hours = pev.hours;
     var address = pev.address;
-
     var pevID = pev._id;
 
     // create infowindow string
@@ -189,17 +171,12 @@ function addPevsToMap() {
     contentString += "Veja mais</a>";       
 
     addMarkerInfowindow(address, icon, contentString);
-
-  })
-}
-
+  });
+};
 
 // Adds marker and associated info window to map
 function addMarkerInfowindow(addressObject, iconUrl, contentString) {
   var map = GoogleMaps.maps.map.instance;
-
-  console.log('map');
-  console.log(map);
   var marker = new google.maps.Marker({
     map: map,
     position: {lat: addressObject.lat, lng: addressObject.lng},
@@ -211,9 +188,8 @@ function addMarkerInfowindow(addressObject, iconUrl, contentString) {
     content: contentString
   });
 
-
   // open infowindow on click
   google.maps.event.addListener(marker, 'click', function() {
     marker.info.open(map, marker);
   });      
-}
+};
