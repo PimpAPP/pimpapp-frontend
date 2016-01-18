@@ -15,32 +15,37 @@ Template.map.onCreated(function() {
   GoogleMaps.ready('map', function(map) {
     var marker;
 
-    // Create and move the marker when latLng changes.
+    var latLng = Geolocation.latLng();
+    if (! latLng) {
+      // If geolocation fails, center on Sao Paulo
+      var latLng = {
+        'lat': -23.5528703,
+        'lng': -46.6782626
+      }
+    }
+
+    // If the marker doesn't yet exist, create it.
+    if (! marker) {
+      marker = new google.maps.Marker({
+        position: new google.maps.LatLng(latLng.lat, latLng.lng),
+        map: map.instance
+      });
+    }
+    // The marker already exists, so we'll just change its position.
+    else {
+      marker.setPosition(latLng);
+    }
+
+    // Center and zoom the map view onto the current position.
+    map.instance.setCenter(marker.getPosition());
+    map.instance.setZoom(MAP_ZOOM);
+
     self.autorun(function() {
-      var latLng = Geolocation.latLng();
-      if (! latLng)
-        return;
-
-      // If the marker doesn't yet exist, create it.
-      if (! marker) {
-        marker = new google.maps.Marker({
-          position: new google.maps.LatLng(latLng.lat, latLng.lng),
-          map: map.instance
-        });
-      }
-      // The marker already exists, so we'll just change its position.
-      else {
-        marker.setPosition(latLng);
-      }
-
-      // Center and zoom the map view onto the current position.
-      map.instance.setCenter(marker.getPosition());
-      map.instance.setZoom(MAP_ZOOM);
-
       // Add markers for catadores, cooperatives, and ponto de entregas
+      // TODO: is this the right place to do this?
       addCatadoresToMap();
       addCooperativasToMap();
-      addPevsToMap();
+      addPevsToMap();    
 
     });
   });
@@ -48,12 +53,17 @@ Template.map.onCreated(function() {
 
 // Helper functions for geolocation on the map
 Template.map.helpers({
-  geolocationError: function() {
-    var error = Geolocation.error();
-    return error && error.message;
-  },
+
   mapOptions: function() {
     var latLng = Geolocation.latLng();
+
+    // if geolocation error, center on Sao Paulo
+    if (!latLng) {
+      latLng = {
+        'lat': -23.5528703,
+        'lng': -46.6782626
+      }
+    }
     // Initialize the map once we have the latLng.
     if (GoogleMaps.loaded() && latLng) {
       return {
@@ -61,7 +71,8 @@ Template.map.helpers({
         zoom: MAP_ZOOM
       };
     }
-  }
+  },
+
 });
 
 
@@ -106,6 +117,7 @@ function addCatadoresToMap() {
 
   Catadores.find().fetch().forEach(function(catador) {
     
+    console.log('adding catadores');
     // used to retrieve data for catador on profile
     var catadorID = catador._id;
 
@@ -183,6 +195,9 @@ function addPevsToMap() {
 // Adds marker and associated info window to map
 function addMarkerInfowindow(addressObject, iconUrl, contentString) {
   var map = GoogleMaps.maps.map.instance;
+
+  console.log('map');
+  console.log(map);
   var marker = new google.maps.Marker({
     map: map,
     position: {lat: addressObject.lat, lng: addressObject.lng},

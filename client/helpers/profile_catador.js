@@ -1,12 +1,3 @@
-// catador services
-var services_recyclable_str = "Coleta de material reciclável (papel, vidro, latas, embalagens, vidro, embalagem longa vida, etc.)";
-var services_construction_str = "Coleta de resíduo de construção civil (entulho, tintas, madeira, etc.)";
-var services_freight_str = "Frete e carreto";
-var services_furniture_str = "Coleta de resíduos Volumosos (sofá, geladeira, fogão, etc.)";
-var services_metals_str = "Coleta de ferro e metais (cobre, alumínio, etc.)";
-var services_electronics_str = "Coleta de resíduos eletroeletrônicos (computadores, pilhas, baterias, etc.)";
-var services_other_materials_str = "Coleta de outros materiais";
-var services_metals_str = "Coleta de ferro e metais (cobre, alumínio, etc.)";
 
 Template.imageView.helpers({
   images: function () {
@@ -76,6 +67,7 @@ function getCatadorIdFromUrl() {
 
   // pathname takes form /catadorprofile/<id>
   var id = pathname.split('/catadorprofile/')[1]
+
   return id;
 }
 
