@@ -55,15 +55,15 @@ Template.CatadorDetails.helpers({
 });
 
 
-
+// TODO: Would be better if this was done only once when page is loaded
 function getCatadorIdFromUrl() {
   // get url of current page
   var currentUrl = Router.current().originalUrl;
-  
+
   // retrieve path
   var a = document.createElement('a');
   a.href = currentUrl;
-  var pathname = a.pathname;
+  var pathname = a.pathname;  
 
   // pathname takes form /catadorprofile/<id>
   var id = pathname.split('/catadorprofile/')[1]

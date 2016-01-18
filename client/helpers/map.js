@@ -40,14 +40,16 @@ Template.map.onCreated(function() {
     map.instance.setCenter(marker.getPosition());
     map.instance.setZoom(MAP_ZOOM);
 
-    self.autorun(function() {
-      // Add markers for catadores, cooperatives, and ponto de entregas
-      // TODO: is this the right place to do this?
-      addCatadoresToMap();
-      addCooperativasToMap();
-      addPevsToMap();    
+    addCatadoresToMap();
+    addCooperativasToMap();
+    addPevsToMap();    
+  
 
-    });
+    // self.autorun(function() {
+    //   // Add markers for catadores, cooperatives, and ponto de entregas
+    //   // TODO: is this the right place to do this?
+
+    // });
   });
 });
 
