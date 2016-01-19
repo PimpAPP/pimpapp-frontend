@@ -38,4 +38,3 @@ cfs:filesystem
 useraccounts:bootstrap
 force-ssl
 tarang:ssl
-fastclick
