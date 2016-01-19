@@ -35,15 +35,17 @@
 <template name="selectCarroceiroType">
   <div class="carroceiroTypeSelection">
     <label>O que você quer cadastrar?</label><br>
-    <label class="radio-inline">
-      <input type="radio" name="inlineRadioOptions" id="catador-radio" value="option1"> Catador
-    </label>
-    <label class="radio-inline">
-      <input type="radio" name="inlineRadioOptions" id="cooperativa-radio" value="option2"> Cooperativa
-    </label>
-    <label class="radio-inline">
-      <input type="radio" name="inlineRadioOptions" id="pev-radio" value="option3"> Ponto de entrega
-    </label> 
+      <div class="btn-group btn-group-justified" role="group" aria-label="...">
+        <div class="btn-group" role="group">
+          <button type="submit" id="catador-button" class="btn btn-default btn-carroceiro">Catador</button>
+        </div>
+        <div class="btn-group" role="group">
+          <button type="submit" id="cooperativa-button" class="btn btn-default btn-carroceiro">Cooperativa</button>
+        </div>
+        <div class="btn-group" role="group">
+          <button type="submit" id="pev-button" class="btn btn-default btn-carroceiro">Ponto de entrega</button>
+        </div>
+      </div>
   </div> 
 </template>
 
