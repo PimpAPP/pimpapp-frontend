@@ -16,6 +16,8 @@ body {
 .content-container {
     margin: 2em;
     padding-top: 1em;
+    height: 100%;
+    width:;
 }
 
 
@@ -46,11 +48,26 @@ body {
 /* Registration specifications */
 #carroceiro-form-selection {
     margin-bottom: 2em;
+    float: left;
+    margin-right: 2em;
+    max-width: 20%;
+    height: auto;
 }
 
 /* Profile specifications*/
-
 .image-container {
+    width: 15%;
+    height: 25%;
+    overflow: hidden;
     float: left;
     margin-right: 2em;
 }
+
+
+.image-container img {
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+    overflow: hideen;
+}
+
