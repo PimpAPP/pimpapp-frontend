@@ -64,7 +64,8 @@ Template.map.helpers({
       return {
         center: new google.maps.LatLng(latLng.lat, latLng.lng),
         zoom: MAP_ZOOM,
-        mapTypeControl: false
+        mapTypeControl: false,
+        streetViewControl: false
       };
     }
   },
@@ -76,7 +77,7 @@ Template.map.helpers({
 function attachSearchBox(map, marker) {
   var input = document.getElementById('pac-input');
   var searchBox = new google.maps.places.SearchBox(input);
-  map.instance.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+  map.instance.controls[google.maps.ControlPosition.TOP_CENTER].push(input);
 
   // move marker and set new map center when user inputs place
   searchBox.addListener('places_changed', function() {
