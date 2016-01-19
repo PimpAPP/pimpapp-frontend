@@ -15,46 +15,58 @@
 
 <!-- Form to register carroceiro -->
 <template name="addCarroceiroForm">
-  {{> selectCarroceiroType}}
+  
+  <ul class="nav nav-pills" id="carroceiro-form-selection">
+    <li class="active"><a data-toggle="pill" href="#catador-form">Catador</a></li>
+    <li><a data-toggle="pill" href="#cooperativa-form">Cooperativa</a></li>
+    <li><a data-toggle="pill" href="#pev-form">Ponto de entrega</a></li>
+  </ul>
 
-  <!-- Logic that selects which registration form to display -->
-  {{#if showCatadorForm}}
-    {{> catadorForm}}
-  {{else}}
-    {{#if showCooperativaForm}}
+  <div class="tab-content">
+    <div id="catador-form" class="tab-pane fade in active">
+      {{> catadorForm}}
+    </div>
+    <div id="cooperativa-form" class="tab-pane fade">
       {{> cooperativaForm}}
-    {{else}}    
-      {{#if showPevForm}}
-        {{> pevForm }}
-        {{/if}}
-    {{/if}}
-  {{/if}}
+    </div>
+    <div id="pev-form" class="tab-pane fade">
+      {{> pevForm}}
+    </div>
+  </div>
+  
 </template>
 
 <!-- Selection form to pick what to register -->
-<template name="selectCarroceiroType">
+<!-- <template name="selectCarroceiroType">
   <div class="carroceiroTypeSelection">
     <label>O que você quer cadastrar?</label><br>
-      <div class="btn-group btn-group-justified" role="group" aria-label="...">
-        <div class="btn-group" role="group">
-          <button type="submit" id="catador-button" class="btn btn-default btn-carroceiro">Catador</button>
-        </div>
-        <div class="btn-group" role="group">
-          <button type="submit" id="cooperativa-button" class="btn btn-default btn-carroceiro">Cooperativa</button>
-        </div>
-        <div class="btn-group" role="group">
-          <button type="submit" id="pev-button" class="btn btn-default btn-carroceiro">Ponto de entrega</button>
-        </div>
+    <ul class="nav nav-pills">
+      <li class="active"><a data-toggle="pill" href="#catador-form">Catador</a></li>
+      <li><a data-toggle="pill" href="#cooperativa-form">Cooperativa</a></li>
+      <li><a data-toggle="pill" href="#pev-form">Ponto de entrega</a></li>
+    </ul>
+`
+    <div class="tab-content">
+      <div id="catador-form" class="tab-pane fade in active">
+        {{> catadorForm}}
       </div>
+      <div id="cooperativa-form" class="tab-pane fade">
+        {{> cooperativaForm}}
+      </div>
+      <div id="pev-form" class="tab-pane fade">
+        {{> pevForm}}
+      </div>
+    </div>
+
   </div> 
-</template>
+</template> -->
 
 
 <!-- Form to register catador -->
 <template name="catadorForm">
   {{#autoForm collection="Catadores" id="insertCatadorForm" type="insert"}}
   <fieldset>
-    <legend>Cadastre um catador</legend>
+    <!-- <legend>Cadastre um catador</legend> -->
     {{> afQuickField name='name'}}
     {{> afQuickField name='telephone1'}}
     {{> afQuickField name='telephone2'}}
@@ -90,7 +102,7 @@
   <!-- {{> quickForm collection="Cooperativas" id="insertCooperativaForm" type="insert"}} -->
   {{#autoForm collection="Cooperativas" id="insertCooperativaForm" type="insert"}}
   <fieldset>
-    <legend>Add a Cooperativa</legend>
+    <!-- <legend>Add a Cooperativa</legend> -->
     {{> afQuickField name='name'}}
     {{> afQuickField name='address' type="googleplace"}}
     {{> afQuickField name='telephone'}}
@@ -121,7 +133,7 @@
   <!-- {{> quickForm collection="PontoDeEntregas" id="insertPevForm" type="insert"}} -->
   {{#autoForm collection="PontoDeEntregas" id="insertPevForm" type="insert"}}
   <fieldset>
-    <legend>Add a ponto de entrega</legend>
+    <!-- <legend>Add a ponto de entrega</legend> -->
     {{> afQuickField name='name'}}
     {{> afQuickField name='address' type="googleplace"}}
     {{> afQuickField name='hours'}}
