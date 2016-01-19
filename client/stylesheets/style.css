@@ -48,8 +48,9 @@ body {
     margin-bottom: 2em;
 }
 
-/**/
+/* Profile specifications*/
 
-.carroceiroPicture {
-    
+.image-container {
+    float: left;
+    margin-right: 2em;
 }

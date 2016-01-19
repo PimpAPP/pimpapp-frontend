@@ -5,9 +5,17 @@ So that it is possible to share a link to a user profile -->
   {{> Nav}}
 
   <div class="content-container">
-    <h2>Profile</h2>
-    {{> CatadorDetails}}
-    {{> imageView}}
+    <div>
+      <div class="image-container">
+        {{> imageView}}
+      </div>
+      <div class="personal-container">
+        {{> PersonalDetails}}
+      </div>
+
+    </div>
+
+
   </div>
 </template>
 
@@ -16,15 +24,16 @@ So that it is possible to share a link to a user profile -->
   Loading catador profile
 </template>
 
-<template name="CatadorDetails">
-  <h4>Nome</h4> 
-  {{name}}
-  <h4>Telefone 1</h4>
-  {{telephone1}}
-  <h4>Telefone 2</h4>
-  {{telephone2}}  
-  <h4>WhatsApp?</h4> 
-  {{whatsapp}}
+<template name="PersonalDetails">
+  <h3>{{name}}</h3> 
+  
+  Telefone 1: {{telephone1}}<br>
+  Telefone 2: {{telephone2}}<br>
+  WhatsApp? {{whatsapp}}
+  
+</template>
+
+<template name="workDetails">
   <h4>Endereço</h4>
   {{address}}
   <h4>Utiliza veículo motorizado??</h4> 
@@ -35,12 +44,9 @@ So that it is possible to share a link to a user profile -->
 </template>
 
 <template name="imageView">
-  <div class="carroceiroPicture">
-    <h4>Photo</h4>
-    {{#each images}}
-      <div>
-        <a href="{{this.url}}" target="_blank"><img src="{{this.url}}" alt=""></a>        
-      </div>
-    {{/each}}
-  </div>
+  {{#each images}}
+    <div>
+      <a href="{{this.url}}" target="_blank"><img src="{{this.url}}" alt=""></a>        
+    </div>
+  {{/each}}
 </template>
