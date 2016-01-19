@@ -1,3 +1,5 @@
+/* Common to all pages */
+
 html, body {
     height: 100%;
     width: 100%;
@@ -6,6 +8,26 @@ html, body {
 
 body {
   position: relative
+}
+
+.nav-container {
+    margin-bottom: 50px;
+}
+
+.content-container {
+    margin: 2em;
+    padding-top: 1em;
+    height: 100%;
+    width: 100%;
+}
+
+
+
+/* Map specifications */
+
+.map-container {
+    width: 100%;
+    height: 100%;
 }
 
 #pac-input {
@@ -31,43 +53,9 @@ body {
 }
 
 
-.nav-container {
-    margin-bottom: 50px;
-}
-
-.content-container {
-    margin: 2em;
-    padding-top: 1em;
-    height: 100%;
-    width: 100%;
-}
-
-
-/* Map specifications */
-.map-container {
-    width: 100%;
-    height: 90%;
-}
-
-.search-address.form-group {
-    width: 100%;
-}
-
-#geocomplete {
-    width: 90%;
-    padding: 0;
-    margin: 0;
-
-}
-
-#go-to-address {
-    width: 6%;
-    padding: 0;
-    margin: 0;
-}
-
 
 /* Registration specifications */
+
 #carroceiro-form-selection {
     margin-bottom: 2em;
 }
@@ -96,13 +84,15 @@ body {
     overflow: hideen;
 }
 
-
 .region-container {
     clear: both;
     margin-top: 1em;
     display: inline-block;
     width: 100%;
 }
+
+
+/* Responsiveness */
 
 @media (max-width: 480px) {
     .profile-container {
@@ -114,7 +104,6 @@ body {
         margin: 0 auto;
         padding: 0;
     }
-
 }
 
 

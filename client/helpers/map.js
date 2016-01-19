@@ -24,69 +24,15 @@ Template.map.onCreated(function() {
       }
     }
 
-
-    var input = document.getElementById('pac-input');
-    var searchBox = new google.maps.places.SearchBox(input);
-    map.instance.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
-
-    // Bias the SearchBox results towards current map's viewport.
-    map.instance.addListener('bounds_changed', function() {
-      searchBox.setBounds(map.instance.getBounds());
-    });    
-
-    var markers = [];
-    // [START region_getplaces]
-    // Listen for the event fired when the user selects a prediction and retrieve
-    // more details for that place.
-    searchBox.addListener('places_changed', function() {
-      var places = searchBox.getPlaces();
-
-      if (places.length == 0) {
-        return;
-      }
-
-      // Clear out the old markers.
-      markers.forEach(function(marker) {
-        marker.setMap(null);
-      });
-      markers = [];
-
-      // For each place, get the icon, name and location.
-      var bounds = new google.maps.LatLngBounds();
-      places.forEach(function(place) {
-        var icon = {
-          url: place.icon,
-          size: new google.maps.Size(71, 71),
-          origin: new google.maps.Point(0, 0),
-          anchor: new google.maps.Point(17, 34),
-          scaledSize: new google.maps.Size(25, 25)
-        };
-
-        // Create a marker for each place.
-        markers.push(new google.maps.Marker({
-          map: map.instance,
-          icon: icon,
-          title: place.name,
-          position: place.geometry.location
-        }));
-
-        if (place.geometry.viewport) {
-          // Only geocodes have viewport.
-          bounds.union(place.geometry.viewport);
-        } else {
-          bounds.extend(place.geometry.location);
-        }
-      });
-      map.instance.fitBounds(bounds);
-    });
-    
-
     // create marker at coordinates
     marker = new google.maps.Marker({
         position: new google.maps.LatLng(latLng.lat, latLng.lng),
         map: map.instance
     });
     map.instance.setCenter(marker.getPosition());
+
+    // attaches the search box
+    attachSearchBox(map, marker);
     
     self.autorun(function() {
       // add markers for catadores, cooperatives, and ponto de entregas
@@ -98,6 +44,7 @@ Template.map.onCreated(function() {
 
   });
 });
+
 
 // helper functions for geolocation on the map
 Template.map.helpers({
@@ -124,38 +71,26 @@ Template.map.helpers({
 });
 
 
-// go to specified address
-Template.SearchMap.events({
-  'submit form': function(event) {
-      event.preventDefault();
-      var address = event.target.desiredAddress.value;
-      var map = GoogleMaps.maps.map.instance
+// attaches the address search box
+function attachSearchBox(map, marker) {
+  var input = document.getElementById('pac-input');
+  var searchBox = new google.maps.places.SearchBox(input);
+  map.instance.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
 
-      // Code from Google Developers
-      var geocoder = new google.maps.Geocoder();
-      geocoder.geocode( { 'address': address}, function(results, status) {
-        if (status == google.maps.GeocoderStatus.OK) {
-          map.setCenter(results[0].geometry.location);
-          var marker = new google.maps.Marker({
-              map: map,
-              position: results[0].geometry.location
-          });
-        } else {
-          alert("Geocode was not successful for the following reason: " + status);
-        }
-      });
-
+  // move marker and set new map center when user inputs place
+  searchBox.addListener('places_changed', function() {
+    var places = searchBox.getPlaces();
+    if (places.length == 0) {
+      return;
     }
-})
-
-// autocompletes the address searched
-Template.addressGeoAutoComplete.onRendered(function() {
-    this.autorun(function () {
-    if (GoogleMaps.loaded()) {
-      $("#geocomplete").geocomplete();
-    }
+    else if (places.length == 1) {
+      console.log('here');
+      var location = places[0].geometry.location;
+      marker.setPosition(location);
+      map.instance.setCenter(location);
+    };
   });
-});
+};
 
 
 // adds markers for catadores and associated info windows

@@ -8,37 +8,17 @@
 
 <template name="Home">
   {{> Nav}}
-  
   {{> map}}
-  
-  <!-- {{> SearchMap}} -->
-<!-- 
-  <div class="panel panel-default">
-    <div class="panel-body">
-      {{> map}}
-    </div>
-    <div class="panel-footer">{{> SearchMap}}</div>
-  </div> -->
 </template>
 
-
-<template name="addressGeoAutoComplete">
-  <input type="text" id="geocomplete" class="form-control" name="desiredAddress">
-</template>
-
-
-<template name="SearchMap">
-  <div class="search-address">
-    <div class="map-search-form">
-      <form class="form-inline">
-        
-          {{> addressGeoAutoComplete}}
-          <input type="submit" id="go-to-address" class="form-control" value="Go here">
-        
-      </form>
-    </div>
+<template name="map">
+  <div class="map-container">
+    <input id="pac-input" class="controls" type="text" placeholder="Search Box">
+    {{> googleMap name="map" options=mapOptions}}
   </div>
 </template>
+
+
 
 
 
