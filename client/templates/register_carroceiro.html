@@ -1,66 +1,36 @@
 <template name="Registercarroceiro">
   {{> Nav}}
   <div class="container-fluid">
-    <div class="content-container">
-      <h1>Cadastre um carroceiro</h1>
-      {{#if currentUser}}
-        {{> addCarroceiroForm}}
-      {{else}}
-        <p>Sign in first.</p>
-      {{/if}}
-    </div>
+    <h1>Cadastre um carroceiro</h1>
+    {{#if currentUser}}
+      {{> addCarroceiroForm}}
+    {{else}}
+      <p>Sign in first.</p>
+    {{/if}}
   </div>
 </template>
 
 
 <!-- Form to register carroceiro -->
 <template name="addCarroceiroForm">
-  <div class="container-fluid">
-    <ul class="nav nav-pills" id="carroceiro-form-selection">
-      <li class="active"><a data-toggle="pill" href="#catador-form">Catador</a></li>
-      <li><a data-toggle="pill" href="#cooperativa-form">Cooperativa</a></li>
-      <li><a data-toggle="pill" href="#pev-form">Ponto de entrega</a></li>
-    </ul>
+  <ul class="nav nav-pills" id="carroceiro-form-selection">
+    <li class="active"><a data-toggle="pill" href="#catador-form">Catador</a></li>
+    <li><a data-toggle="pill" href="#cooperativa-form">Cooperativa</a></li>
+    <li><a data-toggle="pill" href="#pev-form">Ponto de entrega</a></li>
+  </ul>
 
-    <div class="tab-content">
-      <div id="catador-form" class="tab-pane fade in active">
-        {{> catadorForm}}
-      </div>
-      <div id="cooperativa-form" class="tab-pane fade">
-        {{> cooperativaForm}}
-      </div>
-      <div id="pev-form" class="tab-pane fade">
-        {{> pevForm}}
-      </div>
+  <div class="tab-content">
+    <div id="catador-form" class="tab-pane fade in active">
+      {{> catadorForm}}
+    </div>
+    <div id="cooperativa-form" class="tab-pane fade">
+      {{> cooperativaForm}}
+    </div>
+    <div id="pev-form" class="tab-pane fade">
+      {{> pevForm}}
     </div>
   </div>
-  
 </template>
-
-<!-- Selection form to pick what to register -->
-<!-- <template name="selectCarroceiroType">
-  <div class="carroceiroTypeSelection">
-    <label>O que você quer cadastrar?</label><br>
-    <ul class="nav nav-pills">
-      <li class="active"><a data-toggle="pill" href="#catador-form">Catador</a></li>
-      <li><a data-toggle="pill" href="#cooperativa-form">Cooperativa</a></li>
-      <li><a data-toggle="pill" href="#pev-form">Ponto de entrega</a></li>
-    </ul>
-`
-    <div class="tab-content">
-      <div id="catador-form" class="tab-pane fade in active">
-        {{> catadorForm}}
-      </div>
-      <div id="cooperativa-form" class="tab-pane fade">
-        {{> cooperativaForm}}
-      </div>
-      <div id="pev-form" class="tab-pane fade">
-        {{> pevForm}}
-      </div>
-    </div>
-
-  </div> 
-</template> -->
 
 
 <!-- Form to register catador -->
@@ -122,8 +92,6 @@
     {{> afQuickField name='receive_waste'}}
     {{> afQuickField name='receive_oil'}}
     {{> afQuickField name='receive_other'}}
-
-
   </fieldset>
   <button type="submit" class="btn btn-primary">Insert</button>
   {{/autoForm}}  
