@@ -3,20 +3,32 @@ So that it is possible to share a link to a user profile -->
 
 <template name="catadorprofile">
   {{> Nav}}
+  <div class="container-fluid">
 
-  <div class="content-container">
-    <div>
-      <div class="image-container">
-        {{> imageView}}
-      </div>
-      <div class="personal-container">
-        {{> PersonalDetails}}
+    <div class="profile-container">
+      <div class="img-and-details">
+        <div class="image-container">
+            {{> imageView}}
+        </div>
+        <div class="personal-container">
+          {{> PersonalDetails}}
+        </div>
       </div>
 
+      <div class="region-container">
+        Region
+      </div>
+
+      <div class="services-container">
+        Services
+      </div>
+
+      <div class="comment-container">
+        Comments
+      </div>
     </div>
 
-
-  </div>
+  </div> <!-- /container-fluid -->
 </template>
 
 <!-- while subscriptions are loading, display this -->
