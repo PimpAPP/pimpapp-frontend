@@ -48,14 +48,12 @@ Template.catadorprofile.helpers({
 
   whatsapp1: function() {
     var catador = Catadores.findOne(getCatadorIdFromUrl());
-    var returnVal = (catador.whatsapp1)? 'Sim' : 'Não';
-    return returnVal;
+    return catador.whatsapp1;
   },
 
   whatsapp2: function() {
     var catador = Catadores.findOne(getCatadorIdFromUrl());
-    var returnVal = (catador.whatsapp1)? 'Sim' : 'Não';
-    return returnVal;
+    return catador.whatsapp2;
   },
 
   address: function() {
