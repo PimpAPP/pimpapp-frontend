@@ -12,12 +12,14 @@ So that it is possible to share a link to a user profile -->
             <div class="panel-body">
               <div class="row">
                 <div class="col-md-4 text-center">
-                  {{> imageView}}
+                  <div class="image-container">
+                    {{> imageView}}
+                  </div>
                 </div>
                 <div class="col-md-8">
                   <div class="row">
                     <div class="col-md-12">
-                      <h1 class="only-bottom-margin">{{name}}</h1>
+                      <h1 class="only-bottom-margin catador-name">{{name}}</h1>
                     </div>
                   </div>
                   <div class="row">
@@ -25,17 +27,25 @@ So that it is possible to share a link to a user profile -->
                       <span class="text-muted">Telefone 1: </span>{{telephone1}}<br>
                       <span class="text-muted">Telefone 2: </span>{{telephone2}}<br>
                     
-                      <small class="text-muted">Created: 01.01.2015</small>
+                      <!-- <small class="text-muted">Created: 01.01.2015</small> -->
                     </div>
                     <div class="col-md-6">
-                      <div class="activity-mini">
+<!--                       <div class="activity-mini">
                         <i class="glyphicon glyphicon-comment text-muted"></i> 500
                       </div>
                       <div class="activity-mini">
                         <i class="glyphicon glyphicon-thumbs-up text-muted"></i> 1500
-                      </div>
+                      </div> -->
                     </div>
                   </div>
+                </div>
+              </div> <!-- /row -->
+              
+              <div class="row">
+                <div class="col-md-12">
+                  <hr>
+                  Region: 
+                  <!-- <hr><button class="btn btn-default pull-right"><i class="glyphicon glyphicon-pencil"></i> Edit</button> -->
                 </div>
               </div> <!-- /row -->
 
@@ -43,7 +53,6 @@ So that it is possible to share a link to a user profile -->
                 <div class="col-md-12">
                   <hr>
                   Services: {{services}}
-
                   <!-- <hr><button class="btn btn-default pull-right"><i class="glyphicon glyphicon-pencil"></i> Edit</button> -->
                 </div>
               </div> <!-- /row -->

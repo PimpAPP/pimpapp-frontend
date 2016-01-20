@@ -18,6 +18,7 @@ body {
     width: 60%;
     margin-left: auto;
     margin-right: auto;
+    margin-bottom: 1em;
 }
 
 .panel {
@@ -81,19 +82,17 @@ Solution here: http://stackoverflow.com/questions/6258521/clear-icon-inside-inpu
 
 /* Profile specifications*/
 
+/*.image-container {
+    margin-right: 3em;
+}*/
+
 /*.profile-container {
     margin: 2em auto;
     padding: 2em;
     border: solid;
 }
 
-.image-container {
-    max-width:35%;
-    height: 100%;
-    overflow: hidden;
-    float: left;
-    margin-right: 2em;
-}
+
 
 .image-container img {
     height: 100%;
@@ -110,7 +109,8 @@ Solution here: http://stackoverflow.com/questions/6258521/clear-icon-inside-inpu
 }*/
 
 
-img.avatar {
+
+img.avatar { /* TODO: make sime size always? */
     border: 1px solid #eee;
 }
 
@@ -146,7 +146,11 @@ img.avatar {
         width: 100%;
     }
 
-    .profile-container {
+/*    .catador-name {
+        text-align: center;
+    }*/
+
+    .panel {
         border: none;
     }
 }
