@@ -20,6 +20,9 @@ body {
     margin-right: auto;
 }
 
+.panel {
+    margin-top: 2em;
+}
 
 /* Map specifications */
 
@@ -78,7 +81,7 @@ Solution here: http://stackoverflow.com/questions/6258521/clear-icon-inside-inpu
 
 /* Profile specifications*/
 
-.profile-container {
+/*.profile-container {
     margin: 2em auto;
     padding: 2em;
     border: solid;
@@ -104,7 +107,23 @@ Solution here: http://stackoverflow.com/questions/6258521/clear-icon-inside-inpu
     margin-top: 1em;
     display: inline-block;
     width: 100%;
+}*/
+
+
+img.avatar {
+  border: 1px solid #eee;
 }
+
+.only-bottom-margin {
+  margin-top: 0px;
+}
+
+.activity-mini {
+  padding-right: 15px;
+  float: left;
+}
+
+
 
 
 /* Responsiveness */
