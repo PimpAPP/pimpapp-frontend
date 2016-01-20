@@ -22,7 +22,7 @@ body {
 }
 
 .panel {
-    margin-top: 2em;
+    margin-top: 5em;
 }
 
 
@@ -58,7 +58,7 @@ body {
 /* Creates the X to cross out typed text.
 Solution here: http://stackoverflow.com/questions/6258521/clear-icon-inside-input-text */
 .clearable {
-    background: #fff url(http://i.stack.imgur.com/mJotv.gif) no-repeat right -10px center;
+    background: #fff url(img/x.gif) no-repeat right -10px center;
     padding: 3px 18px 3px 4px;      /*Use the same right padding (18) in jQ! */
     border-radius: 3px;
     transition: background 0.4s;

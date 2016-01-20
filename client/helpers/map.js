@@ -96,7 +96,7 @@ function attachSearchBox(map, marker) {
 
 
 // CLEARABLE INPUT
-function tog(v){
+function tog(v) {
   return v?'addClass':'removeClass';
 } 
 
