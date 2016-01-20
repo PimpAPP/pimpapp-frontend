@@ -10,42 +10,11 @@ So that it is possible to share a link to a user profile -->
         <div class="col-md-9">
           <div class="panel panel-default">
             <div class="panel-body">
-              
-              <div class="row">
-                <div class="col-md-12 text-center">
-                  <div class="image-container">
-                    {{> imageView}}
-                  </div>
-                </div>
-              </div>
-              
-              <div class="row">
-                <div class="col-md-12">
-                  <h1 class="only-bottom-margin text-center">{{name}}</h1>
-                </div>
-              </div>
-              
-              <div class="row">
-                <div class="col-md-12">
-                  <hr>
-                  <span class="text-muted">Telefone 1: </span>{{telephone1}} {{operator_telephone1}}
-                  {{#if whatsapp1}}
-                    <i class="fa fa-whatsapp"></i>
-                  {{/if}}
-                  <br>
-                  <span class="text-muted">Telefone 2: </span>{{telephone2}} {{operator_telephone2}}<br>
-                  <br>
-                  <span class="text-muted">Region: </span>{{region}}<br>
-                </div>
-              </div>
-
-              <div class="row">
-                <div class="col-md-12">
-                  <hr>
-                  Services: {{services}}
-                  <!-- <hr><button class="btn btn-default pull-right"><i class="glyphicon glyphicon-pencil"></i> Edit</button> -->
-                </div>
-              </div> <!-- /row -->
+              {{#if Template.subscriptionsReady}}
+                {{> catadorDetails}}
+              {{else}}
+                {{> loadingcatadorprofile}}
+              {{/if}}
             </div> <!-- /panel-body -->
           </div> <!-- /panel -->
         </div>
@@ -61,6 +30,43 @@ So that it is possible to share a link to a user profile -->
   Loading catador profile
 </template>
 
+<template name="catadorDetails">
+  <div class="row">
+    <div class="col-md-12 text-center">
+      <div class="image-container">
+        {{> imageView}}
+      </div>
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="col-md-12">
+      <h1 class="only-bottom-margin text-center">{{name}}</h1>
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="col-md-12">
+      <hr>
+      <span class="text-muted">Telefone 1: </span>{{telephone1}} {{operator_telephone1}}
+      {{#if whatsapp1}}
+        <i class="fa fa-whatsapp"></i>
+      {{/if}}
+      <br>
+      <span class="text-muted">Telefone 2: </span>{{telephone2}} {{operator_telephone2}}<br>
+      <br>
+      <span class="text-muted">Region: </span>{{region}}<br>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <hr>
+      Services: {{services}}
+      <!-- <hr><button class="btn btn-default pull-right"><i class="glyphicon glyphicon-pencil"></i> Edit</button> -->
+    </div>
+  </div> <!-- /row -->
+</template>
 
 <template name="imageView">
   {{#each images}}

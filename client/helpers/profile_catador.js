@@ -1,19 +1,16 @@
 
 
 
-Template.imageView.helpers({
-  images: function () {
-    // retrieve picture for selected catador
-    console.log('tries to retrieve images');
-    var catador = Catadores.findOne(getCatadorIdFromUrl());
-    var img = Images.find({'_id': catador.picture});
-    return img;
+Template.catadorprofile.onCreated(function() {
+  this.subscribe('images');
+  this.subscribe('catadores');
 
-  }
-});
+})
 
 
-Template.catadorprofile.helpers({
+
+
+Template.catadorDetails.helpers({
   
   name: function() {
     var catador = Catadores.findOne(getCatadorIdFromUrl());
@@ -88,7 +85,16 @@ Template.catadorprofile.helpers({
 });
 
 
+Template.imageView.helpers({
+  images: function () {
+    // retrieve picture for selected catador
+    console.log('tries to retrieve images');
+    var catador = Catadores.findOne(getCatadorIdFromUrl());
+    var img = Images.find({'_id': catador.picture});
+    return img;
 
+  }
+});
 
 
 // TODO: Would be better if this was done only once when page is loaded
@@ -105,4 +111,6 @@ function getCatadorIdFromUrl() {
   var id = pathname.split('/catadorprofile/')[1]
   return id;
 };
+
+
 
