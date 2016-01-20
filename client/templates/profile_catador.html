@@ -28,7 +28,11 @@ So that it is possible to share a link to a user profile -->
               <div class="row">
                 <div class="col-md-12">
                   <hr>
-                  <span class="text-muted">Telefone 1: </span>{{telephone1}} {{operator_telephone1}}<br>
+                  <span class="text-muted">Telefone 1: </span>{{telephone1}} {{operator_telephone1}}
+                  {{#if whatsapp1}}
+                    <i class="fa fa-whatsapp"></i>
+                  {{/if}}
+                  <br>
                   <span class="text-muted">Telefone 2: </span>{{telephone2}} {{operator_telephone2}}<br>
                   <br>
                   <span class="text-muted">Region: </span>{{region}}<br>
