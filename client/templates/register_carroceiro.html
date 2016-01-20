@@ -32,6 +32,7 @@
     <div id="pev-form" class="tab-pane fade">
       {{> pevForm}}
     </div>
+
   </div>
 </template>
 
@@ -42,8 +43,27 @@
   <fieldset>
     <!-- <legend>Cadastre um catador</legend> -->
     {{> afQuickField name='name'}}
-    {{> afQuickField name='telephone1'}}
-    {{> afQuickField name='telephone2'}}
+    <div class="input-group-telephone">
+      <div class="input-telephone">
+        {{> afQuickField name='telephone1'}}
+      </div>
+      <div class="input-telephone">
+        {{> afQuickField name='operator_telephone1' firstOption='Operador' options='allowed'}}
+      </div>
+      <div class="input-telephone">
+        <div class="input-whatsapp">
+          {{> afQuickField name='whatsapp1'}}
+        </div>
+      </div>      
+    </div>
+    <div class="input-group-telephone">
+      <div class="input-telephone">
+        {{> afQuickField name='telephone2'}}
+      </div>
+      <div class="input-telephone">
+        {{> afQuickField name='operator_telephone2'}}
+      </div>
+    </div>
     {{> afQuickField name='whatsapp'}}
     {{> afQuickField name='address' type="googleplace"}}
     {{> afQuickField name='region'}}

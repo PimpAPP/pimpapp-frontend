@@ -28,8 +28,8 @@ So that it is possible to share a link to a user profile -->
               <div class="row">
                 <div class="col-md-12">
                   <hr>
-                  <span class="text-muted">Telefone 1: </span>{{telephone1}}<br>
-                  <span class="text-muted">Telefone 2: </span>{{telephone2}}<br>
+                  <span class="text-muted">Telefone 1: </span>{{telephone1}} {{operator_telephone1}}<br>
+                  <span class="text-muted">Telefone 2: </span>{{telephone2}} {{operator_telephone2}}<br>
                   <br>
                   <span class="text-muted">Region: </span>{{region}}<br>
                 </div>
@@ -57,24 +57,6 @@ So that it is possible to share a link to a user profile -->
   Loading catador profile
 </template>
 
-<!-- <template name="PersonalDetails">
-  <h3>{{name}}</h3> 
-  
-  Telefone 1: {{telephone1}}<br>
-  Telefone 2: {{telephone2}}<br>
-  WhatsApp? {{whatsapp}}
-  
-</template> -->
-
-<!-- <template name="workDetails">
-  <h4>Endereço</h4>
-  {{address}}
-  <h4>Utiliza veículo motorizado??</h4> 
-  {{motorizedVehicle}}
-  <h4>Serviços prestados</h4>
-  {{services}}
-
-</template> -->
 
 <template name="imageView">
   {{#each images}}

@@ -83,6 +83,20 @@ Solution here: http://stackoverflow.com/questions/6258521/clear-icon-inside-inpu
     margin-bottom: 2em;
 }
 
+.input-group-telephone {
+    clear: both;
+}
+
+.input-telephone {
+    float: left;
+    margin: 0.2em;
+
+}
+
+.input-whatsapp {
+    vertical-align: bottom;
+    padding-top: 1.5em;
+}
 
 /*** CATADOR PROFILE ***/
 

@@ -29,15 +29,32 @@ Template.catadorprofile.helpers({
     var catador = Catadores.findOne(getCatadorIdFromUrl());
     return catador.telephone2;
   },
-
+  operator_telephone1: function() {
+    var catador = Catadores.findOne(getCatadorIdFromUrl());
+    var operator = catador.operator_telephone1;
+    if (operator) return '(' + operator + ')';
+    return '';
+  },
+  operator_telephone2: function() {
+    var catador = Catadores.findOne(getCatadorIdFromUrl());
+    var operator = catador.operator_telephone2;
+    if (operator) return '(' + operator + ')';
+    return '';
+  },
   region: function() {
     var catador = Catadores.findOne(getCatadorIdFromUrl());
     return catador.region;
   },
 
-  whatsapp: function() {
+  whatsapp1: function() {
     var catador = Catadores.findOne(getCatadorIdFromUrl());
-    var returnVal = (catador.whatsapp)? 'Sim' : 'Não';
+    var returnVal = (catador.whatsapp1)? 'Sim' : 'Não';
+    return returnVal;
+  },
+
+  whatsapp2: function() {
+    var catador = Catadores.findOne(getCatadorIdFromUrl());
+    var returnVal = (catador.whatsapp1)? 'Sim' : 'Não';
     return returnVal;
   },
 
