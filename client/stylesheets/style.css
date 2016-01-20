@@ -111,16 +111,16 @@ Solution here: http://stackoverflow.com/questions/6258521/clear-icon-inside-inpu
 
 
 img.avatar {
-  border: 1px solid #eee;
+    border: 1px solid #eee;
 }
 
 .only-bottom-margin {
-  margin-top: 0px;
+    margin-top: 0px;
 }
 
 .activity-mini {
-  padding-right: 15px;
-  float: left;
+    padding-right: 15px;
+    float: left;
 }
 
 
@@ -128,7 +128,20 @@ img.avatar {
 
 /* Responsiveness */
 
-@media (max-width: 480px) {
+
+@media screen and (min-width: 980px) /* Desktop */ {
+/*  body {
+    background: red;
+  }*/
+}
+
+@media screen  and (max-width: 979px) /* Tablet */ {
+/*  body {
+    background: blue;
+  }*/
+}
+
+@media screen and (max-width: 500px) /* Mobile */ {
     .container-responsive {
         width: 100%;
     }
@@ -136,12 +149,4 @@ img.avatar {
     .profile-container {
         border: none;
     }
-
-    .content-container {
-        margin: 0 auto;
-        padding: 0;
-    }
-
 }
-
-
