@@ -98,6 +98,10 @@ Solution here: http://stackoverflow.com/questions/6258521/clear-icon-inside-inpu
     padding-top: 1.5em;
 }
 
+.input-address {
+    clear: both;
+}
+
 /*** CATADOR PROFILE ***/
 
 img.avatar { /* TODO: make sime size always? */

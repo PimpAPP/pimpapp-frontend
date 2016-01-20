@@ -56,16 +56,24 @@
         </div>
       </div>      
     </div>
+
     <div class="input-group-telephone">
       <div class="input-telephone">
         {{> afQuickField name='telephone2'}}
       </div>
       <div class="input-telephone">
-        {{> afQuickField name='operator_telephone2'}}
+        {{> afQuickField name='operator_telephone2' firstOption='Operador' options='allowed'}}
       </div>
+      <div class="input-telephone">
+        <div class="input-whatsapp">
+          {{> afQuickField name='whatsapp2'}}
+        </div>
+      </div>      
     </div>
-    {{> afQuickField name='whatsapp'}}
-    {{> afQuickField name='address' type="googleplace"}}
+
+    <div class="input-address">
+      {{> afQuickField name='address' type="googleplace"}}
+    </div>
     {{> afQuickField name='region'}}
     {{> afQuickField name='carrocaPimpada'}}
     {{> afQuickField name='motorizedVehicle'}}
