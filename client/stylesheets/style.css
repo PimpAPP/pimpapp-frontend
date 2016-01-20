@@ -11,7 +11,7 @@ body {
 }
 
 .nav-container {
-    margin-bottom: 50px;
+    /*margin-bottom: 50px;*/
 }
 
 .container-responsive {
@@ -31,7 +31,7 @@ body {
 
 .map-container {
     width: 100%;
-    height: 95%;
+    height: 100%;
 }
 
 #pac-input {
@@ -51,7 +51,7 @@ body {
     height: 2em;
 
     padding: 3px 5px;
-    margin-top: 10px;
+    margin-top: 60px;
 }
 
 
@@ -129,9 +129,9 @@ img.avatar { /* TODO: make sime size always? */
 }
 
 @media screen  and (max-width: 979px) {
-/*  body {
-    background: blue;
-  }*/
+    .container-responsive {
+        width: 80%;
+    }
 }
 
 @media screen and (max-width: 500px) {
