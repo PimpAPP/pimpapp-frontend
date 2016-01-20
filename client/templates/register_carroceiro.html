@@ -1,12 +1,15 @@
 <template name="Registercarroceiro">
   {{> Nav}}
-  <div class="container-fluid">
-    <h1>Cadastre um carroceiro</h1>
-    {{#if currentUser}}
-      {{> addCarroceiroForm}}
-    {{else}}
-      <p>Sign in first.</p>
-    {{/if}}
+  <div class="container-responsive">
+    <div class="container-fluid">
+      <h1>Cadastre um carroceiro</h1>
+      {{#if currentUser}}
+        {{> addCarroceiroForm}}
+      {{else}}
+        {{> atForm}}
+        <!-- <p>Sign in first.</p> -->
+      {{/if}}
+    </div>
   </div>
 </template>
 

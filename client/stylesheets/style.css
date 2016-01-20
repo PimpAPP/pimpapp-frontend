@@ -7,13 +7,18 @@ html, body {
 }
 
 body {
-  position: relative
+  position: relative;
 }
 
 .nav-container {
     margin-bottom: 50px;
 }
 
+.container-responsive {
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+}
 
 
 /* Map specifications */
@@ -74,7 +79,6 @@ Solution here: http://stackoverflow.com/questions/6258521/clear-icon-inside-inpu
 /* Profile specifications*/
 
 .profile-container {
-    width: 40%;
     margin: 2em auto;
     padding: 2em;
     border: solid;
@@ -106,8 +110,11 @@ Solution here: http://stackoverflow.com/questions/6258521/clear-icon-inside-inpu
 /* Responsiveness */
 
 @media (max-width: 480px) {
-    .profile-container {
+    .container-responsive {
         width: 100%;
+    }
+
+    .profile-container {
         border: none;
     }
 
