@@ -30,6 +30,11 @@ Template.catadorprofile.helpers({
     return catador.telephone2;
   },
 
+  region: function() {
+    var catador = Catadores.findOne(getCatadorIdFromUrl());
+    return catador.region;
+  },
+
   whatsapp: function() {
     var catador = Catadores.findOne(getCatadorIdFromUrl());
     var returnVal = (catador.whatsapp)? 'Sim' : 'Não';

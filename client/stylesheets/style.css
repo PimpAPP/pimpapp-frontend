@@ -1,4 +1,4 @@
-/* Common to all pages */
+/* COMMON*/
 
 html, body {
     height: 100%;
@@ -25,7 +25,9 @@ body {
     margin-top: 2em;
 }
 
-/* Map specifications */
+
+
+/*** MAP ***/
 
 .map-container {
     width: 100%;
@@ -74,41 +76,15 @@ Solution here: http://stackoverflow.com/questions/6258521/clear-icon-inside-inpu
 } 
 
 
-/* Registration specifications */
+
+/*** CARROCEIRO REGISTRATION ***/
 
 #carroceiro-form-selection {
     margin-bottom: 2em;
 }
 
-/* Profile specifications*/
 
-/*.image-container {
-    margin-right: 3em;
-}*/
-
-/*.profile-container {
-    margin: 2em auto;
-    padding: 2em;
-    border: solid;
-}
-
-
-
-.image-container img {
-    height: 100%;
-    width: 100%;
-    object-fit: contain;
-    overflow: hideen;
-}
-
-.region-container {
-    clear: both;
-    margin-top: 1em;
-    display: inline-block;
-    width: 100%;
-}*/
-
-
+/*** CATADOR PROFILE ***/
 
 img.avatar { /* TODO: make sime size always? */
     border: 1px solid #eee;
@@ -126,29 +102,24 @@ img.avatar { /* TODO: make sime size always? */
 
 
 
-/* Responsiveness */
+/*** RESPONSIVENESS ***/
 
-
-@media screen and (min-width: 980px) /* Desktop */ {
+@media screen and (min-width: 980px) {
 /*  body {
     background: red;
   }*/
 }
 
-@media screen  and (max-width: 979px) /* Tablet */ {
+@media screen  and (max-width: 979px) {
 /*  body {
     background: blue;
   }*/
 }
 
-@media screen and (max-width: 500px) /* Mobile */ {
+@media screen and (max-width: 500px) {
     .container-responsive {
         width: 100%;
     }
-
-/*    .catador-name {
-        text-align: center;
-    }*/
 
     .panel {
         border: none;
