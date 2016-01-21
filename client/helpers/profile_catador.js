@@ -1,13 +1,10 @@
 
 
-
 Template.catadorprofile.onCreated(function() {
   this.subscribe('images');
   this.subscribe('carroceiros');
 
 })
-
-
 
 
 Template.catadorDetails.helpers({
@@ -88,7 +85,6 @@ Template.catadorDetails.helpers({
 Template.imageView.helpers({
   images: function () {
     // retrieve picture for selected catador
-    console.log('tries to retrieve images');
     var catador = Carroceiros.findOne(getCatadorIdFromUrl());
     var img = Images.find({'_id': catador.picture});
     return img;

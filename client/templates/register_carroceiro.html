@@ -44,7 +44,8 @@
 
 <!-- Form to register catador -->
 <template name="catadorForm">
-  {{#autoForm collection="Catadores" id="insertCatadorForm" type="insert"}}
+  {{#autoForm collection="Catadores" id="insertCatadorForm" 
+    type="method" meteormethod="submitCatadorRegistration"}}
   <fieldset>
     <!-- <legend>Cadastre um catador</legend> -->
     {{> afQuickField name='name'}}
