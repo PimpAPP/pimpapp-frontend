@@ -8,7 +8,13 @@
 
 <template name="Home">
   {{> Nav}}
-  {{> map}}
+
+    {{#if Template.subscriptionsReady}}
+        {{> map}}
+    {{else}}
+        Loading
+    {{/if}}
+  
 </template>
 
 <!-- can add button to go to current location with http://jsfiddle.net/upsidown/19hjuh6s/ -->

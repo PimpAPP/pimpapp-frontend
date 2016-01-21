@@ -10,6 +10,7 @@ Meteor.startup(function() {
 
 // Create map and geolocate
 Template.map.onCreated(function() {
+  this.subscribe('carroceiros');
   var self = this;
 
   GoogleMaps.ready('map', function(map) {
@@ -35,11 +36,12 @@ Template.map.onCreated(function() {
     attachSearchBox(map, marker);
     
     self.autorun(function() {
-      // add markers for catadores, cooperatives, and ponto de entregas
-      // must be in autorun, because subscriptions maybe not received yet
-      addCatadoresToMap();
-      addCooperativasToMap();
-      addPevsToMap();     
+      // update collection Carroceiros with data from Django database
+      update_carroceiros();
+      
+      // add markers for catadores to map
+      add_catadores();
+ 
     });
 
   });
@@ -109,77 +111,39 @@ $(document).on('input', '.clearable', function(){
     $(this).removeClass('x onX').val('').change();
 });
 
-// adds markers for catadores and associated info windows
-function addCatadoresToMap() {
-  var icon = catador_icon_source;
 
-  Catadores.find().fetch().forEach(function(catador) {
-    
-    // retrieve data for marker
+function add_catadores() {
+  var icon = catador_icon_source;
+  
+  var carroceiroType = 'carroceiro';
+  var catadores = Carroceiros.find({'type':carroceiroType}).fetch();
+
+  catadores.forEach(function(catador) {
+    // retrieve data for catador
+    var catadorID = catador._id;
     var name = catador.name;
     var address = catador.address;
-    var catadorID = catador._id;
-    
+    var locationObject = {
+      'lat': catador.latitude,
+      'lng': catador.longitude
+    };
+
     // create infowindow string
-    var contentString = "Name: "+ name;
+    var contentString = name;
     contentString += "<br>";
     contentString += "<a href='/catadorprofile/" + catadorID + "''>";
-    contentString += "Veja mais</a>";
-    
-    addMarkerInfowindow(address, icon, contentString);
-  });  
-};
-
-// adds markers for cooperativas and associated info windows
-function addCooperativasToMap() {
-  var icon = cooperativa_icon_source;
-
-  Cooperativas.find().fetch().forEach(function(coop) {
-    
-    // retrieve relevant data
-    var address = coop.address
-    var name = coop.name;
-    var telephone = coop.telephone;
-    var hours = coop.hours;
-    var coleta = coop.coleta;
-    var cooperativaID = coop._id;
-
-    // create infowindow string
-    var contentString = "Name: "+ name;
-    contentString += "<br>";
-    contentString += "Telephone: " + telephone;
-    contentString += "<br>";
-    contentString += "Hours: " + hours;
-    contentString += "<br>";
-    contentString += "<a href='/cooperativaprofile/" + cooperativaID + "''>";
     contentString += "Veja mais</a>";    
 
-    addMarkerInfowindow(address, icon, contentString);
-  });  
-};
-
-function addPevsToMap() {
-  var icon = pev_icon_source;
-
-  PontoDeEntregas.find().fetch().forEach(function(pev) {
-
-    // retrieve relevant data
-    var name = pev.name;
-    var hours = pev.hours;
-    var address = pev.address;
-    var pevID = pev._id;
-
-    // create infowindow string
-    var contentString = "Name: "+ name;
-    contentString += "<br>";
-    contentString += "Hours: " + hours;
-    contentString += "<br>";
-    contentString += "<a href='/pevprofile/" + pevID + "''>";
-    contentString += "Veja mais</a>";       
-
-    addMarkerInfowindow(address, icon, contentString);
+    addMarkerInfowindow(locationObject, icon, contentString);
   });
 };
+
+// Function that calls Meteor method that updates the collection
+// Carroceiros with data from Django
+function update_carroceiros() {
+  Meteor.call('getCarroceiros');
+}
+
 
 // Adds marker and associated info window to map
 function addMarkerInfowindow(addressObject, iconUrl, contentString) {
@@ -200,3 +164,63 @@ function addMarkerInfowindow(addressObject, iconUrl, contentString) {
     marker.info.open(map, marker);
   });      
 };
+
+
+
+////////////////////////////////////////////////////////////////////////////////////
+// WE WILL WAIT TO IMPLEMENT FUNCTIONALITY FOR COOPERATIVAS AND PONTO DE ENTREGAS 
+////////////////////////////////////////////////////////////////////////////////////
+
+// adds markers for cooperativas and associated info windows
+// function addCooperativasToMap() {
+//   var icon = cooperativa_icon_source;
+
+//   Cooperativas.find().fetch().forEach(function(coop) {
+    
+//     // retrieve relevant data
+//     var address = coop.address
+//     var name = coop.name;
+//     var telephone = coop.telephone;
+//     var hours = coop.hours;
+//     var coleta = coop.coleta;
+//     var cooperativaID = coop._id;
+
+//     // create infowindow string
+//     var contentString = "Name: "+ name;
+//     contentString += "<br>";
+//     contentString += "Telephone: " + telephone;
+//     contentString += "<br>";
+//     contentString += "Hours: " + hours;
+//     contentString += "<br>";
+//     contentString += "<a href='/cooperativaprofile/" + cooperativaID + "''>";
+//     contentString += "Veja mais</a>";    
+
+//     addMarkerInfowindow(address, icon, contentString);
+//   });  
+// };
+
+// function addPevsToMap() {
+//   var icon = pev_icon_source;
+
+//   PontoDeEntregas.find().fetch().forEach(function(pev) {
+
+//     // retrieve relevant data
+//     var name = pev.name;
+//     var hours = pev.hours;
+//     var address = pev.address;
+//     var pevID = pev._id;
+
+//     // create infowindow string
+//     var contentString = "Name: "+ name;
+//     contentString += "<br>";
+//     contentString += "Hours: " + hours;
+//     contentString += "<br>";
+//     contentString += "<a href='/pevprofile/" + pevID + "''>";
+//     contentString += "Veja mais</a>";       
+
+//     addMarkerInfowindow(address, icon, contentString);
+//   });
+// };
+
+
+
