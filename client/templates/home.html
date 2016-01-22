@@ -1,0 +1,32 @@
+<head>
+  <title>PimpAPP</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+</body>
+
+<template name="Home">
+  {{> Nav}}
+
+    {{#if Template.subscriptionsReady}}
+        {{> map}}
+    {{else}}
+        Loading
+    {{/if}}
+  
+</template>
+
+<!-- can add button to go to current location with http://jsfiddle.net/upsidown/19hjuh6s/ -->
+<template name="map">
+  <div class="map-container">
+    <input id="pac-input" class="clearable" type="text" placeholder="Veja outro lugar">
+    {{> googleMap name="map" options=mapOptions}}
+  </div>
+</template>
+
+
+
+
+
+
