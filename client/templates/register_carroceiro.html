@@ -1,3 +1,8 @@
+<!-- 
+  Layout of page to register catadores, cooperativas, and ponto de entregas
+ -->
+
+
 <template name="Registercarroceiro">
   {{> Nav}}
   <div class="container-responsive">
@@ -100,14 +105,10 @@
   </fieldset>
   <button type="submit" class="btn btn-primary">Insert</button>
   {{/autoForm}}
-  <!-- The quickForm includes the fields automatically, but doesn't
-  support Google Place autocomplete -->
-  <!-- {{> quickForm collection="Catadores" id="insertCatadorForm" type="insert"}} -->
 </template>
 
 <!-- Form to register cooperativa -->
 <template name="cooperativaForm">
-  <!-- {{> quickForm collection="Cooperativas" id="insertCooperativaForm" type="insert"}} -->
   {{#autoForm collection="Cooperativas" id="insertCooperativaForm" type="insert"}}
   <fieldset>
     <!-- <legend>Add a Cooperativa</legend> -->
@@ -136,7 +137,6 @@
 
 <!-- Form to register ponto de entrega -->
 <template name="pevForm">
-  <!-- {{> quickForm collection="PontoDeEntregas" id="insertPevForm" type="insert"}} -->
   {{#autoForm collection="PontoDeEntregas" id="insertPevForm" type="insert"}}
   <fieldset>
     <!-- <legend>Add a ponto de entrega</legend> -->
