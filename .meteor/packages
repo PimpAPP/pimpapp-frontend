@@ -39,3 +39,4 @@ useraccounts:bootstrap
 force-ssl
 tarang:ssl
 http
+accounts-google

@@ -117,6 +117,11 @@ img.avatar { /* TODO: make sime size always? */
     float: left;
 }
 
+/*** USER REGISTRATION ***/
+.user-registration-form {
+    margin-top: 5em;
+}
+
 
 
 
