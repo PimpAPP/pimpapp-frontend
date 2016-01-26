@@ -32,7 +32,12 @@
   <div class="row">
     <div class="col-md-12 text-center">
       <div class="image-container">
-        {{> imageView}}
+        <!-- {{> imageView}} --> 
+        <!-- PLACEHOLDER TO SEE WHAT IMAGE POSITIONING LOOKS LIKE NOW,
+        Before getting pictures from catadores -->
+        <a href="/img/pimp.png" target="_blank"><img class="img-circle avatar avatar-original" 
+        style="-webkit-user-select:none; display:block; margin:auto;" 
+        src="/img/pimp.png" alt=""></a>     
       </div>
     </div>
   </div>
@@ -52,8 +57,13 @@
       {{/if}}
       <br>
       <span class="text-muted">Telefone 2: </span>{{telephone2}} {{operator_telephone2}}<br>
+      {{#if whatsapp2}}
+        <i class="fa fa-whatsapp"></i>
+      {{/if}}
       <br>
       <span class="text-muted">Region: </span>{{region}}<br>
+      <span class="text-muted">Utiliza veículo motorizada? </span>{{motorizedVehicle}}<br>
+
     </div>
   </div>
 
