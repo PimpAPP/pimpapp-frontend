@@ -82,6 +82,15 @@ Template.catadorDetails.helpers({
 });
 
 
+Template.catadorDetails.events({
+  'click button': function() {
+    console.log("clicked update button");
+    // TODO: appropriate action, e.g. redirect to new page where can update certain information?
+    // Or should be able to select which field to update?
+  }
+});
+
+
 Template.imageView.helpers({
   images: function () {
     // retrieve picture for selected catador
