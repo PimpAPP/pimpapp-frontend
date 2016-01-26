@@ -134,6 +134,9 @@ function add_catadores() {
     contentString += "<a href='/catadorprofile/" + catadorID + "''>";
     contentString += "Veja mais</a>";    
 
+    // to include photo in infowindow, retrieve image here.
+    // then include in html an image tag with src=<url source of image>
+
     addMarkerInfowindow(locationObject, icon, contentString);
   });
 };
