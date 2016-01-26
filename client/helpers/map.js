@@ -162,7 +162,11 @@ function addMarkerInfowindow(addressObject, iconUrl, contentString) {
   // open infowindow on click
   google.maps.event.addListener(marker, 'click', function() {
     marker.info.open(map, marker);
-  });      
+  });
+
+  google.maps.event.addListener(map, "click", function(event) {
+    marker.info.close();
+  });
 };
 
 
