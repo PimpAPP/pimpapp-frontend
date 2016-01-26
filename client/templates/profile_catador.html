@@ -60,8 +60,15 @@
   <div class="row">
     <div class="col-md-12">
       <hr>
-      Services: {{services}}
-
+      <div class="profile-services">
+        <h4>Services</h4>
+        {{services}}
+        <!-- Images are placeholders. TODO: use better icons in helper function services.
+        Return images conditional on services offered by the catador. -->
+        <img href="/img/metals.png" src="/img/metals.png" alt="service-icon-metals">
+        <img src="/img/recyclables.png">
+        <img src="/img/trash.png">
+      </div>
       <hr>
       <button class="btn btn-default pull-right"><i class="glyphicon glyphicon-pencil"></i> Atualizar</button>
     </div>
