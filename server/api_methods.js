@@ -28,6 +28,7 @@ Meteor.methods({
 
   // TODO: call Django API here to include catador information in Django database
   submitCatadorRegistration: function(doc) {
+    console.log("registering a catador");
     console.log(doc);
 
     var catador = 'catador';
@@ -37,6 +38,19 @@ Meteor.methods({
 
 
     // });
+  },
+
+  // TODO: call Django API here to update catador information in Django database
+  // Careful to either 
+  //    1. prefill form with existing catador information before
+  //      shown to user in profile_catador.html
+  //    OR
+  //    2.only update the fields that are filled out in this doc form, and not insert
+  //      the entire doc as is to Django database 
+  // IDEAL: Don't use this form, instead customize update for each different elemnet
+  updateCatadorDetails: function(doc) {
+    console.log("updating catador information");
+    console.log(doc);
 
   }
 

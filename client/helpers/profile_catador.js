@@ -5,6 +5,7 @@ Template.catadorprofile.onCreated(function() {
   // because now has to subscribe every time new profile is loaded
   this.subscribe('images');
   this.subscribe('carroceiros');
+  this.subscribe('posts');
 
 })
 
@@ -63,6 +64,38 @@ Template.catadorDetails.helpers({
     return returnVal;
   },
 
+  // services
+
+  services_recyclable: function() {
+    var catador = Carroceiros.findOne(getCatadorIdFromUrl());
+    return catador.services_recyclable;
+  },
+  services_construction: function() {
+    var catador = Carroceiros.findOne(getCatadorIdFromUrl());
+    return catador.services_construction;
+  },
+  services_freight: function() {
+    var catador = Carroceiros.findOne(getCatadorIdFromUrl());
+    return catador.services_freight;
+  },
+  services_furniture: function() {
+    var catador = Carroceiros.findOne(getCatadorIdFromUrl());
+    return catador.services_furniture;
+  },
+  services_metals: function() {
+    var catador = Carroceiros.findOne(getCatadorIdFromUrl());
+    return catador.services_metals;
+  },      
+  services_electronics: function() {
+    var catador = Carroceiros.findOne(getCatadorIdFromUrl());
+    return catador.services_electronics;
+  },      
+  services_other_materials: function() {
+    var catador = Carroceiros.findOne(getCatadorIdFromUrl());
+    return catador.services_other_materials;
+  },      
+
+
   services: function() {
     var catador = Carroceiros.findOne(getCatadorIdFromUrl());
     var services = [];
@@ -73,8 +106,6 @@ Template.catadorDetails.helpers({
     if (catador.services_metals) services.push(services_metals_str);
     if (catador.services_electronics) services.push(services_electronics_str);
     if (catador.services_other_materials) services.push(services_other_materials_str);
-    if (catador.services_construction) services.push(services_construction_str);
-    if (catador.services_metals) services.push(services_metals_str);
 
     var servicesString = services.join(", ");
     
@@ -92,7 +123,7 @@ Template.catadorDetails.events({
   },
   'click .profile-button-services': function() {
     console.log("clicked services button");
-    Modal.show('exampleModal');
+    Modal.show('modalServices');
     
   }
 
@@ -108,6 +139,7 @@ Template.imageView.helpers({
 
   }
 });
+
 
 
 // TODO: Would be better if this was done only once when page is loaded

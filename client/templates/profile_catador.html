@@ -61,7 +61,7 @@
         <i class="fa fa-whatsapp"></i>
       {{/if}}
       <br>
-      <span class="text-muted">Region: </span>{{region}}<br>
+      <span class="text-muted">Região: </span>{{region}}<br>
       <span class="text-muted">Utiliza veículo motorizada? </span>{{motorizedVehicle}}<br>
 
     </div>
@@ -71,17 +71,48 @@
     <div class="col-md-12">
       <hr>
       <div class="profile-services">
+        <!-- TODO: update images to correct icons -->
         <h4>Serviços</h4>
-        {{services}}
+        {{#if services_recyclable}}
+          <img src="/img/recyclables.png">
+        {{/if}}
+        {{#if services_construction}}
+          <img src="/img/recyclables.png">
+        {{/if}}
+        {{#if services_freight}}
+          <img src="/img/recyclables.png">
+        {{/if}}
+        {{#if services_furniture}}
+          <img src="/img/recyclables.png">
+        {{/if}}
+        {{#if services_metals}}
+          <img src="/img/recyclables.png">
+        {{/if}}
+        {{#if services_electronics}}
+          <img src="/img/recyclables.png">
+        {{/if}}
+        {{#if services_other_materials}}
+          <img src="/img/recyclables.png">
+        {{/if}}
+
         <!-- Images are placeholders. TODO: use better icons in helper function services.
         Return images conditional on services offered by the catador. -->
+        <!-- TODO: remove these images once Django API is updated to include service types-->
         <img href="/img/metals.png" src="/img/metals.png" alt="service-icon-metals">
-        <img src="/img/recyclables.png">
         <img src="/img/trash.png">
+
         <button class="btn btn-default pull-right profile-button-services"><i class="glyphicon glyphicon-info-sign"></i></button>
       </div>
       <hr>
-      <button class="btn btn-default pull-right profile-button-update"><i class="glyphicon glyphicon-pencil"></i> Atualizar</button>
+      <!-- <button ><i class="glyphicon glyphicon-pencil"></i> Atualizar</button> -->
+<!--       {{#afModal class="btn btn-default pull-right profile-button-update" collection="Posts" operation="method"}}
+        Atualizar
+      {{/afModal}} -->
+      {{> autoformModals}}
+      {{#afModal class="btn btn-default pull-right profile-button-update" 
+        collection="CatadoresUpdate" meteormethod="updateCatadorDetails" operation="insert"}}
+        Atualizar
+      {{/afModal}}      
     </div>
   </div> <!-- /row -->
 </template>
@@ -98,7 +129,7 @@
 
 
 
-<template name="exampleModal">
+<template name="modalServices">
     <div class="modal fade modal-services-info">
         <div class="modal-dialog">
             <div class="modal-content">
