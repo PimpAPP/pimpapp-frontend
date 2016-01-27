@@ -90,6 +90,7 @@ Template.catadorDetails.events({
   },
   'click .profile-button-services': function() {
     console.log("clicked services button");
+    Modal.show('exampleModal');
     
   }
 
