@@ -10,9 +10,6 @@ body {
   position: relative;
 }
 
-.nav-container {
-    /*margin-bottom: 50px;*/
-}
 
 .container-responsive {
     width: 50%;
@@ -23,6 +20,17 @@ body {
 
 .panel {
     margin-top: 5em;
+}
+
+
+/*** NAVBAR ***/
+
+.navbar-brand {
+    padding: 5px 5px 5px 20px;
+}
+
+.navbar-brand img {
+    max-height: 35px;
 }
 
 
