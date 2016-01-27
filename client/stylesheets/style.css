@@ -131,6 +131,11 @@ img.avatar { /* TODO: make sime size always? */
     margin-top: 10em;
 }
 
+.service-item {
+    margin-bottom: 1em;
+}
+
+
 /*** USER REGISTRATION ***/
 .user-registration-form {
     margin-top: 5em;
