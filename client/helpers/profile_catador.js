@@ -1,6 +1,8 @@
 
 
 Template.catadorprofile.onCreated(function() {
+  // TODO: ideally not stop these subscriptions when profile is closed
+  // because now has to subscribe every time new profile is loaded
   this.subscribe('images');
   this.subscribe('carroceiros');
 
