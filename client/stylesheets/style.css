@@ -131,6 +131,15 @@ img.avatar { /* TODO: make sime size always? */
     margin-top: 10em;
 }
 
+
+.modal-header h4, button {
+    display: inline-block;
+}
+
+.modal-header button {
+    float: right;
+}
+
 .service-item {
     margin-bottom: 1em;
 }
@@ -166,5 +175,11 @@ img.avatar { /* TODO: make sime size always? */
 
     .panel {
         border: none;
+    }
+}
+
+@media screen and (max-height: 800px) {
+    .modal-services-info {
+        margin-top: 2em;
     }
 }
