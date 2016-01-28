@@ -120,6 +120,8 @@ Template.catadorDetails.events({
     console.log("clicked update button");
     // TODO: appropriate action, e.g. redirect to new page where can update certain information?
     // Or should be able to select which field to update?
+    Modal.show('modalUpdateInfo');
+    
   },
   'click .profile-button-services': function() {
     console.log("clicked services button");

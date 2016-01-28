@@ -8,11 +8,19 @@
         <div class="col-md-12">
           <div class="panel panel-default">
             <div class="panel-body">
-              {{#if Template.subscriptionsReady}}
-                {{> catadorDetails}}
+
+              {{#if currentUser}}
+
+                {{#if Template.subscriptionsReady}}
+                  {{> catadorDetails}}
+                {{else}}
+                  {{> loadingcatadorprofile}}
+                {{/if}}
+
               {{else}}
-                {{> loadingcatadorprofile}}
+                {{> atForm}}
               {{/if}}
+
             </div> <!-- /panel-body -->
           </div> <!-- /panel -->
         </div>
@@ -101,18 +109,27 @@
         <img href="/img/metals.png" src="/img/metals.png" alt="service-icon-metals">
         <img src="/img/trash.png">
 
-        <button class="btn btn-default pull-right profile-button-services"><i class="glyphicon glyphicon-info-sign"></i></button>
-      </div>
-      <hr>
-      <!-- <button ><i class="glyphicon glyphicon-pencil"></i> Atualizar</button> -->
-<!--       {{#afModal class="btn btn-default pull-right profile-button-update" collection="Posts" operation="method"}}
-        Atualizar
-      {{/afModal}} -->
+        <button class="btn btn-default pull-right profile-button-services">
+          <i class="glyphicon glyphicon-info-sign"></i>
+        </button>
+        <hr>
+
+      </div> <!-- /profile-services -->
+
+      <button class="btn btn-default pull-right profile-button-update">
+        <i class="glyphicon glyphicon-pencil profile"></i> Atualizar
+      </button>
+
+      <!-- If we think autoform is the way to go, then run:
+      in terminal: meteor add yogiben:autoform-modals
+      in collections.js, define CatadoresUpdate collection, then
+      code here:
       {{> autoformModals}}
       {{#afModal class="btn btn-default pull-right profile-button-update" 
         collection="CatadoresUpdate" meteormethod="updateCatadorDetails" operation="insert"}}
         Atualizar
-      {{/afModal}}      
+      {{/afModal}}       -->
+
     </div>
   </div> <!-- /row -->
 </template>
@@ -202,6 +219,33 @@
                       Frete e Carreto. Serviço de retirada e entrega de objetos, materiais. Pequenas mudanças.
                     </div>
                   </div>      
+
+                  <div class="row col-md-12 col-xs-12">
+                    Não esqueça confirmar com o catador que ele coleta o certo tipo de material!
+                  </div>
+                </div> <!-- /modal-body -->
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</template>
+
+
+
+<template name="modalUpdateInfo">
+    <div class="modal fade modal-services-info">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h4 class="modal-title">Atualizar informação</h4>
+                </div>
+
+                <div class="modal-body">
 
                 </div> <!-- /modal-body -->
 
