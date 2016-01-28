@@ -10,7 +10,7 @@
       <div class="panel panel-default">
         <div class="panel-body">
 
-          <h1>Cadastre um carroceiro</h1>
+          <h1>Cadastre um catador</h1>
           {{#if currentUser}}
             {{> addCarroceiroForm}}
           {{else}}
@@ -26,7 +26,11 @@
 
 <!-- Form to register carroceiro -->
 <template name="addCarroceiroForm">
-  <ul class="nav nav-pills" id="carroceiro-form-selection">
+
+  {{> catadorForm}}
+
+<!-- TODO: include the code below once full support for cooperatives and ponto de entregas  -->
+<!--   <ul class="nav nav-pills" id="carroceiro-form-selection">
     <li class="active"><a data-toggle="pill" href="#catador-form">Catador</a></li>
     <li><a data-toggle="pill" href="#cooperativa-form">Cooperativa</a></li>
     <li><a data-toggle="pill" href="#pev-form">Ponto de entrega</a></li>
@@ -43,7 +47,7 @@
       {{> pevForm}}
     </div>
 
-  </div>
+  </div> -->
 </template>
 
 
