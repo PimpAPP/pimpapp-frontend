@@ -143,6 +143,23 @@ Template.imageView.helpers({
 });
 
 
+Template.modalUpdateInfo.events({
+  'change #changeTelephoneInfo': function() {
+    if (Session.get('changeTelephone')) {
+      Session.set('changeTelephone', false);  
+    }
+    else {
+      Session.set('changeTelephone', true);  
+    }
+  }
+})
+
+Template.modalUpdateInfo.helpers({
+  'changeTelephone': function() {
+    return Session.get('changeTelephone');
+  }
+});
+
 
 // TODO: Would be better if this was done only once when page is loaded
 function getCatadorIdFromUrl() {
