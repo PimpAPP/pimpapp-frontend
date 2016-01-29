@@ -1,33 +1,28 @@
 
 <template name="catadorprofile">
-  {{> Nav}}
 
-  <div class="container-responsive">
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-md-12">
-          <div class="panel panel-default">
-            <div class="panel-body">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="panel panel-default">
+        <div class="panel-body">
 
-              {{#if currentUser}}
+          {{#if currentUser}}
 
-                {{#if Template.subscriptionsReady}}
-                  {{> catadorDetails}}
-                {{else}}
-                  {{> loadingcatadorprofile}}
-                {{/if}}
+            {{#if Template.subscriptionsReady}}
+              {{> catadorDetails}}
+            {{else}}
+              {{> loadingcatadorprofile}}
+            {{/if}}
 
-              {{else}}
-                {{> atForm}}
-              {{/if}}
+          {{else}}
+            {{> atForm}}
+          {{/if}}
 
-            </div> <!-- /panel-body -->
-          </div> <!-- /panel -->
-        </div>
-      </div> <!-- /row -->
- 
-    </div> <!-- /container-fluid -->
-  </div> <!-- /container-responsive -->
+        </div> <!-- /panel-body -->
+      </div> <!-- /panel -->
+    </div>
+  </div> <!-- /row -->
+
 </template>
 
 
@@ -237,36 +232,33 @@
 
 
 <template name="modalUpdateInfo">
-    <div class="modal fade modal-services-info">
-        <div class="modal-dialog">
-            <div class="modal-content">
+  <div class="modal fade modal-services-info">
+    <div class="modal-dialog">
+      <div class="modal-content">
 
-                <div class="modal-header">
-                    <h4 class="modal-title">Atualizar informação</h4>
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                </div>
-
-                <div class="modal-body">
-
-                  <div class="input-group">
-                    <span class="input-group-addon">
-                      Telefone
-                    </span>
-                    <span class="input-group-addon">
-                      <input type="checkbox" id="changeTelephoneInfo" aria-label="...">
-                    </span>
-                    {{#if changeTelephone}}
-                      <input type="text" class="form-control" aria-label="...">
-                    {{/if}}
-                  </div><!-- /input-group -->
-
-                </div> <!-- /modal-body -->
-
-                <div class="modal-footer">
-                    
-                </div>
-
-            </div>
+        <div class="modal-header">
+          <h4 class="modal-title">Atualizar informação</h4>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         </div>
+
+        <div class="modal-body">
+          <div class="input-group">
+            <span class="input-group-addon">
+              Telefone
+            </span>
+            <span class="input-group-addon">
+              <input type="checkbox" id="changeTelephoneInfo" aria-label="...">
+            </span>
+            {{#if changeTelephone}}
+              <input type="text" class="form-control" aria-label="...">
+            {{/if}}
+          </div><!-- /input-group -->
+        </div> <!-- /modal-body -->
+
+        <div class="modal-footer">
+        </div>
+
+      </div>
     </div>
+  </div>
 </template>
