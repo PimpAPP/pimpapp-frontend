@@ -1,4 +1,3 @@
-
 <template name="catadorprofile">
 
   <div class="row">
@@ -28,7 +27,7 @@
 
 <!-- while subscriptions are loading, display this -->
 <template name="loadingcatadorprofile">
-  Loading catador profile
+  Carregando perfil do catador
 </template>
 
 <template name="catadorDetails">
@@ -64,8 +63,10 @@
         <i class="fa fa-whatsapp"></i>
       {{/if}}
       <br>
-      <span class="text-muted">Região: </span>{{region}}<br>
-      <span class="text-muted">Utiliza veículo motorizada? </span>{{motorizedVehicle}}<br>
+      <span class="text-muted">Endere&ccedil;o: </span>{{address}}<br>
+      <span class="text-muted">Regi&atilde;o: </span>{{region}}<br>
+      <span class="text-muted">Tem sua carro&ccedil;a pimpada? </span>{{carrocaPimpada}}<br>
+      <span class="text-muted">Utiliza ve&iacute;culo motorizado? </span>{{motorizedVehicle}}<br>
 
     </div>
   </div>
@@ -75,34 +76,34 @@
       <hr>
       <div class="profile-services">
         <!-- TODO: update images to correct icons -->
-        <h4>Serviços</h4>
+        <h4>Servi&ccedil;os</h4>
         {{#if services_recyclable}}
-          <img src="/img/recyclables.png">
+          <img src="/img/recyclables.png" alt="material recicl&aacute;vel" title="material recicl&aacute;vel">
         {{/if}}
         {{#if services_construction}}
-          <img src="/img/recyclables.png">
+          <img src="/img/paint.png" alt="res&iacute;duo de constru&ccedil;&atilde;o civil" title="res&iacute;duo de constru&ccedil;&atilde;o civil">
         {{/if}}
         {{#if services_freight}}
-          <img src="/img/recyclables.png">
+          <img src="/img/recyclables.png" alt="frete e carreto" title="frete e carreto">
         {{/if}}
         {{#if services_furniture}}
-          <img src="/img/recyclables.png">
+          <img src="/img/recyclables.png" alt="res&iacute;duos volumosos" title="res&iacute;duos volumosos">
         {{/if}}
         {{#if services_metals}}
-          <img src="/img/recyclables.png">
+          <img src="/img/metals.png" alt="ferro e metais" title="ferro e metais">
         {{/if}}
         {{#if services_electronics}}
-          <img src="/img/recyclables.png">
+          <img src="/img/recyclables.png" alt="eletroeletr&ocirc;nicos" title="eletroeletr&ocirc;nicos">
         {{/if}}
         {{#if services_other_materials}}
-          <img src="/img/recyclables.png">
+          <img src="/img/trash.png" alt="outros materiais" title="outros materiais">
         {{/if}}
 
         <!-- Images are placeholders. TODO: use better icons in helper function services.
         Return images conditional on services offered by the catador. -->
         <!-- TODO: remove these images once Django API is updated to include service types-->
-        <img href="/img/metals.png" src="/img/metals.png" alt="service-icon-metals">
-        <img src="/img/trash.png">
+        <img src="/img/metals.png" alt="ferro e metais" title="ferro e metais">
+        <img src="/img/trash.png" alt="outros materiais" title="outros materiais">
 
         <button class="btn btn-default pull-right profile-button-services">
           <i class="glyphicon glyphicon-info-sign"></i>
@@ -111,8 +112,10 @@
 
       </div> <!-- /profile-services -->
 
+      <span class="text-muted">Observa&ccedil;&otilde;es: </span>{{observations}}<br>
+
       <button class="btn btn-default pull-right profile-button-update">
-        <i class="glyphicon glyphicon-pencil profile"></i> Atualizar
+        <i class="glyphicon glyphicon-pencil profile"></i> Atualizar Informa&ccedil;&otilde;es
       </button>
 
       <!-- If we think autoform is the way to go, then run:
@@ -147,77 +150,76 @@
             <div class="modal-content">
 
                 <div class="modal-header">
-                    <h4 class="modal-title">Serviços</h4>
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <h4 class="modal-title">Servi&ccedil;os</h4>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
                 </div>
 
                 <div class="modal-body">
-
-                  <div class="row col-md-12 col-xs-12 service-item">
+                  <div class="row service-item">
                     <div class="col-md-2 col-xs-2">
-                      <img src="/img/recyclables.png"> 
+                      <img src="/img/recyclables.png" alt="material recicl&aacute;vel" title="material recicl&aacute;vel">
                     </div>
                     <div class="col-md-10 col-xs-10">
-                      Material reciclável (papel, vidro, latas, embalagens, vidro, embalagem longa vida, etc.)
+                      Material recicl&aacute;vel (papel, vidro, latas, embalagens, vidro, embalagem longa vida, etc.)
                     </div>
                   </div>
 
-                  <div class="row col-md-12 col-xs-12 service-item">
+                  <div class="row service-item">
                     <div class="col-md-2 col-xs-2">
-                      <img src="/img/trash.png"> 
+                      <img src="/img/trash.png" alt="res&iacute;duo de constru&ccedil;&atilde;o civil" title="res&iacute;duo de constru&ccedil;&atilde;o civil">
                     </div>
                     <div class="col-md-10 col-xs-10">
-                      Resíduo de construção civil (entulho, tintas, madeira, etc.)
+                      Res&iacute;duos de constru&ccedil;&atilde;o civil (entulho, tintas, madeira, etc.)
                     </div>
                   </div>
 
-                  <div class="row col-md-12 col-xs-12 service-item">
+                  <div class="row service-item">
                     <div class="col-md-2 col-xs-2">
-                      <img src="/img/trash.png"> 
+                      <img src="/img/trash.png" alt="res&iacute;duos volumosos" title="res&iacute;duos volumosos">
                     </div>
                     <div class="col-md-10 col-xs-10">
-                      Resíduos Volumosos (sofá, geladeira, fogão, etc.)
+                      Res&iacute;duos volumosos (sof&aacute;, geladeira, fog&atilde;o, etc.)
                     </div>
                   </div>
 
-                  <div class="row col-md-12 col-xs-12 service-item">
+                  <div class="row service-item">
                     <div class="col-md-2 col-xs-2">
-                      <img src="/img/trash.png"> 
+                      <img src="/img/metals.png" alt="ferro e metais" title="ferro e metais">
                     </div>
                     <div class="col-md-10 col-xs-10">
-                      Ferro e metais (cobre, alumínio, etc.)
+                      Ferro e metais (cobre, alum&iacute;nio, etc.)
                     </div>
                   </div>
 
-                  <div class="row col-md-12 col-xs-12 service-item">
+                  <div class="row service-item">
                     <div class="col-md-2 col-xs-2">
-                      <img src="/img/trash.png"> 
+                      <img src="/img/trash.png" alt="eletroeletr&ocirc;nicos" title="eletroeletr&ocirc;nicos">
                     </div>
                     <div class="col-md-10 col-xs-10">
-                      Resíduos eletroeletrônicos (computadores, pilhas, baterias, etc.)
+                      Res&iacute;duos eletroeletr&ocirc;nicos (computadores, pilhas, baterias, etc.)
                     </div>
                   </div>                                    
 
-                  <div class="row col-md-12 col-xs-12 service-item">
+                  <div class="row service-item">
                     <div class="col-md-2 col-xs-2">
-                      <img src="/img/trash.png"> 
+                      <img src="/img/trash.png" alt="frete e carreto" title="frete e carreto">
                     </div>
                     <div class="col-md-10 col-xs-10">
                       Frete e carreto
                     </div>
                   </div>  
 
-                  <div class="row col-md-12 col-xs-12 service-item">
+                  <div class="row service-item">
                     <div class="col-md-2 col-xs-2">
-                      <img src="/img/trash.png"> 
+                      <img src="/img/trash.png" alt="outros materiais" title="outros materiais">
                     </div>
                     <div class="col-md-10 col-xs-10">
                       Outros materiais
                     </div>
                   </div>      
 
-                  <div class="row col-md-12 col-xs-12">
-                    Não esqueça confirmar com o catador que ele coleta o certo tipo de material!
+                  <div class="row service-comment">
+                    N&atilde;o esque&ccedil;a de confirmar com o catador que ele coleta este tipo de material!
                   </div>
                 </div> <!-- /modal-body -->
 
@@ -229,30 +231,156 @@
     </div>
 </template>
 
-
-
 <template name="modalUpdateInfo">
   <div class="modal fade modal-services-info">
     <div class="modal-dialog">
       <div class="modal-content">
 
         <div class="modal-header">
-          <h4 class="modal-title">Atualizar informação</h4>
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <h4 class="modal-title">Qual informa&ccedil;&atilde;o voc&ecirc; quer atualizar ou corrigir?</h4>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
         </div>
 
         <div class="modal-body">
           <div class="input-group">
             <span class="input-group-addon">
-              Telefone
+              <input type="checkbox" id="changeNameInfo" aria-label="...">
             </span>
             <span class="input-group-addon">
-              <input type="checkbox" id="changeTelephoneInfo" aria-label="...">
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nome&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             </span>
-            {{#if changeTelephone}}
+            {{#if changeName}}
               <input type="text" class="form-control" aria-label="...">
             {{/if}}
           </div><!-- /input-group -->
+          <div class="input-group">
+            <span class="input-group-addon">
+              <input type="checkbox" id="changeTelephone1Info" aria-label="...">
+            </span>
+            <span class="input-group-addon">
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Telefone 1&nbsp;&nbsp;&nbsp;&nbsp;
+            </span>
+            {{#if changeTelephone1}}
+              <input type="text" class="form-control" aria-label="...">
+            {{/if}}
+          </div><!-- /input-group -->
+          <div class="input-group">
+            <span class="input-group-addon">
+              <input type="checkbox" id="changeOperator1Info" aria-label="...">
+            </span>
+            <span class="input-group-addon">
+              &nbsp;&nbsp;&nbsp;&nbsp;Operadora 1&nbsp;&nbsp;&nbsp;&nbsp;
+            </span>
+            {{#if changeOperator1}}
+              <input type="text" class="form-control" aria-label="...">
+            {{/if}}
+          </div><!-- /input-group -->
+          <div class="input-group">
+            <span class="input-group-addon">
+              <input type="checkbox" id="changeWhatsapp1Info" aria-label="...">
+            </span>
+            <span class="input-group-addon">
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Whatsapp 1?&nbsp;&nbsp;&nbsp;&nbsp;
+            </span>
+            {{#if changeWhatsapp1}}
+              <input type="text" class="form-control" aria-label="...">
+            {{/if}}
+          </div><!-- /input-group -->
+          <div class="input-group">
+            <span class="input-group-addon">
+              <input type="checkbox" id="changeTelephone2Info" aria-label="...">
+            </span>
+            <span class="input-group-addon">
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Telefone 2&nbsp;&nbsp;&nbsp;&nbsp;
+            </span>
+            {{#if changeTelephone2}}
+              <input type="text" class="form-control" aria-label="...">
+            {{/if}}
+          </div><!-- /input-group -->
+          <div class="input-group">
+            <span class="input-group-addon">
+              <input type="checkbox" id="changeOperator2Info" aria-label="...">
+            </span>
+            <span class="input-group-addon">
+              &nbsp;&nbsp;&nbsp;&nbsp;Operadora 2&nbsp;&nbsp;&nbsp;&nbsp;
+            </span>
+            {{#if changeOperator2}}
+              <input type="text" class="form-control" aria-label="...">
+            {{/if}}
+          </div><!-- /input-group -->
+          <div class="input-group">
+            <span class="input-group-addon">
+              <input type="checkbox" id="changeWhatsapp2Info" aria-label="...">
+            </span>
+            <span class="input-group-addon">
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Whatsapp 2?&nbsp;&nbsp;&nbsp;&nbsp;
+            </span>
+            {{#if changeWhatsapp2}}
+              <input type="text" class="form-control" aria-label="...">
+            {{/if}}
+          </div><!-- /input-group -->
+          <div class="input-group">
+            <span class="input-group-addon">
+              <input type="checkbox" id="changeAddressInfo" aria-label="...">
+            </span>
+            <span class="input-group-addon">
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Endere&ccedil;o&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </span>
+            {{#if changeAddress}}
+              <input type="text" class="form-control" aria-label="...">
+            {{/if}}
+          </div><!-- /input-group -->
+          <div class="input-group">
+            <span class="input-group-addon">
+              <input type="checkbox" id="changeRegionInfo" aria-label="...">
+            </span>
+            <span class="input-group-addon">
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Regi&atilde;o&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </span>
+            {{#if changeRegion}}
+              <input type="text" class="form-control" aria-label="...">
+            {{/if}}
+          </div><!-- /input-group -->
+          <div class="input-group">
+            <span class="input-group-addon">
+              <input type="checkbox" id="changeCarrocaPimpadaInfo" aria-label="...">
+            </span>
+            <span class="input-group-addon">
+              &nbsp;&nbsp;Carro&ccedil;a Pimpada?&nbsp;
+            </span>
+            {{#if changeCarrocaPimpada}}
+              <input type="text" class="form-control" aria-label="...">
+            {{/if}}
+          </div><!-- /input-group -->
+          <div class="input-group">
+            <span class="input-group-addon">
+              <input type="checkbox" id="changeMotorizedVehicleInfo" aria-label="...">
+            </span>
+            <span class="input-group-addon">
+              Ve&iacute;culo Motorizado?
+            </span>
+            {{#if changeMotorizedVehicle}}
+              <input type="text" class="form-control" aria-label="...">
+            {{/if}}
+          </div><!-- /input-group -->
+          <div class="input-group">
+            <span class="input-group-addon">
+              <input type="checkbox" id="changeObservationsInfo" aria-label="...">
+            </span>
+            <span class="input-group-addon">
+              &nbsp;&nbsp;&nbsp;Observa&ccedil;&otilde;es&nbsp;&nbsp;&nbsp;&nbsp;
+            </span>
+            {{#if changeObservations}}
+              <input type="text" class="form-control" aria-label="...">
+            {{/if}}
+          </div><!-- /input-group -->
+
+          <br>
+          <button class="btn btn-default pull-right profile-button-update">
+            <i class="glyphicon glyphicon-pencil profile"></i> Atualizar
+          </button>
+          <br>
+
         </div> <!-- /modal-body -->
 
         <div class="modal-footer">

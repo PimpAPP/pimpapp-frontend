@@ -3,6 +3,7 @@ var MAP_ZOOM = 15;
 
 // Load GoogleMaps on startup
 Meteor.startup(function() {
+  T9n.setLanguage("pt");
   GoogleMaps.load({
     libraries: 'places'
   });
@@ -114,18 +115,18 @@ $(document).on('input', '.clearable', function(){
 
 function add_catadores() {
   var icon = catador_icon_source;
-  
-  var carroceiroType = 'carroceiro';
-  var catadores = Carroceiros.find({'type':carroceiroType}).fetch();
+
+  var carroceiroType = 'C';
+  var catadores = Carroceiros.find({'catador_type':carroceiroType}).fetch();
 
   catadores.forEach(function(catador) {
     // retrieve data for catador
     var catadorID = catador._id;
     var name = catador.name;
-    var address = catador.address;
+    var address = catador.geolocation.address;
     var locationObject = {
-      'lat': catador.latitude,
-      'lng': catador.longitude
+      'lat': catador.geolocation.latitude,
+      'lng': catador.geolocation.longitude
     };
 
     // create infowindow string

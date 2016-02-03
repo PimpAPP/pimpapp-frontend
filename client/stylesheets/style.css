@@ -142,9 +142,14 @@ img.avatar { /* TODO: make sime size always? */
 
 .service-item {
     margin-bottom: 1em;
+    padding-right: 15px;
+    padding-left: 15px;
 }
 
-
+.service-comment {
+    padding-right: 15px;
+    padding-left: 15px;
+}
 
 /*** USER REGISTRATION ***/
 .user-registration-form {

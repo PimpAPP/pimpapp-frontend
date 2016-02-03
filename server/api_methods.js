@@ -1,7 +1,7 @@
 // All methods that call Django API go here
 
 
-var endpoint = 'http://104.131.46.101/';
+var endpoint = 'http://104.131.46.101/api/';
 
 Meteor.methods({
   // updates collection Carroceiros with latest data from Django database
@@ -16,8 +16,7 @@ Meteor.methods({
         var data = response.data;
         for (var i = 0; i < data.length; i++) {
             var carroceiro = data[i];
-
-            var exists = Carroceiros.findOne({'id': carroceiro.id})
+            var exists = Carroceiros.findOne({'pk': carroceiro.pk})
             if (!exists) {
               Carroceiros.insert(carroceiro);
             }              
