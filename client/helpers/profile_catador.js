@@ -14,64 +14,81 @@ Template.catadorDetails.helpers({
   
   name: function() {
     var catador = Carroceiros.findOne(getCatadorIdFromUrl());
+    Session.set('currName', catador.name);
     return catador.name;
   },
 
   telephone1: function() {
     var catador = Carroceiros.findOne(getCatadorIdFromUrl());
+    Session.set('currTelephone1', catador.phone);
     return catador.phone;
   },
 
   telephone2: function() {
     var catador = Carroceiros.findOne(getCatadorIdFromUrl());
+    Session.set('currTelephone2', catador.telephone2);
     return catador.telephone2;
   },
   operator_telephone1: function() {
     var catador = Carroceiros.findOne(getCatadorIdFromUrl());
+    Session.set('currOperator1', catador.operator_telephone1);
     var operator = catador.operator_telephone1;
     if (operator) return '(' + operator + ')';
     return '';
   },
   operator_telephone2: function() {
     var catador = Carroceiros.findOne(getCatadorIdFromUrl());
+    Session.set('currOperator2', catador.operator_telephone2);
     var operator = catador.operator_telephone2;
     if (operator) return '(' + operator + ')';
     return '';
   },
   region: function() {
     var catador = Carroceiros.findOne(getCatadorIdFromUrl());
+    Session.set('currRegion', catador.region);
     return catador.region;
   },
 
   whatsapp1: function() {
     var catador = Carroceiros.findOne(getCatadorIdFromUrl());
+    Session.set('currWhatsapp1', catador.whatsapp1);
     return catador.whatsapp1;
   },
 
   whatsapp2: function() {
     var catador = Carroceiros.findOne(getCatadorIdFromUrl());
+    Session.set('currWhatsapp2', catador.whatsapp2);
     return catador.whatsapp2;
   },
 
-  address: function() {
+  address_base: function() {
     var catador = Carroceiros.findOne(getCatadorIdFromUrl());
-    return catador.geolocation.address;
+    Session.set('currAddress_base', catador.address_base);
+    return catador.address_base;
+  },
+  city: function() {
+    var catador = Carroceiros.findOne(getCatadorIdFromUrl());
+    Session.set('currCity', catador.city);
+    return catador.city;
   },
 
   carrocaPimpada: function() {
     var catador = Carroceiros.findOne(getCatadorIdFromUrl());
     var returnVal = (catador.carrocaPimpada)? 'Sim' : 'N\u00e3o';
+    Session.set('currCarrocaPimpada', returnVal);
     return returnVal;
   },
 
   motorizedVehicle: function() {
     var catador = Carroceiros.findOne(getCatadorIdFromUrl());
     var returnVal = (catador.motorizedVehicle)? 'Sim' : 'N\u00e3o';
+    Session.set('currMotorizedVehicle', returnVal);
     return returnVal;
   },
 
   observations: function() {
     var catador = Carroceiros.findOne(getCatadorIdFromUrl());
+    Session.set('currObservations', catador.observations);
     return catador.observations;
   },
 
@@ -129,9 +146,29 @@ Template.catadorDetails.helpers({
 Template.catadorDetails.events({
   'click .profile-button-update': function() {
 
+
+
+
     console.log("clicked update button");
     // TODO: appropriate action, e.g. redirect to new page where can update certain information?
     // Or should be able to select which field to update?
+
+    // when calling update screen initially uncheck all check boxes that indicate that user wants to update that field
+    Session.set('changeName', false);
+    Session.set('changeTelephone1', false);
+    Session.set('changeOperator1', false);
+    Session.set('changeWhatsapp1', false);
+    Session.set('changeTelephone2', false);
+    Session.set('changeOperator2', false);
+    Session.set('changeWhatsapp2', false);
+    Session.set('changeAddress_base', false);
+    Session.set('changeRegion', false);
+    Session.set('changeCity', false);
+    Session.set('changeCarrocaPimpada', false);
+    Session.set('changeMotorizedVehicle', false);
+    Session.set('changeObservations', false);
+
+    // call screen of update
     Modal.show('modalUpdateInfo');
     
   },
@@ -212,12 +249,12 @@ Template.modalUpdateInfo.events({
       Session.set('changeWhatsapp2', true);
     }
   },
-  'change #changeAddressInfo': function() {
-    if (Session.get('changeAddress')) {
-      Session.set('changeAddress', false);
+  'change #changeAddress_baseInfo': function() {
+    if (Session.get('changeAddress_base')) {
+      Session.set('changeAddress_base', false);
     }
     else {
-      Session.set('changeAddress', true);
+      Session.set('changeAddress_base', true);
     }
   },
   'change #changeRegionInfo': function() {
@@ -226,6 +263,14 @@ Template.modalUpdateInfo.events({
     }
     else {
       Session.set('changeRegion', true);
+    }
+  },
+  'change #changeCityInfo': function() {
+    if (Session.get('changeCity')) {
+      Session.set('changeCity', false);
+    }
+    else {
+      Session.set('changeCity', true);
     }
   },
   'change #changeCarrocaPimpadaInfo': function() {
@@ -258,38 +303,80 @@ Template.modalUpdateInfo.helpers({
   'changeName': function() {
     return Session.get('changeName');
   },
+  'currName': function() {
+    return Session.get('currName');
+  },
   'changeTelephone1': function() {
     return Session.get('changeTelephone1');
+  },
+  'currTelephone1': function() {
+    return Session.get('currTelephone1');
   },
   'changeOperator1': function() {
     return Session.get('changeOperator1');
   },
+  'currOperator1': function() {
+    return Session.get('currOperator1');
+  },
   'changeWhatsapp1': function() {
     return Session.get('changeWhatsapp1');
+  },
+  'currWhatsapp1': function() {
+    return Session.get('currWhatsapp1');
   },
   'changeTelephone2': function() {
     return Session.get('changeTelephone2');
   },
+  'currTelephone2': function() {
+    return Session.get('currTelephone2');
+  },
   'changeOperator2': function() {
     return Session.get('changeOperator2');
+  },
+  'currOperator2': function() {
+    return Session.get('currOperator2');
   },
   'changeWhatsapp2': function() {
     return Session.get('changeWhatsapp2');
   },
-  'changeAddress': function() {
-    return Session.get('changeAddress');
+  'currWhatsapp2': function() {
+    return Session.get('currWhatsapp2');
+  },
+  'changeAddress_base': function() {
+    return Session.get('changeAddress_base');
+  },
+  'currAddress_base': function() {
+    return Session.get('currAddress_base');
   },
   'changeRegion': function() {
     return Session.get('changeRegion');
   },
+  'currRegion': function() {
+    return Session.get('currRegion');
+  },
+  'changeCity': function() {
+    return Session.get('changeCity');
+  },
+  'currCity': function() {
+    return Session.get('currCity');
+  },
   'changeCarrocaPimpada': function() {
     return Session.get('changeCarrocaPimpada');
+  },
+  'currCarrocaPimpada': function() {
+    return Session.get('currCarrocaPimpada');
   },
   'changeMotorizedVehicle': function() {
     return Session.get('changeMotorizedVehicle');
   },
+  'currMotorizedVehicle': function() {
+    return Session.get('currMotorizedVehicle');
+  },
   'changeObservations': function() {
     return Session.get('changeObservations');
+  },
+  'currObservations': function() {
+    return Session.get('currObservations');
   }
 });
 

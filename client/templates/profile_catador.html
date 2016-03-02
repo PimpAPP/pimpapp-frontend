@@ -63,8 +63,9 @@
         <i class="fa fa-whatsapp"></i>
       {{/if}}
       <br>
-      <span class="text-muted">Endere&ccedil;o: </span>{{address}}<br>
+      <span class="text-muted">Endere&ccedil;o: </span>{{address_base}}<br>
       <span class="text-muted">Regi&atilde;o: </span>{{region}}<br>
+      <span class="text-muted">Cidade: </span>{{city}}<br>
       <span class="text-muted">Tem sua carro&ccedil;a pimpada? </span>{{carrocaPimpada}}<br>
       <span class="text-muted">Utiliza ve&iacute;culo motorizado? </span>{{motorizedVehicle}}<br>
 
@@ -250,7 +251,7 @@
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nome&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             </span>
             {{#if changeName}}
-              <input type="text" class="form-control" aria-label="...">
+              <input type="text" class="form-control" aria-label="..." value={{currName}}>
             {{/if}}
           </div><!-- /input-group -->
           <div class="input-group">
@@ -261,7 +262,7 @@
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Telefone 1&nbsp;&nbsp;&nbsp;&nbsp;
             </span>
             {{#if changeTelephone1}}
-              <input type="text" class="form-control" aria-label="...">
+              <input type="text" class="form-control" aria-label="..." value={{currTelephone1}}>
             {{/if}}
           </div><!-- /input-group -->
           <div class="input-group">
@@ -272,7 +273,7 @@
               &nbsp;&nbsp;&nbsp;&nbsp;Operadora 1&nbsp;&nbsp;&nbsp;&nbsp;
             </span>
             {{#if changeOperator1}}
-              <input type="text" class="form-control" aria-label="...">
+              <input type="text" class="form-control" aria-label="..." value={{currOperator1}}>
             {{/if}}
           </div><!-- /input-group -->
           <div class="input-group">
@@ -283,7 +284,7 @@
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Whatsapp 1?&nbsp;&nbsp;&nbsp;&nbsp;
             </span>
             {{#if changeWhatsapp1}}
-              <input type="text" class="form-control" aria-label="...">
+              <input type="text" class="form-control" aria-label="..." value={{currWhatsapp1}}>
             {{/if}}
           </div><!-- /input-group -->
           <div class="input-group">
@@ -294,7 +295,7 @@
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Telefone 2&nbsp;&nbsp;&nbsp;&nbsp;
             </span>
             {{#if changeTelephone2}}
-              <input type="text" class="form-control" aria-label="...">
+              <input type="text" class="form-control" aria-label="..." value={{currTelephone2}}>
             {{/if}}
           </div><!-- /input-group -->
           <div class="input-group">
@@ -305,7 +306,7 @@
               &nbsp;&nbsp;&nbsp;&nbsp;Operadora 2&nbsp;&nbsp;&nbsp;&nbsp;
             </span>
             {{#if changeOperator2}}
-              <input type="text" class="form-control" aria-label="...">
+              <input type="text" class="form-control" aria-label="..." value={{currOperator2}}>
             {{/if}}
           </div><!-- /input-group -->
           <div class="input-group">
@@ -316,18 +317,18 @@
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Whatsapp 2?&nbsp;&nbsp;&nbsp;&nbsp;
             </span>
             {{#if changeWhatsapp2}}
-              <input type="text" class="form-control" aria-label="...">
+              <input type="text" class="form-control" aria-label="..." value={{currWhatsapp2}}>
             {{/if}}
           </div><!-- /input-group -->
           <div class="input-group">
             <span class="input-group-addon">
-              <input type="checkbox" id="changeAddressInfo" aria-label="...">
+              <input type="checkbox" id="changeAddress_baseInfo" aria-label="...">
             </span>
             <span class="input-group-addon">
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Endere&ccedil;o&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             </span>
-            {{#if changeAddress}}
-              <input type="text" class="form-control" aria-label="...">
+            {{#if changeAddress_base}}
+              <input type="text" class="form-control" aria-label="..." value={{currAddress_base}}>
             {{/if}}
           </div><!-- /input-group -->
           <div class="input-group">
@@ -338,7 +339,18 @@
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Regi&atilde;o&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             </span>
             {{#if changeRegion}}
-              <input type="text" class="form-control" aria-label="...">
+              <input type="text" class="form-control" aria-label="..." value={{currRegion}}>
+            {{/if}}
+          </div><!-- /input-group -->
+          <div class="input-group">
+            <span class="input-group-addon">
+              <input type="checkbox" id="changeCityInfo" aria-label="...">
+            </span>
+            <span class="input-group-addon">
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cidade&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </span>
+            {{#if changeCity}}
+              <input type="text" class="form-control" aria-label="..." value={{currCity}}>
             {{/if}}
           </div><!-- /input-group -->
           <div class="input-group">
@@ -349,7 +361,7 @@
               &nbsp;&nbsp;Carro&ccedil;a Pimpada?&nbsp;
             </span>
             {{#if changeCarrocaPimpada}}
-              <input type="text" class="form-control" aria-label="...">
+              <input type="text" class="form-control" aria-label="..." value={{currCarrocaPimpada}}>
             {{/if}}
           </div><!-- /input-group -->
           <div class="input-group">
@@ -360,7 +372,7 @@
               Ve&iacute;culo Motorizado?
             </span>
             {{#if changeMotorizedVehicle}}
-              <input type="text" class="form-control" aria-label="...">
+              <input type="text" class="form-control" aria-label="..." value={{currMotorizedVehicle}}>
             {{/if}}
           </div><!-- /input-group -->
           <div class="input-group">
@@ -371,7 +383,7 @@
               &nbsp;&nbsp;&nbsp;Observa&ccedil;&otilde;es&nbsp;&nbsp;&nbsp;&nbsp;
             </span>
             {{#if changeObservations}}
-              <input type="text" class="form-control" aria-label="...">
+              <input type="text" class="form-control" aria-label="..." value={{currObservations}}>
             {{/if}}
           </div><!-- /input-group -->
 

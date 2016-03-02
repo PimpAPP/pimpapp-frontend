@@ -19,10 +19,15 @@ Meteor.methods({
             var exists = Carroceiros.findOne({'pk': carroceiro.pk})
             if (!exists) {
               Carroceiros.insert(carroceiro);
-            }              
+            }
         }
       }
     });
+  },
+
+  //initializes the collection Carroceiros to get fresh data from Django
+  resetCarroceiros: function() {
+    Carroceiros.remove({});
   },
 
   // TODO: call Django API here to include catador information in Django database
