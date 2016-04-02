@@ -31,17 +31,22 @@ Meteor.methods({
   },
 
   // TODO: call Django API here to include catador information in Django database
-  submitCatadorRegistration: function(doc) {
+  submitCatadorRegistration: function(catador) {
     console.log("registering a catador");
-    console.log(doc);
+    console.log(catador);
 
-    var catador = 'catador';
-    var create_catador_endpoint = endpoint + catador;
-    // HTTP.post(create_catador_endpoint, {'options': 'to set'}
-    //   function(error, response) {
+    //var catador = 'catador';
+    //var create_catador_endpoint = endpoint + catador;
+    var carroceiro = 'carroceiro/';
+    var carroceiro_endpoint = endpoint + carroceiro;
 
-
-    // });
+    HTTP.post(carroceiro_endpoint, {catador}, function( error, response ) {
+  if ( error ) {
+    console.log( error );
+  } else {
+    console.log( response );
+  }
+  });
   },
 
   // TODO: call Django API here to update catador information in Django database

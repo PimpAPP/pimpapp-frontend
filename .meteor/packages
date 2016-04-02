@@ -6,7 +6,6 @@
 
 dburles:google-maps
 mdg:geolocation
-standard-minifiers
 meteor-base
 mobile-experience
 mongo
@@ -44,3 +43,5 @@ peppelg:bootstrap-3-modal
 accounts-facebook
 softwarerero:accounts-t9n
 okgrow:analytics
+standard-minifier-css
+standard-minifier-js

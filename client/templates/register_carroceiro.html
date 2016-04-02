@@ -53,6 +53,7 @@
   {{#autoForm collection="Catadores" id="insertCatadorForm" 
     type="method" meteormethod="submitCatadorRegistration"}}
   <fieldset>
+
     <!-- <legend>Cadastre um catador</legend> -->
     {{> afQuickField name='name'}}
     <div class="input-group-telephone">
@@ -83,10 +84,12 @@
       </div>      
     </div>
 
-    <div class="input-address">
-      {{> afQuickField name='address' type="googleplace"}}
+    <div class="input-address_base">
+      {{> afQuickField name='address_base' type="googleplace"}}
     </div>
     {{> afQuickField name='region'}}
+    {{> afQuickField name='city'}}
+    {{> afQuickField name='country'}}
     {{> afQuickField name='carrocaPimpada'}}
     {{> afQuickField name='motorizedVehicle'}}
     
