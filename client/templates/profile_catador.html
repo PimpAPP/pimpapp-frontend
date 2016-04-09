@@ -58,14 +58,17 @@
         <i class="fa fa-whatsapp"></i>
       {{/if}}
       <br>
-      <span class="text-muted">Telefone 2: </span>{{telephone2}} {{operator_telephone2}}<br>
+      <span class="text-muted">Telefone 2: </span>{{telephone2}} {{operator_telephone2}}
       {{#if whatsapp2}}
         <i class="fa fa-whatsapp"></i>
       {{/if}}
       <br>
-      <span class="text-muted">Endere&ccedil;o: </span>{{address_base}}<br>
+      <span class="text-muted">Endere&ccedil;o: </span>{{base_address}}<br>
       <span class="text-muted">Regi&atilde;o: </span>{{region}}<br>
       <span class="text-muted">Cidade: </span>{{city}}<br>
+      <span class="text-muted">Estado: </span>{{state}}<br>
+      <span class="text-muted">Pa&iacute;s: </span>{{country}}<br>
+      <span class="text-muted">CEP: </span>{{zip}}<br>
       <span class="text-muted">Tem sua carro&ccedil;a pimpada? </span>{{carrocaPimpada}}<br>
       <span class="text-muted">Utiliza ve&iacute;culo motorizado? </span>{{motorizedVehicle}}<br>
 
@@ -84,10 +87,7 @@
         {{#if services_construction}}
           <img src="/img/paint.png" alt="res&iacute;duo de constru&ccedil;&atilde;o civil" title="res&iacute;duo de constru&ccedil;&atilde;o civil">
         {{/if}}
-        {{#if services_freight}}
-          <img src="/img/recyclables.png" alt="frete e carreto" title="frete e carreto">
-        {{/if}}
-        {{#if services_furniture}}
+        {{#if services_volume}}
           <img src="/img/recyclables.png" alt="res&iacute;duos volumosos" title="res&iacute;duos volumosos">
         {{/if}}
         {{#if services_metals}}
@@ -96,6 +96,9 @@
         {{#if services_electronics}}
           <img src="/img/recyclables.png" alt="eletroeletr&ocirc;nicos" title="eletroeletr&ocirc;nicos">
         {{/if}}
+        {{#if services_freight}}
+          <img src="/img/recyclables.png" alt="frete e carreto" title="frete e carreto">
+        {{/if}}
         {{#if services_other_materials}}
           <img src="/img/trash.png" alt="outros materiais" title="outros materiais">
         {{/if}}
@@ -103,8 +106,8 @@
         <!-- Images are placeholders. TODO: use better icons in helper function services.
         Return images conditional on services offered by the catador. -->
         <!-- TODO: remove these images once Django API is updated to include service types-->
-        <img src="/img/metals.png" alt="ferro e metais" title="ferro e metais">
-        <img src="/img/trash.png" alt="outros materiais" title="outros materiais">
+        <!--img src="/img/metals.png" alt="ferro e metais" title="ferro e metais">
+        <img src="/img/trash.png" alt="outros materiais" title="outros materiais"-->
 
         <button class="btn btn-default pull-right profile-button-services">
           <i class="glyphicon glyphicon-info-sign"></i>
@@ -322,13 +325,13 @@
           </div><!-- /input-group -->
           <div class="input-group">
             <span class="input-group-addon">
-              <input type="checkbox" id="changeAddress_baseInfo" aria-label="...">
+              <input type="checkbox" id="changeBase_addressInfo" aria-label="...">
             </span>
             <span class="input-group-addon">
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Endere&ccedil;o&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             </span>
-            {{#if changeAddress_base}}
-              <input type="text" class="form-control" aria-label="..." value={{currAddress_base}}>
+            {{#if changeBase_address}}
+              <input type="text" class="form-control" aria-label="..." value={{currBase_address}}>
             {{/if}}
           </div><!-- /input-group -->
           <div class="input-group">

@@ -5,6 +5,9 @@ Template.catadorprofile.onCreated(function() {
   // because now has to subscribe every time new profile is loaded
   this.subscribe('images');
   this.subscribe('carroceiros');
+  this.subscribe('addresses');
+  this.subscribe('telephones');
+  this.subscribe('services');
   this.subscribe('posts');
 
 })
@@ -20,56 +23,88 @@ Template.catadorDetails.helpers({
 
   telephone1: function() {
     var catador = Carroceiros.findOne(getCatadorIdFromUrl());
-    Session.set('currTelephone1', catador.phone);
-    return catador.phone;
+    var telephone = TelephoneS.findOne({'catador_id':catador.id});
+    Session.set('currTelephone1', telephone.telephone1);
+    return telephone.telephone1;
   },
 
   telephone2: function() {
     var catador = Carroceiros.findOne(getCatadorIdFromUrl());
-    Session.set('currTelephone2', catador.telephone2);
-    return catador.telephone2;
+    var telephone = TelephoneS.findOne({'catador_id':catador.id});
+    Session.set('currTelephone2', telephone.telephone2);
+    return telephone.telephone2;
   },
   operator_telephone1: function() {
     var catador = Carroceiros.findOne(getCatadorIdFromUrl());
-    Session.set('currOperator1', catador.operator_telephone1);
-    var operator = catador.operator_telephone1;
+    var telephone = TelephoneS.findOne({'catador_id':catador.id});
+    Session.set('currOperator1', telephone.operator_telephone1);
+    var operator = telephone.operator_telephone1;
     if (operator) return '(' + operator + ')';
     return '';
   },
   operator_telephone2: function() {
     var catador = Carroceiros.findOne(getCatadorIdFromUrl());
-    Session.set('currOperator2', catador.operator_telephone2);
-    var operator = catador.operator_telephone2;
+    var telephone = TelephoneS.findOne({'catador_id':catador.id});
+    Session.set('currOperator2', telephone.operator_telephone2);
+    var operator = telephone.operator_telephone2;
     if (operator) return '(' + operator + ')';
     return '';
-  },
-  region: function() {
-    var catador = Carroceiros.findOne(getCatadorIdFromUrl());
-    Session.set('currRegion', catador.region);
-    return catador.region;
   },
 
   whatsapp1: function() {
     var catador = Carroceiros.findOne(getCatadorIdFromUrl());
-    Session.set('currWhatsapp1', catador.whatsapp1);
-    return catador.whatsapp1;
+    var telephone = TelephoneS.findOne({'catador_id':catador.id});
+    Session.set('currWhatsapp1', telephone.whatsapp1);
+    return telephone.whatsapp1;
   },
 
   whatsapp2: function() {
     var catador = Carroceiros.findOne(getCatadorIdFromUrl());
-    Session.set('currWhatsapp2', catador.whatsapp2);
-    return catador.whatsapp2;
+    var telephone = TelephoneS.findOne({'catador_id':catador.id});
+    Session.set('currWhatsapp2', telephone.whatsapp2);
+    return telephone.whatsapp2;
   },
 
-  address_base: function() {
+  base_address: function() {
     var catador = Carroceiros.findOne(getCatadorIdFromUrl());
-    Session.set('currAddress_base', catador.address_base);
-    return catador.address_base;
+    var address = AddressS.findOne({'catador_id':catador.id});
+    Session.set('currBase_address', address.base_address);
+    return address.base_address;
   },
+
+  region: function() {
+    var catador = Carroceiros.findOne(getCatadorIdFromUrl());
+    var address = AddressS.findOne({'catador_id':catador.id});
+    Session.set('currRegion', address.region);
+    return address.region;
+  },
+
   city: function() {
     var catador = Carroceiros.findOne(getCatadorIdFromUrl());
-    Session.set('currCity', catador.city);
-    return catador.city;
+    var address = AddressS.findOne({'catador_id':catador.id});
+    Session.set('currCity', address.city);
+    return address.city;
+  },
+
+  state: function() {
+    var catador = Carroceiros.findOne(getCatadorIdFromUrl());
+    var address = AddressS.findOne({'catador_id':catador.id});
+    Session.set('currState', address.state);
+    return address.state;
+  },
+
+  country: function() {
+    var catador = Carroceiros.findOne(getCatadorIdFromUrl());
+    var address = AddressS.findOne({'catador_id':catador.id});
+    Session.set('currCountry', address.country);
+    return address.country;
+  },
+
+  zip: function() {
+    var catador = Carroceiros.findOne(getCatadorIdFromUrl());
+    var address = AddressS.findOne({'catador_id':catador.id});
+    Session.set('currZip', address.zip);
+    return address.zip;
   },
 
   carrocaPimpada: function() {
@@ -96,31 +131,38 @@ Template.catadorDetails.helpers({
 
   services_recyclable: function() {
     var catador = Carroceiros.findOne(getCatadorIdFromUrl());
-    return catador.services_recyclable;
+    var services = ServiceS.findOne({'catador_id':catador.id});
+    return services.services_recyclable;
   },
   services_construction: function() {
     var catador = Carroceiros.findOne(getCatadorIdFromUrl());
-    return catador.services_construction;
+    var services = ServiceS.findOne({'catador_id':catador.id});
+    return services.services_construction;
   },
-  services_freight: function() {
+  services_volume: function() {
     var catador = Carroceiros.findOne(getCatadorIdFromUrl());
-    return catador.services_freight;
-  },
-  services_furniture: function() {
-    var catador = Carroceiros.findOne(getCatadorIdFromUrl());
-    return catador.services_furniture;
+    var services = ServiceS.findOne({'catador_id':catador.id});
+    return services.services_volume;
   },
   services_metals: function() {
     var catador = Carroceiros.findOne(getCatadorIdFromUrl());
-    return catador.services_metals;
+    var services = ServiceS.findOne({'catador_id':catador.id});
+    return services.services_metals;
   },      
   services_electronics: function() {
     var catador = Carroceiros.findOne(getCatadorIdFromUrl());
-    return catador.services_electronics;
+    var services = ServiceS.findOne({'catador_id':catador.id});
+    return services.services_electronics;
+  },
+  services_freight: function() {
+    var catador = Carroceiros.findOne(getCatadorIdFromUrl());
+    var services = ServiceS.findOne({'catador_id':catador.id});
+    return services.services_freight;
   },      
   services_other_materials: function() {
     var catador = Carroceiros.findOne(getCatadorIdFromUrl());
-    return catador.services_other_materials;
+    var services = ServiceS.findOne({'catador_id':catador.id});
+    return services.services_other_materials;
   },      
 
 
@@ -161,7 +203,7 @@ Template.catadorDetails.events({
     Session.set('changeTelephone2', false);
     Session.set('changeOperator2', false);
     Session.set('changeWhatsapp2', false);
-    Session.set('changeAddress_base', false);
+    Session.set('changeBase_address', false);
     Session.set('changeRegion', false);
     Session.set('changeCity', false);
     Session.set('changeCarrocaPimpada', false);
@@ -249,12 +291,12 @@ Template.modalUpdateInfo.events({
       Session.set('changeWhatsapp2', true);
     }
   },
-  'change #changeAddress_baseInfo': function() {
-    if (Session.get('changeAddress_base')) {
-      Session.set('changeAddress_base', false);
+  'change #changeBase_addressInfo': function() {
+    if (Session.get('changeBase_address')) {
+      Session.set('changeBase_address', false);
     }
     else {
-      Session.set('changeAddress_base', true);
+      Session.set('changeBase_address', true);
     }
   },
   'change #changeRegionInfo': function() {
@@ -342,11 +384,11 @@ Template.modalUpdateInfo.helpers({
   'currWhatsapp2': function() {
     return Session.get('currWhatsapp2');
   },
-  'changeAddress_base': function() {
-    return Session.get('changeAddress_base');
+  'changeBase_address': function() {
+    return Session.get('changeBase_address');
   },
-  'currAddress_base': function() {
-    return Session.get('currAddress_base');
+  'currBase_address': function() {
+    return Session.get('currBase_address');
   },
   'changeRegion': function() {
     return Session.get('changeRegion');

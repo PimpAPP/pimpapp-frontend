@@ -12,6 +12,7 @@ Meteor.startup(function() {
 // Create map and geolocate
 Template.map.onCreated(function() {
   this.subscribe('carroceiros');
+  this.subscribe('geolocations');
   var self = this;
 
   GoogleMaps.ready('map', function(map) {
@@ -37,11 +38,11 @@ Template.map.onCreated(function() {
     attachSearchBox(map, marker);
 
     // initializes collection's data
-    reset_carroceiros();
+    //reset_carroceiros();
     
     self.autorun(function() {
       // update collection Carroceiros with data from Django database
-      update_carroceiros();
+      //update_carroceiros();
       
       // add markers for catadores to map
       add_catadores();
@@ -126,10 +127,10 @@ function add_catadores() {
     // retrieve data for catador
     var catadorID = catador._id;
     var name = catador.name;
-    var address = catador.address_base;
+    var geolocation = GeolocationS.findOne({'catador_id':catador.id});
     var locationObject = {
-      'lat': catador.geolocation.latitude,
-      'lng': catador.geolocation.longitude
+      'lat': geolocation.latitude,
+      'lng': geolocation.longitude
     };
 
     // create infowindow string
