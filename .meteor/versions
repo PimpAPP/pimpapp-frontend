@@ -101,6 +101,7 @@ mongo-id@1.0.2
 mongo-livedata@1.0.10
 mpowaga:jquery-fileupload@9.11.2
 mpowaga:jquery-ui-widget@1.11.4
+mrt:flash-messages@1.0.1
 npm-bcrypt@0.7.8_2
 npm-mongo@1.4.41
 oauth@1.1.8

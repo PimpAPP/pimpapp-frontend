@@ -4,7 +4,6 @@
 
 
 <template name="Registercarroceiro">
-
   <div class="panel panel-default">
     <div class="panel-body">
 
@@ -50,12 +49,14 @@
 
 <!-- Form to register catador -->
 <template name="catadorForm">
-  {{#autoForm collection="Catadores" id="insertCatadorForm" 
+  {{#autoForm doc=this id="insertCatadorForm" schema="CatadorProfileInsertSchema"
     type="method" meteormethod="submitCatadorRegistration"}}
+
   <fieldset>
 
     <!-- <legend>Cadastre um catador</legend> -->
     {{> afQuickField name='name'}}
+
     <div class="input-group-telephone">
       <div class="input-telephone">
         {{> afQuickField name='telephone1'}}
@@ -84,29 +85,28 @@
       </div>      
     </div>
 
-    <div class="input-address_base">
-      {{> afQuickField name='address_base' type="googleplace"}}
+    <div class="input-address">
+      {{> afQuickField id='complete_address' name='complete_address' type="googleplace"}}
     </div>
     {{> afQuickField name='region'}}
-    {{> afQuickField name='city'}}
-    {{> afQuickField name='country'}}
     {{> afQuickField name='carrocaPimpada'}}
     {{> afQuickField name='motorizedVehicle'}}
     
     <label>Tipos de materiais que coleta</label>
     {{> afQuickField name="services_recyclable"}}
     {{> afQuickField name="services_construction"}}
-    {{> afQuickField name="services_furniture"}}
+    {{> afQuickField name="services_volume"}}
     {{> afQuickField name="services_metals"}}
     {{> afQuickField name="services_electronics"}}
-    {{> afQuickField name="services_other_materials"}}
     {{> afQuickField name="services_freight"}}
+    {{> afQuickField name="services_other_materials"}}
 
     {{> afQuickField name="observations"}}
 
-    {{> afQuickField name="picture"}}
+    {{> afQuickField name="full_photo"}}
 
   </fieldset>
+  {{> flashMessages}}
   <button type="submit" class="btn btn-primary">Inserir</button>
   {{/autoForm}}
 </template>

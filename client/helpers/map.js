@@ -36,14 +36,9 @@ Template.map.onCreated(function() {
 
     // attaches the search box
     attachSearchBox(map, marker);
-
-    // initializes collection's data
-    //reset_carroceiros();
     
     self.autorun(function() {
-      // update collection Carroceiros with data from Django database
-      //update_carroceiros();
-      
+
       // add markers for catadores to map
       add_catadores();
  
@@ -145,19 +140,6 @@ function add_catadores() {
     addMarkerInfowindow(locationObject, icon, contentString);
   });
 };
-
-// Function that calls Meteor method that initializes the collection
-// Carroceiros to get fresh data from Django
-function reset_carroceiros() {
-  Meteor.call('resetCarroceiros');
-}
-
-// Function that calls Meteor method that updates the collection
-// Carroceiros with data from Django
-function update_carroceiros() {
-  Meteor.call('getCarroceiros');
-}
-
 
 // Adds marker and associated info window to map
 function addMarkerInfowindow(addressObject, iconUrl, contentString) {

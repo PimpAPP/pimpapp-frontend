@@ -63,8 +63,8 @@
         <i class="fa fa-whatsapp"></i>
       {{/if}}
       <br>
-      <span class="text-muted">Endere&ccedil;o: </span>{{base_address}}<br>
-      <span class="text-muted">Regi&atilde;o: </span>{{region}}<br>
+      <span class="text-muted">Endere&ccedil;o de refer&ecirc;ncia: </span>{{base_address}}<br>
+      <span class="text-muted">Bairros em que coleta: </span>{{region}}<br>
       <span class="text-muted">Cidade: </span>{{city}}<br>
       <span class="text-muted">Estado: </span>{{state}}<br>
       <span class="text-muted">Pa&iacute;s: </span>{{country}}<br>
@@ -82,25 +82,25 @@
         <!-- TODO: update images to correct icons -->
         <h4>Servi&ccedil;os</h4>
         {{#if services_recyclable}}
-          <img src="/img/recyclables.png" alt="material recicl&aacute;vel" title="material recicl&aacute;vel">
+          <img src="/img/services_recyclables.png" alt="material recicl&aacute;vel" title="material recicl&aacute;vel">
         {{/if}}
         {{#if services_construction}}
-          <img src="/img/paint.png" alt="res&iacute;duo de constru&ccedil;&atilde;o civil" title="res&iacute;duo de constru&ccedil;&atilde;o civil">
+          <img src="/img/services_construction.png" alt="res&iacute;duo de constru&ccedil;&atilde;o civil" title="res&iacute;duo de constru&ccedil;&atilde;o civil">
         {{/if}}
         {{#if services_volume}}
-          <img src="/img/recyclables.png" alt="res&iacute;duos volumosos" title="res&iacute;duos volumosos">
+          <img src="/img/services_volume.png" alt="res&iacute;duos volumosos" title="res&iacute;duos volumosos">
         {{/if}}
         {{#if services_metals}}
-          <img src="/img/metals.png" alt="ferro e metais" title="ferro e metais">
+          <img src="/img/services_metals.png" alt="ferro e metais" title="ferro e metais">
         {{/if}}
         {{#if services_electronics}}
-          <img src="/img/recyclables.png" alt="eletroeletr&ocirc;nicos" title="eletroeletr&ocirc;nicos">
+          <img src="/img/services_electronics.png" alt="eletroeletr&ocirc;nicos" title="eletroeletr&ocirc;nicos">
         {{/if}}
         {{#if services_freight}}
-          <img src="/img/recyclables.png" alt="frete e carreto" title="frete e carreto">
+          <img src="/img/services_recyclables.png" alt="frete e carreto" title="frete e carreto">
         {{/if}}
         {{#if services_other_materials}}
-          <img src="/img/trash.png" alt="outros materiais" title="outros materiais">
+          <img src="/img/services_other_materials.png" alt="outros materiais" title="outros materiais">
         {{/if}}
 
         <!-- Images are placeholders. TODO: use better icons in helper function services.
