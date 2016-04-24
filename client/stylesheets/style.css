@@ -8,8 +8,8 @@ html, body {
 
 body {
   position: relative;
+  background-image:url('/img/background.jpg');
 }
-
 
 .container-responsive {
     width: 50%;
@@ -22,15 +22,30 @@ body {
     margin-top: 5em;
 }
 
+.home img {
+    width: 100%;
+}
+
+.footer-brand img {
+    width: 100%;
+}
 
 /*** NAVBAR ***/
+
+nav {
+  background-image:url('/img/header.png');
+}
+
+nav a {
+  color: green;
+}
 
 .navbar-brand {
     padding: 5px 5px 5px 20px;
 }
 
 .navbar-brand img {
-    max-height: 35px;
+    height: 100%;
 }
 
 /*** MAP ***/

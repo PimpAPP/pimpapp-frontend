@@ -1,6 +1,7 @@
 <template name="Nav">
   <div class="nav-container">
-    <nav class="navbar navbar-default navbar-fixed-top">
+    <!-- Fernando 04/24/16 - I removed "navbar-default" class because it generated  a blank line between nav bar and main screen and its letters for nav items was opaque and in a color difficult to see -->
+    <nav class="navbar navbar-fixed-top">
       <div class="container-fluid navbar-inner">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-pimp" aria-expanded="false">
@@ -9,9 +10,10 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
+
           <!-- TODO: reduce resolution of image -->
-          <a class="navbar-brand" href="/">
-            <img src="/img/LogoRECO_final-01.png">
+          <a class="navbar-brand" href="/map">
+            <img src="/img/LogoRECO.png">
           </a>
         </div>
 
