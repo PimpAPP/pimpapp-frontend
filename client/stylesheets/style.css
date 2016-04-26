@@ -4,6 +4,7 @@ html, body {
     height: 100%;
     width: 100%;
     overflow-x: hidden;
+    font-family: DIN;
 }
 
 body {
@@ -19,7 +20,8 @@ body {
 }
 
 .panel {
-    margin-top: 5em;
+    margin-top: 7em;
+    opacity: 0.85;
 }
 
 .home img {
@@ -34,10 +36,11 @@ body {
 
 nav {
   background-image:url('/img/header.png');
+  font-weight:bold;
 }
 
 nav a {
-  color: green;
+  color: white;
 }
 
 .navbar-brand {
