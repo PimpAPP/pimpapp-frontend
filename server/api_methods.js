@@ -10,6 +10,9 @@ Meteor.methods({
       id: String,
       moderation_status: String,
       name: String,
+      miniBio: String,
+      email: String,
+      socialNetwork: String,
       catador_type: String,
       allow_public_edition: Boolean,
       carrocaPimpada: Boolean,
@@ -25,6 +28,9 @@ Meteor.methods({
     catador.name = formInsertCatador.name;
     catador.catador_type = 'C';
     catador.allow_public_edition = true;
+    catador.miniBio = formInsertCatador.miniBio;
+    catador.email = formInsertCatador.email;
+    catador.socialNetwork = formInsertCatador.socialNetwork;
     catador.carrocaPimpada = formInsertCatador.carrocaPimpada;
     catador.motorizedVehicle = formInsertCatador.motorizedVehicle;
     catador.observations = formInsertCatador.observations;
@@ -107,9 +113,11 @@ Meteor.methods({
                       telephone1: Number,
                       operator_telephone1: String,
                       whatsapp1: Boolean,
+                      internet1: Boolean,
                       telephone2: Number,
                       operator_telephone2: String,
                       whatsapp2: Boolean,
+                      internet2: Boolean,
                       user_id: String,
                       created_on: Date
                     };
@@ -119,9 +127,11 @@ Meteor.methods({
                     telephone.telephone1 = formInsertCatador.telephone1;
                     telephone.operator_telephone1 = formInsertCatador.operator_telephone1;
                     telephone.whatsapp1 = formInsertCatador.whatsapp1;
+                    telephone.internet1 = formInsertCatador.internet1;
                     telephone.telephone2 = formInsertCatador.telephone2;
                     telephone.operator_telephone2 = formInsertCatador.operator_telephone2;
                     telephone.whatsapp2 = formInsertCatador.whatsapp2;
+                    telephone.internet2 = formInsertCatador.internet2;
                     telephone.user_id = catador.user_id;
                     telephone.created_on = catador.created_on;
 
@@ -135,6 +145,7 @@ Meteor.methods({
                           catador_id: String,
                           moderation_status: String,
                           services_recyclable: Boolean,
+                          services_glass: Boolean,
                           services_construction: Boolean,
                           services_volume: Boolean,
                           services_metals: Boolean,
@@ -148,6 +159,7 @@ Meteor.methods({
                         service.catador_id = catador.id;
                         service.moderation_status = catador.moderation_status;
                         service.services_recyclable = formInsertCatador.services_recyclable;
+                        service.services_glass = formInsertCatador.services_glass;
                         service.services_construction = formInsertCatador.services_construction;
                         service.services_volume = formInsertCatador.services_volume;
                         service.services_metals = formInsertCatador.services_metals;

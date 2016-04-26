@@ -49,6 +49,7 @@
       <h1 class="only-bottom-margin text-center">{{name}}</h1>
     </div>
   </div>
+  <span class="text-muted">Minibio: </span>{{miniBio}}<br>
   
   <div class="row">
     <div class="col-md-12">
@@ -57,12 +58,20 @@
       {{#if whatsapp1}}
         <i class="fa fa-whatsapp"></i>
       {{/if}}
+      {{#if internet1}}
+        <span class="text-muted"> - Acessa internet na rua</span>
+      {{/if}}
       <br>
       <span class="text-muted">Telefone 2: </span>{{telephone2}} {{operator_telephone2}}
       {{#if whatsapp2}}
         <i class="fa fa-whatsapp"></i>
       {{/if}}
+      {{#if internet2}}
+        <span class="text-muted"> - Acessa internet na rua</span>
+      {{/if}}
       <br>
+      <span class="text-muted">E-mail: </span>{{email}}<br>
+      <span class="text-muted">Perfil nas redes sociais: </span>{{socialNetwork}}<br>
       <span class="text-muted">Endere&ccedil;o de refer&ecirc;ncia: </span>{{base_address}}<br>
       <span class="text-muted">Bairros em que coleta: </span>{{region}}<br>
       <span class="text-muted">Cidade: </span>{{city}}<br>
@@ -83,6 +92,9 @@
         <h4>Servi&ccedil;os</h4>
         {{#if services_recyclable}}
           <img src="/img/services_recyclables.png" alt="material recicl&aacute;vel" title="material recicl&aacute;vel">
+        {{/if}}
+        {{#if services_glass}}
+          <img src="/img/services_glass.png" alt="vidro" title="vidro">
         {{/if}}
         {{#if services_construction}}
           <img src="/img/services_construction.png" alt="res&iacute;duo de constru&ccedil;&atilde;o civil" title="res&iacute;duo de constru&ccedil;&atilde;o civil">
@@ -165,6 +177,15 @@
                     </div>
                     <div class="col-md-10 col-xs-10">
                       Material recicl&aacute;vel (papel, vidro, latas, embalagens, vidro, embalagem longa vida, etc.)
+                    </div>
+                  </div>
+
+                  <div class="row service-item">
+                    <div class="col-md-2 col-xs-2">
+                      <img src="/img/services_glass.png" alt="vidro" title="vidro">
+                    </div>
+                    <div class="col-md-10 col-xs-10">
+                      Vidro
                     </div>
                   </div>
 

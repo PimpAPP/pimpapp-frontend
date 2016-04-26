@@ -114,12 +114,13 @@ Solution here: http://stackoverflow.com/questions/6258521/clear-icon-inside-inpu
 
 }
 
-.input-whatsapp {
+.input-whatsapp-internet {
     vertical-align: bottom;
     padding-top: 1.5em;
+    padding-left: 1em;
 }
 
-.input-address {
+.input-email {
     clear: both;
 }
 

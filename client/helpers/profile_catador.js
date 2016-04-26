@@ -21,6 +21,12 @@ Template.catadorDetails.helpers({
     return catador.name;
   },
 
+  miniBio: function() {
+    var catador = Carroceiros.findOne(getCatadorIdFromUrl());
+    Session.set('currMiniBio', catador.miniBio);
+    return catador.miniBio;
+  },
+
   telephone1: function() {
     var catador = Carroceiros.findOne(getCatadorIdFromUrl());
     var telephone = TelephoneS.findOne({'catador_id':catador.id});
@@ -63,6 +69,32 @@ Template.catadorDetails.helpers({
     var telephone = TelephoneS.findOne({'catador_id':catador.id});
     Session.set('currWhatsapp2', telephone.whatsapp2);
     return telephone.whatsapp2;
+  },
+
+  internet1: function() {
+    var catador = Carroceiros.findOne(getCatadorIdFromUrl());
+    var telephone = TelephoneS.findOne({'catador_id':catador.id});
+    Session.set('currInternet1', telephone.internet1);
+    return telephone.internet1;
+  },
+
+  internet2: function() {
+    var catador = Carroceiros.findOne(getCatadorIdFromUrl());
+    var telephone = TelephoneS.findOne({'catador_id':catador.id});
+    Session.set('currInternet2', telephone.internet2);
+    return telephone.internet2;
+  },
+
+  email: function() {
+    var catador = Carroceiros.findOne(getCatadorIdFromUrl());
+    Session.set('currEmail', catador.email);
+    return catador.email;
+  },
+
+  socialNetwork: function() {
+    var catador = Carroceiros.findOne(getCatadorIdFromUrl());
+    Session.set('currSocialNetwork', catador.socialNetwork);
+    return catador.socialNetwork;
   },
 
   base_address: function() {
@@ -134,6 +166,11 @@ Template.catadorDetails.helpers({
     var services = ServiceS.findOne({'catador_id':catador.id});
     return services.services_recyclable;
   },
+  services_glass: function() {
+    var catador = Carroceiros.findOne(getCatadorIdFromUrl());
+    var services = ServiceS.findOne({'catador_id':catador.id});
+    return services.services_glass;
+  },
   services_construction: function() {
     var catador = Carroceiros.findOne(getCatadorIdFromUrl());
     var services = ServiceS.findOne({'catador_id':catador.id});
@@ -170,6 +207,7 @@ Template.catadorDetails.helpers({
     var catador = Carroceiros.findOne(getCatadorIdFromUrl());
     var services = [];
     if (catador.services_recyclable) services.push(services_recyclable_str);
+    if (catador.services_glass) services.push(services_glass_str);
     if (catador.services_construction) services.push(services_construction_str);
     if (catador.services_freight) services.push(services_freight_str);
     if (catador.services_furniture) services.push(services_furniture_str);
