@@ -152,6 +152,7 @@ Meteor.methods({
                           services_electronics: Boolean,
                           services_freight: Boolean,
                           services_other_materials: Boolean,
+                          services_other_materials_description: String,
                           user_id: String,
                           created_on: Date
                         };
@@ -166,6 +167,8 @@ Meteor.methods({
                         service.services_electronics = formInsertCatador.services_electronics;
                         service.services_freight = formInsertCatador.services_freight;
                         service.services_other_materials = formInsertCatador.services_other_materials;
+                        service.services_other_materials_description = formInsertCatador.services_other_materials_description;
+
                         service.user_id = catador.user_id;
                         service.created_on = catador.created_on;
 

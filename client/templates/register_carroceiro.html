@@ -54,49 +54,50 @@
 
   <fieldset>
 
+    <label>Campos com * s&atilde;o obrigat&oacute;rios</label>
     <!-- <legend>Cadastre um catador</legend> -->
     {{> afQuickField name='name'}}
     {{> afQuickField name='miniBio' rows=5}}
 
-    <div class="input-group-telephone">
-      <div class="input-telephone">
+    <div class="input-clear-both">
+      <div class="input-float-left">
         {{> afQuickField name='telephone1'}}
       </div>
-      <div class="input-telephone">
+      <div class="input-float-left">
         {{> afQuickField name='operator_telephone1' firstOption='Operador' options='allowed'}}
       </div>
-      <div class="input-telephone">
+      <div class="input-float-left">
         <div class="input-whatsapp-internet">
           {{> afQuickField name='whatsapp1'}}
         </div>
       </div>      
-      <div class="input-telephone">
+      <div class="input-float-left">
         <div class="input-whatsapp-internet">
           {{> afQuickField name='internet1'}}
         </div>
       </div>
     </div>
 
-    <div class="input-group-telephone">
-      <div class="input-telephone">
+    <div class="input-clear-both">
+      <div class="input-float-left">
         {{> afQuickField name='telephone2'}}
       </div>
-      <div class="input-telephone">
+      <div class="input-float-left">
         {{> afQuickField name='operator_telephone2' firstOption='Operador' options='allowed'}}
       </div>
-      <div class="input-telephone">
+      <div class="input-float-left">
         <div class="input-whatsapp-internet">
           {{> afQuickField name='whatsapp2'}}
         </div>
       </div>
-      <div class="input-telephone">
+      <div class="input-float-left">
         <div class="input-whatsapp-internet">
           {{> afQuickField name='internet2'}}
         </div>
       </div>
     </div>
 
-    <div class="input-email">
+    <div class="input-clear-both">
       {{> afQuickField name='email' class="required email"}}
     </div>
 
@@ -114,9 +115,19 @@
     {{> afQuickField name="services_metals"}}
     {{> afQuickField name="services_electronics"}}
     {{> afQuickField name="services_freight"}}
-    {{> afQuickField name="services_other_materials"}}
 
-    {{> afQuickField name="observations"}}
+    <div class="input-clear-both">
+      <div class="input-float-left">
+        {{> afQuickField name='services_other_materials'}}
+      </div>
+      <div class="input-float-left">
+        {{> afQuickField name='services_other_materials_description' afFieldInput-placeholder="schemaLabel" label-class="sr-only"}}
+      </div>
+    </div>
+
+    <div class="input-clear-both">
+      {{> afQuickField name="observations"}}
+    </div>
 
     {{> afQuickField name="full_photo"}}
 

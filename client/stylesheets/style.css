@@ -107,11 +107,11 @@ Solution here: http://stackoverflow.com/questions/6258521/clear-icon-inside-inpu
     margin-bottom: 2em;
 }
 
-.input-group-telephone {
+.input-clear-both {
     clear: both;
 }
 
-.input-telephone {
+.input-float-left {
     float: left;
     margin: 0.2em;
 
@@ -123,9 +123,8 @@ Solution here: http://stackoverflow.com/questions/6258521/clear-icon-inside-inpu
     padding-left: 1em;
 }
 
-.input-email {
-    clear: both;
-}
+/* needed to put * in front of all required fields */
+[data-required] label:after {content: '*'}
 
 /*** CATADOR PROFILE ***/
 

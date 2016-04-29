@@ -201,7 +201,11 @@ Template.catadorDetails.helpers({
     var services = ServiceS.findOne({'catador_id':catador.id});
     return services.services_other_materials;
   },      
-
+  services_other_materials_description: function() {
+    var catador = Carroceiros.findOne(getCatadorIdFromUrl());
+    var services = ServiceS.findOne({'catador_id':catador.id});
+    return services.services_other_materials_description;
+  },
 
   services: function() {
     var catador = Carroceiros.findOne(getCatadorIdFromUrl());

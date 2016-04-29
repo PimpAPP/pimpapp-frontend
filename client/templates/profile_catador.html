@@ -112,7 +112,10 @@
           <img src="/img/services_freight.png" alt="frete e carreto" title="frete e carreto">
         {{/if}}
         {{#if services_other_materials}}
-          <img src="/img/services_other_materials.png" alt="outros materiais" title="outros materiais">
+          <label>&nbsp;&nbsp;&nbsp;Tamb&eacute;m coleta outros materiais</label>
+          {{#if services_other_materials_description != null}}
+            <label> - </label>{{services_other_materials_description}}
+          {{/if}}
         {{/if}}
 
         <!-- Images are placeholders. TODO: use better icons in helper function services.
@@ -233,15 +236,6 @@
                       Frete e carreto
                     </div>
                   </div>  
-
-                  <div class="row service-item">
-                    <div class="col-md-2 col-xs-2">
-                      <img src="/img/services_other_materials.png" alt="outros materiais" title="outros materiais">
-                    </div>
-                    <div class="col-md-10 col-xs-10">
-                      Outros materiais
-                    </div>
-                  </div>      
 
                   <div class="row service-comment">
                     N&atilde;o esque&ccedil;a de confirmar com o catador que ele coleta este tipo de material!
