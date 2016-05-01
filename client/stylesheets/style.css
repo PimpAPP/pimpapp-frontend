@@ -130,6 +130,7 @@ Solution here: http://stackoverflow.com/questions/6258521/clear-icon-inside-inpu
 
 img.avatar { /* TODO: make sime size always? */
     border: 1px solid #eee;
+    height: 150px;
 }
 
 .only-bottom-margin {

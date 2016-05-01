@@ -118,10 +118,11 @@
 
     <div class="input-clear-both">
       <div class="input-float-left">
-        {{> afQuickField name='services_other_materials'}}
+        {{> afQuickField id="services_other_materials" name='services_other_materials'}}
       </div>
       <div class="input-float-left">
-        {{> afQuickField name='services_other_materials_description' afFieldInput-placeholder="schemaLabel" label-class="sr-only"}}
+        <!-- Start as disabeld because other materials is not checked -->
+        {{> afQuickField disabled=true id="services_other_materials_description" name='services_other_materials_description' afFieldInput-placeholder="schemaLabel" label-class="sr-only"}}
       </div>
     </div>
 

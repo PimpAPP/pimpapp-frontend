@@ -269,9 +269,8 @@ Template.imageView.helpers({
   images: function () {
     // retrieve picture for selected catador
     var catador = Carroceiros.findOne(getCatadorIdFromUrl());
-    var img = Images.find({'_id': catador.picture});
+    var img = Images.find({'catador_id':catador.id});
     return img;
-
   }
 });
 

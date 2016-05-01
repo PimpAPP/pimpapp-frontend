@@ -176,26 +176,35 @@ Meteor.methods({
                           if ( errorServ ) {
                             console.log( "errorServ");
                             console.log( errorServ );
-                          } else {     
-                            console.log( "responseServ = " );
-                            console.log( responseServ );
-                          } // Service insert
-                        });
+                          } else {
 
-                      } // Telephone insert
-                    });
+                            Images.update({"_id":formInsertCatador.full_photo},{$set:{"catador_id":catador.id}}, function( errorImageUpd, responseImageUpd ) {
+                              if ( errorImageUpd ) {
+                                console.log( "errorImageUpd");
+                                console.log( errorImageUpd );
+                              } else {
+                                console.log( "responseImageUpd = " );
+                                console.log( responseImageUpd );
+                              }
+                            }); // Images update
 
-                  }  //Addresses insert
-                });
+                          }
+                        }); // Service insert
 
-              }  //Geolocation insert
-            });
+                      }
+                    }); // Telephone insert
 
-          }  //Carroceiros update
-        });
+                  }
+                }); //Addresses insert
 
-      } //Carroceiros insert
-    });
+              }
+            }); //Geolocation insert
+
+          }
+        }); //Carroceiros update
+
+      }
+    }); //Carroceiros insert
   },
 
   // TODO: call Django API here to update catador information in Django database

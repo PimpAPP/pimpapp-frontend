@@ -34,12 +34,7 @@
   <div class="row">
     <div class="col-md-12 text-center">
       <div class="image-container">
-        <!-- {{> imageView}} --> 
-        <!-- PLACEHOLDER TO SEE WHAT IMAGE POSITIONING LOOKS LIKE NOW,
-        Before getting pictures from catadores -->
-        <a href="/img/pimp.png" target="_blank"><img class="img-circle avatar avatar-original" 
-        style="-webkit-user-select:none; display:block; margin:auto;" 
-        src="/img/pimp.png" alt=""></a>     
+        {{> imageView}}
       </div>
     </div>
   </div>
@@ -88,7 +83,6 @@
     <div class="col-md-12">
       <hr>
       <div class="profile-services">
-        <!-- TODO: update images to correct icons -->
         <h4>Servi&ccedil;os</h4>
         {{#if services_recyclable}}
           <img src="/img/services_recyclables.png" alt="material recicl&aacute;vel" title="material recicl&aacute;vel">
@@ -117,12 +111,6 @@
             <label> - </label>{{services_other_materials_description}}
           {{/if}}
         {{/if}}
-
-        <!-- Images are placeholders. TODO: use better icons in helper function services.
-        Return images conditional on services offered by the catador. -->
-        <!-- TODO: remove these images once Django API is updated to include service types-->
-        <!--img src="/img/metals.png" alt="ferro e metais" title="ferro e metais">
-        <img src="/img/trash.png" alt="outros materiais" title="outros materiais"-->
 
         <button class="btn btn-default pull-right profile-button-services">
           <i class="glyphicon glyphicon-info-sign"></i>
@@ -156,7 +144,7 @@
     <div>
       <a href="{{this.url}}" target="_blank"><img class="img-circle avatar avatar-original" 
         style="-webkit-user-select:none; display:block; margin:auto;" 
-        src="{{this.url}}" alt=""></a>        
+        src="{{this.url}}" title="Clique para ver original"></a>
     </div>
   {{/each}}
 </template>
