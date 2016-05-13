@@ -76,7 +76,7 @@ iron:location@1.0.11
 iron:middleware-stack@1.1.0
 iron:router@1.0.12
 iron:url@1.0.11
-jeremy:geocomplete@1.6.5_12
+jeremy:geocomplete@1.7.0
 jquery@1.11.8
 launch-screen@1.0.11
 less@2.6.0
