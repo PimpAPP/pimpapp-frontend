@@ -23,6 +23,14 @@ Para mais detalhes veja: http://askubuntu.com/questions/162391/how-do-i-fix-my-l
 https://recopimp.herokuapp.com/
 
 ## Rodando no Andriod:
+```
 export BIND_IP=$(/sbin/ip -o -4 addr list eth0 | awk '{print $4}' | cut -d/ -f1)
 meteor run android --verbose
 adb devices
+```
+
+## Rodando no Deploy:
+```
+# diretorio build/ nao pode estar dentro do app
+meteor build --server-only ../build/
+```
