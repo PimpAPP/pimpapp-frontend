@@ -4,12 +4,12 @@ html, body {
     height: 100%;
     width: 100%;
     overflow-x: hidden;
-    font-family: DIN;
+    /*font-family: DIN;*/
 }
 
 body {
   position: relative;
-  background-image:url('/img/background.jpg');
+  background-image:url('/img/PadraoAzulejo.jpg');
 }
 
 .container-responsive {
@@ -34,13 +34,18 @@ body {
 
 /*** NAVBAR ***/
 
-nav {
-  background-image:url('/img/header.png');
+.navbar {
+  background-color: #272727;
+  /*background-image:url('/img/header.png');*/
   font-weight:bold;
 }
 
-nav a {
-  color: white;
+.icon-bar {
+    background-color: #3DB44B;
+}
+
+.navbar a {
+  color: #3DB44B;
 }
 
 .navbar-brand {
