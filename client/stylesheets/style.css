@@ -7,6 +7,15 @@ html, body {
     font-family: DIN;
 }
 
+div.red_text {
+    color: red;
+    display: inline;
+}
+
+p.inline {
+   display: inline;
+}
+
 body {
   position: relative;
   background-image:url('/img/background.jpg');
@@ -56,6 +65,10 @@ nav a {
 .map-container {
     width: 100%;
     height: 100%;
+}
+
+img.image_map {
+    height: 100px;
 }
 
 #pac-input {
@@ -128,7 +141,7 @@ Solution here: http://stackoverflow.com/questions/6258521/clear-icon-inside-inpu
 
 /*** CATADOR PROFILE ***/
 
-img.avatar { /* TODO: make sime size always? */
+img.avatar {
     border: 1px solid #eee;
     height: 150px;
 }

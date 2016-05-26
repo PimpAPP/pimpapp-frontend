@@ -13,6 +13,7 @@ Meteor.startup(function() {
 Template.map.onCreated(function() {
   this.subscribe('carroceiros');
   this.subscribe('geolocations');
+  this.subscribe('images');
   var self = this;
 
   GoogleMaps.ready('map', function(map) {
@@ -127,9 +128,14 @@ function add_catadores() {
       'lat': geolocation.latitude,
       'lng': geolocation.longitude
     };
+    var cursor_image = Images.find({'catador_id':catador.id});
+    var image_url = "";
+    cursor_image.forEach(function(image) { image_url = image.url();});
 
     // create infowindow string
     var contentString = name;
+    contentString += "<br>";
+    contentString += "<img class=image_map src= " + image_url + ">";
     contentString += "<br>";
     contentString += "<a href='/catadorprofile/" + catadorID + "''>";
     contentString += "Veja mais</a>";    
