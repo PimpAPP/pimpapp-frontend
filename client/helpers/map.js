@@ -135,8 +135,11 @@ function add_catadores() {
     // create infowindow string
     var contentString = name;
     contentString += "<br>";
-    contentString += "<img class=image_map src= " + image_url + ">";
-    contentString += "<br>";
+    // if doesn't have a photo, doesn't put it in baloon
+    if (image_url) {
+      contentString += "<img class=image_map src= " + image_url + ">";
+      contentString += "<br>";
+    }
     contentString += "<a href='/catadorprofile/" + catadorID + "''>";
     contentString += "Veja mais</a>";    
 
