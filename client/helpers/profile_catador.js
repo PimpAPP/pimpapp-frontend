@@ -9,475 +9,469 @@ Template.catadorprofile.onCreated(function() {
   this.subscribe('telephones');
   this.subscribe('services');
   this.subscribe('posts');
+});
 
-})
+Template.catadorDetails.onCreated(function() {
+  catador = Carroceiros.findOne({$and: [{'id': getCatadorIdFromUrl()},{'moderation_status': {$in: statusShow}}]});
 
+  telephone = TelephoneS.findOne({$and: [{'catador_id':catador.id}, {'moderation_status': {$in: statusShow}}]});
+
+  address = AddressS.findOne({$and: [{'catador_id':catador.id}, {'moderation_status': {$in: statusShow}}]});
+
+  services = ServiceS.findOne({$and: [{'catador_id':catador.id}, {'moderation_status': {$in: statusShow}}]});
+});
 
 Template.catadorDetails.helpers({
-  
   name: function() {
-    var catador = Carroceiros.findOne(getCatadorIdFromUrl());
-    Session.set('currName', catador.name);
     return catador.name;
   },
 
   miniBio: function() {
-    var catador = Carroceiros.findOne(getCatadorIdFromUrl());
-    Session.set('currMiniBio', catador.miniBio);
     return catador.miniBio;
   },
 
   telephone1: function() {
-    var catador = Carroceiros.findOne(getCatadorIdFromUrl());
-    var telephone = TelephoneS.findOne({'catador_id':catador.id});
-    Session.set('currTelephone1', telephone.telephone1);
     return telephone.telephone1;
   },
 
   telephone2: function() {
-    var catador = Carroceiros.findOne(getCatadorIdFromUrl());
-    var telephone = TelephoneS.findOne({'catador_id':catador.id});
-    Session.set('currTelephone2', telephone.telephone2);
     return telephone.telephone2;
   },
   operator_telephone1: function() {
-    var catador = Carroceiros.findOne(getCatadorIdFromUrl());
-    var telephone = TelephoneS.findOne({'catador_id':catador.id});
-    Session.set('currOperator1', telephone.operator_telephone1);
     var operator = telephone.operator_telephone1;
     if (operator) return '(' + operator + ')';
     return '';
   },
   operator_telephone2: function() {
-    var catador = Carroceiros.findOne(getCatadorIdFromUrl());
-    var telephone = TelephoneS.findOne({'catador_id':catador.id});
-    Session.set('currOperator2', telephone.operator_telephone2);
     var operator = telephone.operator_telephone2;
     if (operator) return '(' + operator + ')';
     return '';
   },
 
   whatsapp1: function() {
-    var catador = Carroceiros.findOne(getCatadorIdFromUrl());
-    var telephone = TelephoneS.findOne({'catador_id':catador.id});
-    Session.set('currWhatsapp1', telephone.whatsapp1);
     return telephone.whatsapp1;
   },
 
   whatsapp2: function() {
-    var catador = Carroceiros.findOne(getCatadorIdFromUrl());
-    var telephone = TelephoneS.findOne({'catador_id':catador.id});
-    Session.set('currWhatsapp2', telephone.whatsapp2);
     return telephone.whatsapp2;
   },
 
   internet1: function() {
-    var catador = Carroceiros.findOne(getCatadorIdFromUrl());
-    var telephone = TelephoneS.findOne({'catador_id':catador.id});
-    Session.set('currInternet1', telephone.internet1);
     return telephone.internet1;
   },
 
   internet2: function() {
-    var catador = Carroceiros.findOne(getCatadorIdFromUrl());
-    var telephone = TelephoneS.findOne({'catador_id':catador.id});
-    Session.set('currInternet2', telephone.internet2);
     return telephone.internet2;
   },
 
   email: function() {
-    var catador = Carroceiros.findOne(getCatadorIdFromUrl());
-    Session.set('currEmail', catador.email);
     return catador.email;
   },
 
   socialNetwork: function() {
-    var catador = Carroceiros.findOne(getCatadorIdFromUrl());
-    Session.set('currSocialNetwork', catador.socialNetwork);
     return catador.socialNetwork;
   },
 
-  base_address: function() {
-    var catador = Carroceiros.findOne(getCatadorIdFromUrl());
-    var address = AddressS.findOne({'catador_id':catador.id});
-    Session.set('currBase_address', address.base_address);
+  complete_address: function() {
     return address.base_address;
   },
 
   region: function() {
-    var catador = Carroceiros.findOne(getCatadorIdFromUrl());
-    var address = AddressS.findOne({'catador_id':catador.id});
-    Session.set('currRegion', address.region);
     return address.region;
   },
 
   city: function() {
-    var catador = Carroceiros.findOne(getCatadorIdFromUrl());
-    var address = AddressS.findOne({'catador_id':catador.id});
-    Session.set('currCity', address.city);
     return address.city;
   },
 
   state: function() {
-    var catador = Carroceiros.findOne(getCatadorIdFromUrl());
-    var address = AddressS.findOne({'catador_id':catador.id});
-    Session.set('currState', address.state);
     return address.state;
   },
 
   country: function() {
-    var catador = Carroceiros.findOne(getCatadorIdFromUrl());
-    var address = AddressS.findOne({'catador_id':catador.id});
-    Session.set('currCountry', address.country);
     return address.country;
   },
 
   zip: function() {
-    var catador = Carroceiros.findOne(getCatadorIdFromUrl());
-    var address = AddressS.findOne({'catador_id':catador.id});
-    Session.set('currZip', address.zip);
     return address.zip;
   },
 
   carrocaPimpada: function() {
-    var catador = Carroceiros.findOne(getCatadorIdFromUrl());
     var returnVal = (catador.carrocaPimpada)? 'Sim' : 'N\u00e3o';
-    Session.set('currCarrocaPimpada', returnVal);
     return returnVal;
   },
 
   motorizedVehicle: function() {
-    var catador = Carroceiros.findOne(getCatadorIdFromUrl());
     var returnVal = (catador.motorizedVehicle)? 'Sim' : 'N\u00e3o';
-    Session.set('currMotorizedVehicle', returnVal);
     return returnVal;
   },
 
   observations: function() {
-    var catador = Carroceiros.findOne(getCatadorIdFromUrl());
-    Session.set('currObservations', catador.observations);
     return catador.observations;
   },
 
   // services
 
   services_recyclable: function() {
-    var catador = Carroceiros.findOne(getCatadorIdFromUrl());
-    var services = ServiceS.findOne({'catador_id':catador.id});
     return services.services_recyclable;
   },
   services_glass: function() {
-    var catador = Carroceiros.findOne(getCatadorIdFromUrl());
-    var services = ServiceS.findOne({'catador_id':catador.id});
     return services.services_glass;
   },
   services_construction: function() {
-    var catador = Carroceiros.findOne(getCatadorIdFromUrl());
-    var services = ServiceS.findOne({'catador_id':catador.id});
     return services.services_construction;
   },
   services_volume: function() {
-    var catador = Carroceiros.findOne(getCatadorIdFromUrl());
-    var services = ServiceS.findOne({'catador_id':catador.id});
     return services.services_volume;
   },
   services_metals: function() {
-    var catador = Carroceiros.findOne(getCatadorIdFromUrl());
-    var services = ServiceS.findOne({'catador_id':catador.id});
     return services.services_metals;
   },      
   services_electronics: function() {
-    var catador = Carroceiros.findOne(getCatadorIdFromUrl());
-    var services = ServiceS.findOne({'catador_id':catador.id});
     return services.services_electronics;
   },
   services_freight: function() {
-    var catador = Carroceiros.findOne(getCatadorIdFromUrl());
-    var services = ServiceS.findOne({'catador_id':catador.id});
     return services.services_freight;
   },      
   services_other_materials: function() {
-    var catador = Carroceiros.findOne(getCatadorIdFromUrl());
-    var services = ServiceS.findOne({'catador_id':catador.id});
     return services.services_other_materials;
   },      
   services_other_materials_description: function() {
-    var catador = Carroceiros.findOne(getCatadorIdFromUrl());
-    var services = ServiceS.findOne({'catador_id':catador.id});
     return services.services_other_materials_description;
-  },
-
-  services: function() {
-    var catador = Carroceiros.findOne(getCatadorIdFromUrl());
-    var services = [];
-    if (catador.services_recyclable) services.push(services_recyclable_str);
-    if (catador.services_glass) services.push(services_glass_str);
-    if (catador.services_construction) services.push(services_construction_str);
-    if (catador.services_freight) services.push(services_freight_str);
-    if (catador.services_furniture) services.push(services_furniture_str);
-    if (catador.services_metals) services.push(services_metals_str);
-    if (catador.services_electronics) services.push(services_electronics_str);
-    if (catador.services_other_materials) services.push(services_other_materials_str);
-
-    var servicesString = services.join(", ");
-    
-    return servicesString;
-  }  
-
+  }
 });
 
 
 Template.catadorDetails.events({
-  'click .profile-button-update': function() {
-
-
-
-
+  'click .profile-button-update': function(event, template) {
     console.log("clicked update button");
-    // TODO: appropriate action, e.g. redirect to new page where can update certain information?
-    // Or should be able to select which field to update?
-
-    // when calling update screen initially uncheck all check boxes that indicate that user wants to update that field
-    Session.set('changeName', false);
-    Session.set('changeTelephone1', false);
-    Session.set('changeOperator1', false);
-    Session.set('changeWhatsapp1', false);
-    Session.set('changeTelephone2', false);
-    Session.set('changeOperator2', false);
-    Session.set('changeWhatsapp2', false);
-    Session.set('changeBase_address', false);
-    Session.set('changeRegion', false);
-    Session.set('changeCity', false);
-    Session.set('changeCarrocaPimpada', false);
-    Session.set('changeMotorizedVehicle', false);
-    Session.set('changeObservations', false);
 
     // call screen of update
     Modal.show('modalUpdateInfo');
-    
   },
   'click .profile-button-services': function() {
     console.log("clicked services button");
     Modal.show('modalServices');
-    
   }
-
 });
-
 
 Template.imageView.helpers({
   images: function () {
     // retrieve picture for selected catador
-    var catador = Carroceiros.findOne(getCatadorIdFromUrl());
-    var img = Images.find({'catador_id':catador.id});
+    var img = Images.find({$and: [{'catador_id':catador.id}, {'moderation_status': {$in: statusShow}}]});
     return img;
   }
 });
 
+Template.modalUpdateInfo.onRendered (function() {
+  setUpdateInitialValues(this);
+});
 
 Template.modalUpdateInfo.events({
-  'change #changeNameInfo': function() {
+  'submit': function(event, template) {
+    //setUpdateInitialValues(template);
+  },
+  'change #changeNameInfo': function(event, template) {
     if (Session.get('changeName')) {
       Session.set('changeName', false);
+      template.find("#name").style.visibility = "hidden";
     }
     else {
       Session.set('changeName', true);
+      template.find("#name").style.visibility = "visible";
+      template.find("#name").value = catador.name;
     }
   },
-  'change #changeTelephone1Info': function() {
+  'change #changeMiniBioInfo': function(event, template) {
+    if (Session.get('changeMiniBio')) {
+      Session.set('changeMiniBio', false);
+      template.find('#miniBio').style.visibility = "hidden";
+    }
+    else {
+      Session.set('changeMiniBio', true);
+      template.find('#miniBio').style.visibility = "visible";
+      template.find('#miniBio').value = catador.miniBio;
+    }
+  },
+  'change #changeTelephone1Info': function(event, template) {
     if (Session.get('changeTelephone1')) {
       Session.set('changeTelephone1', false);
+      template.find('#telephone1').style.visibility = "hidden";
     }
     else {
       Session.set('changeTelephone1', true);
+      template.find('#telephone1').style.visibility = "visible";
+      template.find('#telephone1').value = telephone.telephone1;
     }
   },
-  'change #changeOperator1Info': function() {
+  'change #changeOperator1Info': function(event, template) {
     if (Session.get('changeOperator1')) {
       Session.set('changeOperator1', false);
+      template.find('#operator_telephone1').style.visibility = "hidden";
     }
     else {
       Session.set('changeOperator1', true);
+      template.find('#operator_telephone1').style.visibility = "visible";
+      template.find('#operator_telephone1').value = telephone.operator_telephone1;
     }
   },
-  'change #changeWhatsapp1Info': function() {
+  'change #changeWhatsapp1Info': function(event, template) {
     if (Session.get('changeWhatsapp1')) {
       Session.set('changeWhatsapp1', false);
+      template.find('#whatsapp1').style.visibility = "hidden";
     }
     else {
       Session.set('changeWhatsapp1', true);
+      template.find('#whatsapp1').style.visibility = "visible";
+      template.find('#whatsapp1').checked = telephone.whatsapp1;
     }
   },
-  'change #changeTelephone2Info': function() {
+  'change #changeInternet1Info': function(event, template) {
+    if (Session.get('changeInternet1')) {
+      Session.set('changeInternet1', false);
+      template.find('#internet1').style.visibility = "hidden";
+    }
+    else {
+      Session.set('changeInternet1', true);
+      template.find('#internet1').style.visibility = "visible";
+      template.find('#internet1').checked = telephone.internet1;
+    }
+  },
+  'change #changeTelephone2Info': function(event, template) {
     if (Session.get('changeTelephone2')) {
       Session.set('changeTelephone2', false);
+      template.find('#telephone2').style.visibility = "hidden";
     }
     else {
       Session.set('changeTelephone2', true);
+      template.find('#telephone2').style.visibility = "visible";
+      template.find('#telephone2').value = telephone.telephone2;
     }
   },
-  'change #changeOperator2Info': function() {
+  'change #changeOperator2Info': function(event, template) {
     if (Session.get('changeOperator2')) {
       Session.set('changeOperator2', false);
+      template.find('#operator_telephone2').style.visibility = "hidden";
     }
     else {
       Session.set('changeOperator2', true);
+      template.find('#operator_telephone2').style.visibility = "visible";
+      template.find('#operator_telephone2').value = telephone.operator_telephone2;
     }
   },
-  'change #changeWhatsapp2Info': function() {
+  'change #changeWhatsapp2Info': function(event, template) {
     if (Session.get('changeWhatsapp2')) {
       Session.set('changeWhatsapp2', false);
+      template.find('#whatsapp2').style.visibility = "hidden";
     }
     else {
       Session.set('changeWhatsapp2', true);
+      template.find('#whatsapp2').style.visibility = "visible";
+      template.find('#whatsapp2').checked = telephone.whatsapp2;
     }
   },
-  'change #changeBase_addressInfo': function() {
-    if (Session.get('changeBase_address')) {
-      Session.set('changeBase_address', false);
+  'change #changeInternet2Info': function(event, template) {
+    if (Session.get('changeInternet2')) {
+      Session.set('changeInternet2', false);
+      template.find('#internet2').style.visibility = "hidden";
     }
     else {
-      Session.set('changeBase_address', true);
+      Session.set('changeInternet2', true);
+      template.find('#internet2').style.visibility = "visible";
+      template.find('#internet2').checked = telephone.internet2;
     }
   },
-  'change #changeRegionInfo': function() {
+  'change #changeEmailInfo': function(event, template) {
+    if (Session.get('changeEmail')) {
+      Session.set('changeEmail', false);
+      template.find('#email').style.visibility = "hidden";
+    }
+    else {
+      Session.set('changeEmail', true);
+      template.find('#email').style.visibility = "visible";
+      template.find('#email').value = catador.email;
+    }
+  },
+  'change #changeSocialNetworkInfo': function(event, template) {
+    if (Session.get('changeSocialNetwork')) {
+      Session.set('changeSocialNetwork', false);
+      template.find('#socialNetwork').style.visibility = "hidden";
+    }
+    else {
+      Session.set('changeSocialNetwork', true);
+      template.find('#socialNetwork').style.visibility = "visible";
+      template.find('#socialNetwork').value = catador.socialNetwork;
+    }
+  },
+  'change #changeComplete_addressInfo': function(event, template) {
+    if (Session.get('changeComplete_address')) {
+      Session.set('changeComplete_address', false);
+      template.find('#complete_address').style.visibility = "hidden";
+    }
+    else {
+      Session.set('changeComplete_address', true);
+      template.find('#complete_address').style.visibility = "visible";
+      template.find('#complete_address').value = address.base_address;
+    }
+  },
+  'change #changeRegionInfo': function(event, template) {
     if (Session.get('changeRegion')) {
       Session.set('changeRegion', false);
+      template.find('#region').style.visibility = "hidden";
     }
     else {
       Session.set('changeRegion', true);
+      template.find('#region').style.visibility = "visible";
+      template.find('#region').value = address.region;
     }
   },
-  'change #changeCityInfo': function() {
-    if (Session.get('changeCity')) {
-      Session.set('changeCity', false);
-    }
-    else {
-      Session.set('changeCity', true);
-    }
-  },
-  'change #changeCarrocaPimpadaInfo': function() {
+  'change #changeCarrocaPimpadaInfo': function(event, template) {
     if (Session.get('changeCarrocaPimpada')) {
       Session.set('changeCarrocaPimpada', false);
+      template.find('#carrocaPimpada').style.visibility = "hidden";
     }
     else {
       Session.set('changeCarrocaPimpada', true);
+      template.find('#carrocaPimpada').style.visibility = "visible";
+      template.find('#carrocaPimpada').checked = catador.carrocaPimpada;
     }
   },
-  'change #changeMotorizedVehicleInfo': function() {
+  'change #changeMotorizedVehicleInfo': function(event, template) {
     if (Session.get('changeMotorizedVehicle')) {
       Session.set('changeMotorizedVehicle', false);
+      template.find('#motorizedVehicle').style.visibility = "hidden";
     }
     else {
       Session.set('changeMotorizedVehicle', true);
+      template.find('#motorizedVehicle').style.visibility = "visible";
+      template.find('#motorizedVehicle').checked = catador.motorizedVehicle;
     }
   },
-  'change #changeObservationsInfo': function() {
+  'change #changeObservationsInfo': function(event, template) {
     if (Session.get('changeObservations')) {
       Session.set('changeObservations', false);
+      template.find('#observations').style.visibility = "hidden";
     }
     else {
       Session.set('changeObservations', true);
+      template.find('#observations').style.visibility = "visible";
+      template.find('#observations').value = catador.observations;
     }
-  }
-})
+  },
+  'change #changeServices_recyclableInfo': function(event, template) {
+    if (Session.get('changeServices_recyclable')) {
+      Session.set('changeServices_recyclable', false);
+      template.find('#services_recyclable').style.visibility = "hidden";
+    }
+    else {
+      Session.set('changeServices_recyclable', true);
+      template.find('#services_recyclable').style.visibility = "visible";
+      template.find('#services_recyclable').checked = services.services_recyclable;
+    }
+  },
+  'change #changeServices_glassInfo': function(event, template) {
+    if (Session.get('changeServices_glass')) {
+      Session.set('changeServices_glass', false);
+      template.find('#services_glass').style.visibility = "hidden";
+    }
+    else {
+      Session.set('changeServices_glass', true);
+      template.find('#services_glass').style.visibility = "visible";
+      template.find('#services_glass').checked = services.services_glass;
+    }
+  },
+  'change #changeServices_constructionInfo': function(event, template) {
+    if (Session.get('changeServices_construction')) {
+      Session.set('changeServices_construction', false);
+      template.find('#services_construction').style.visibility = "hidden";
+    }
+    else {
+      Session.set('changeServices_construction', true);
+      template.find('#services_construction').style.visibility = "visible";
+      template.find('#services_construction').checked = services.services_construction;
+    }
+  },
+  'change #changeServices_volumeInfo': function(event, template) {
+    if (Session.get('changeServices_volume')) {
+      Session.set('changeServices_volume', false);
+      template.find('#services_volume').style.visibility = "hidden";
+    }
+    else {
+      Session.set('changeServices_volume', true);
+      template.find('#services_volume').style.visibility = "visible";
+      template.find('#services_volume').checked = services.services_volume;
+    }
+  },
+  'change #changeServices_metalsInfo': function(event, template) {
+    if (Session.get('changeServices_metals')) {
+      Session.set('changeServices_metals', false);
+      template.find('#services_metals').style.visibility = "hidden";
+    }
+    else {
+      Session.set('changeServices_metals', true);
+      template.find('#services_metals').style.visibility = "visible";
+      template.find('#services_metals').checked = services.services_metals;
+    }
+  },
+  'change #changeServices_electronicsInfo': function(event, template) {
+    if (Session.get('changeServices_electronics')) {
+      Session.set('changeServices_electronics', false);
+      template.find('#services_electronics').style.visibility = "hidden";
+    }
+    else {
+      Session.set('changeServices_electronics', true);
+      template.find('#services_electronics').style.visibility = "visible";
+      template.find('#services_electronics').checked = services.services_electronics;
+    }
+  },
+  'change #changeServices_freightInfo': function(event, template) {
+    if (Session.get('changeServices_freight')) {
+      Session.set('changeServices_freight', false);
+      template.find('#services_freight').style.visibility = "hidden";
+    }
+    else {
+      Session.set('changeServices_freight', true);
+      template.find('#services_freight').style.visibility = "visible";
+      template.find('#services_freight').checked = services.services_freight;
+    }
+  },
+  'change #changeServices_other_materialsInfo': function(event, template) {
+    if (Session.get('changeServices_other_materials')) {
+      Session.set('changeServices_other_materials', false);
+      template.find('#services_other_materials').style.visibility = "hidden";
 
-Template.modalUpdateInfo.helpers({
-  'changeName': function() {
-    return Session.get('changeName');
+      setServices_Other_Materials_Description(services.services_other_materials, template);
+    }
+    else {
+      Session.set('changeServices_other_materials', true);
+      template.find('#services_other_materials').style.visibility = "visible";
+      template.find('#services_other_materials').checked = services.services_other_materials;
+    }
   },
-  'currName': function() {
-    return Session.get('currName');
+  'change #changeServices_other_materials_descriptionInfo': function(event, template) {
+    if (Session.get('changeServices_other_materials_description')) {
+      Session.set('changeServices_other_materials_description', false);
+      template.find('#services_other_materials_description').style.visibility = "hidden";
+    }
+    else {
+      Session.set('changeServices_other_materials_description', true);
+      template.find('#services_other_materials_description').style.visibility = "visible";
+      template.find('#services_other_materials_description').value = services.services_other_materials_description;
+    }
   },
-  'changeTelephone1': function() {
-    return Session.get('changeTelephone1');
-  },
-  'currTelephone1': function() {
-    return Session.get('currTelephone1');
-  },
-  'changeOperator1': function() {
-    return Session.get('changeOperator1');
-  },
-  'currOperator1': function() {
-    return Session.get('currOperator1');
-  },
-  'changeWhatsapp1': function() {
-    return Session.get('changeWhatsapp1');
-  },
-  'currWhatsapp1': function() {
-    return Session.get('currWhatsapp1');
-  },
-  'changeTelephone2': function() {
-    return Session.get('changeTelephone2');
-  },
-  'currTelephone2': function() {
-    return Session.get('currTelephone2');
-  },
-  'changeOperator2': function() {
-    return Session.get('changeOperator2');
-  },
-  'currOperator2': function() {
-    return Session.get('currOperator2');
-  },
-  'changeWhatsapp2': function() {
-    return Session.get('changeWhatsapp2');
-  },
-  'currWhatsapp2': function() {
-    return Session.get('currWhatsapp2');
-  },
-  'changeBase_address': function() {
-    return Session.get('changeBase_address');
-  },
-  'currBase_address': function() {
-    return Session.get('currBase_address');
-  },
-  'changeRegion': function() {
-    return Session.get('changeRegion');
-  },
-  'currRegion': function() {
-    return Session.get('currRegion');
-  },
-  'changeCity': function() {
-    return Session.get('changeCity');
-  },
-  'currCity': function() {
-    return Session.get('currCity');
-  },
-  'changeCarrocaPimpada': function() {
-    return Session.get('changeCarrocaPimpada');
-  },
-  'currCarrocaPimpada': function() {
-    return Session.get('currCarrocaPimpada');
-  },
-  'changeMotorizedVehicle': function() {
-    return Session.get('changeMotorizedVehicle');
-  },
-  'currMotorizedVehicle': function() {
-    return Session.get('currMotorizedVehicle');
-  },
-  'changeObservations': function() {
-    return Session.get('changeObservations');
-  },
-  'currObservations': function() {
-    return Session.get('currObservations');
+  'change #services_other_materials': function(event, template) {
+      setServices_Other_Materials_Description(event.target.checked, template);
   }
 });
 
-
-// TODO: Would be better if this was done only once when page is loaded
-function getCatadorIdFromUrl() {
-  // get url of current page
-  var currentUrl = Router.current().originalUrl;
-
-  // retrieve path
-  var a = document.createElement('a');
-  a.href = currentUrl;
-  var pathname = a.pathname;  
-
-  // pathname takes form /catadorprofile/<id>
-  var id = pathname.split('/catadorprofile/')[1]
-  return id;
+function setServices_Other_Materials_Description(servicesChecked, template) {
+    if (servicesChecked) {
+      template.find('#changeServices_other_materials_descriptionInfo').disabled = false;
+    }
+    else {
+      template.find('#changeServices_other_materials_descriptionInfo').disabled = true;
+      template.find('#changeServices_other_materials_descriptionInfo').checked = false;
+      Session.set('changeServices_other_materials_description', false);
+      template.find('#services_other_materials_description').style.visibility = "hidden";
+    }
 };
-
-
-

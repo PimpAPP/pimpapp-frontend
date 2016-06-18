@@ -44,7 +44,7 @@
       <h1 class="only-bottom-margin text-center">{{name}}</h1>
     </div>
   </div>
-  <span class="text-muted">Minibio: </span>{{miniBio}}<br>
+  <span class="text-muted">Bio: </span>{{miniBio}}<br>
   
   <div class="row">
     <div class="col-md-12">
@@ -67,8 +67,8 @@
       <br>
       <span class="text-muted">E-mail: </span>{{email}}<br>
       <span class="text-muted">Perfil nas redes sociais: </span>{{socialNetwork}}<br>
-      <span class="text-muted">Endere&ccedil;o de refer&ecirc;ncia: </span>{{base_address}}<br>
-      <span class="text-muted">Bairros em que coleta: </span>{{region}}<br>
+      <span class="text-muted">Endere&ccedil;o de refer&ecirc;ncia: </span>{{complete_address}}<br>
+      <span class="text-muted">Regi&atilde;o/Bairros em que coleta: </span>{{region}}<br>
       <span class="text-muted">Cidade: </span>{{city}}<br>
       <span class="text-muted">Estado: </span>{{state}}<br>
       <span class="text-muted">Pa&iacute;s: </span>{{country}}<br>
@@ -108,7 +108,7 @@
         {{#if services_other_materials}}
           <label>&nbsp;&nbsp;&nbsp;Tamb&eacute;m coleta outros materiais</label>
           {{#if services_other_materials_description != null}}
-            <label> - </label>{{services_other_materials_description}}
+            <label>&nbsp;-&nbsp;</label>{{services_other_materials_description}}
           {{/if}}
         {{/if}}
 
@@ -131,9 +131,9 @@
       code here:
       {{> autoformModals}}
       {{#afModal class="btn btn-default pull-right profile-button-update" 
-        collection="CatadoresUpdate" meteormethod="updateCatadorDetails" operation="insert"}}
+        schema="CatadorProfileInsertSchema" meteormethod="updateCatadorDetails" operation="insert"}}
         Atualizar
-      {{/afModal}}       -->
+      {{/afModal}}-->
 
     </div>
   </div> <!-- /row -->
@@ -142,14 +142,12 @@
 <template name="imageView">
   {{#each images}}
     <div>
-      <a href="{{this.url}}" target="_blank"><img class="img-circle avatar avatar-original" 
+      <a href="{{this.url}}" target="_blank"><img class="img-circle avatar avatar-original"
         style="-webkit-user-select:none; display:block; margin:auto;" 
         src="{{this.url}}" title="Clique para ver original"></a>
     </div>
   {{/each}}
 </template>
-
-
 
 <template name="modalServices">
     <div class="modal fade modal-services-info">
@@ -249,155 +247,177 @@
         </div>
 
         <div class="modal-body">
+
+        {{#autoForm doc=this id="updateCatadorForm" schema="CatadorProfileUpdateSchema" type="method" meteormethod="updateCatadorDetails"}}
+
+        <fieldset>
+          <label>Campos com * s&atilde;o obrigat&oacute;rios</label>
+
           <div class="input-group">
             <span class="input-group-addon">
-              <input type="checkbox" id="changeNameInfo" aria-label="...">
+              {{> afQuickField id="changeNameInfo" name="changeNameInfo" class="form-control"}}
             </span>
-            <span class="input-group-addon">
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nome&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            </span>
-            {{#if changeName}}
-              <input type="text" class="form-control" aria-label="..." value={{currName}}>
-            {{/if}}
+            {{> afQuickField template="bootstrap3-horizontal" label-class="col-xs-3" input-col-class="col-xs-9" name="insertFields.name" id="name" class="form-control"}}
           </div><!-- /input-group -->
           <div class="input-group">
             <span class="input-group-addon">
-              <input type="checkbox" id="changeTelephone1Info" aria-label="...">
+              {{> afQuickField id="changeMiniBioInfo" name="changeMiniBioInfo" class="form-control"}}
             </span>
-            <span class="input-group-addon">
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Telefone 1&nbsp;&nbsp;&nbsp;&nbsp;
-            </span>
-            {{#if changeTelephone1}}
-              <input type="text" class="form-control" aria-label="..." value={{currTelephone1}}>
-            {{/if}}
+            {{> afQuickField template="bootstrap3-horizontal" label-class="col-xs-3" input-col-class="col-xs-9" name='insertFields.miniBio' id="miniBio" class="form-control"}}
           </div><!-- /input-group -->
           <div class="input-group">
             <span class="input-group-addon">
-              <input type="checkbox" id="changeOperator1Info" aria-label="...">
+              {{> afQuickField id="changeTelephone1Info" name="changeTelephone1Info" class="form-control"}}
             </span>
-            <span class="input-group-addon">
-              &nbsp;&nbsp;&nbsp;&nbsp;Operadora 1&nbsp;&nbsp;&nbsp;&nbsp;
-            </span>
-            {{#if changeOperator1}}
-              <input type="text" class="form-control" aria-label="..." value={{currOperator1}}>
-            {{/if}}
+            {{> afQuickField template="bootstrap3-horizontal" label-class="col-xs-3" input-col-class="col-xs-9" name='insertFields.telephone1' id="telephone1" class="form-control"}}
           </div><!-- /input-group -->
           <div class="input-group">
             <span class="input-group-addon">
-              <input type="checkbox" id="changeWhatsapp1Info" aria-label="...">
+              {{> afQuickField id="changeOperator1Info" name="changeOperator1Info" class="form-control"}}
             </span>
-            <span class="input-group-addon">
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Whatsapp 1?&nbsp;&nbsp;&nbsp;&nbsp;
-            </span>
-            {{#if changeWhatsapp1}}
-              <input type="text" class="form-control" aria-label="..." value={{currWhatsapp1}}>
-            {{/if}}
+            {{> afQuickField template="bootstrap3-horizontal" label-class="col-xs-3" input-col-class="col-xs-9" name='insertFields.operator_telephone1' id="operator_telephone1" class="form-control" firstOption='Operadora' options='allowed'}}
           </div><!-- /input-group -->
           <div class="input-group">
             <span class="input-group-addon">
-              <input type="checkbox" id="changeTelephone2Info" aria-label="...">
+              {{> afQuickField id="changeWhatsapp1Info" name="changeWhatsapp1Info" class="form-control"}}
             </span>
-            <span class="input-group-addon">
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Telefone 2&nbsp;&nbsp;&nbsp;&nbsp;
-            </span>
-            {{#if changeTelephone2}}
-              <input type="text" class="form-control" aria-label="..." value={{currTelephone2}}>
-            {{/if}}
+            {{> afQuickField template="bootstrap3-horizontal" label-class="col-xs-3" input-col-class="col-xs-12" name='insertFields.whatsapp1' id="whatsapp1" class="form-control"}}
           </div><!-- /input-group -->
           <div class="input-group">
             <span class="input-group-addon">
-              <input type="checkbox" id="changeOperator2Info" aria-label="...">
+              {{> afQuickField id="changeInternet1Info" name="changeInternet1Info" class="form-control"}}
             </span>
-            <span class="input-group-addon">
-              &nbsp;&nbsp;&nbsp;&nbsp;Operadora 2&nbsp;&nbsp;&nbsp;&nbsp;
-            </span>
-            {{#if changeOperator2}}
-              <input type="text" class="form-control" aria-label="..." value={{currOperator2}}>
-            {{/if}}
+            {{> afQuickField template="bootstrap3-horizontal" input-col-class="col-xs-12" id="internet1" name="insertFields.internet1" class="form-control"}}
           </div><!-- /input-group -->
           <div class="input-group">
             <span class="input-group-addon">
-              <input type="checkbox" id="changeWhatsapp2Info" aria-label="...">
+              {{> afQuickField id="changeTelephone2Info" name="changeTelephone2Info" class="form-control"}}
             </span>
-            <span class="input-group-addon">
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Whatsapp 2?&nbsp;&nbsp;&nbsp;&nbsp;
-            </span>
-            {{#if changeWhatsapp2}}
-              <input type="text" class="form-control" aria-label="..." value={{currWhatsapp2}}>
-            {{/if}}
+            {{> afQuickField template="bootstrap3-horizontal" label-class="col-xs-3" input-col-class="col-xs-9" name='insertFields.telephone2' id="telephone2" class="form-control"}}
           </div><!-- /input-group -->
           <div class="input-group">
             <span class="input-group-addon">
-              <input type="checkbox" id="changeBase_addressInfo" aria-label="...">
+              {{> afQuickField id="changeOperator2Info" name="changeOperator2Info" class="form-control"}}
             </span>
-            <span class="input-group-addon">
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Endere&ccedil;o&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            </span>
-            {{#if changeBase_address}}
-              <input type="text" class="form-control" aria-label="..." value={{currBase_address}}>
-            {{/if}}
+            {{> afQuickField template="bootstrap3-horizontal" label-class="col-xs-3" input-col-class="col-xs-9" name='insertFields.operator_telephone2' id="operator_telephone2" class="form-control" firstOption='Operadora' options='allowed'}}
           </div><!-- /input-group -->
           <div class="input-group">
             <span class="input-group-addon">
-              <input type="checkbox" id="changeRegionInfo" aria-label="...">
+              {{> afQuickField id="changeWhatsapp2Info" name="changeWhatsapp2Info" class="form-control"}}
             </span>
-            <span class="input-group-addon">
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Regi&atilde;o&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            </span>
-            {{#if changeRegion}}
-              <input type="text" class="form-control" aria-label="..." value={{currRegion}}>
-            {{/if}}
+            {{> afQuickField template="bootstrap3-horizontal" input-col-class="col-xs-12" name='insertFields.whatsapp2' id="whatsapp2" class="form-control"}}
           </div><!-- /input-group -->
           <div class="input-group">
             <span class="input-group-addon">
-              <input type="checkbox" id="changeCityInfo" aria-label="...">
+              {{> afQuickField id="changeInternet2Info" name="changeInternet2Info" class="form-control"}}
             </span>
-            <span class="input-group-addon">
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cidade&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            </span>
-            {{#if changeCity}}
-              <input type="text" class="form-control" aria-label="..." value={{currCity}}>
-            {{/if}}
+            {{> afQuickField template="bootstrap3-horizontal" input-col-class="col-xs-12" name='insertFields.internet2' id="internet2" class="form-control"}}
           </div><!-- /input-group -->
           <div class="input-group">
             <span class="input-group-addon">
-              <input type="checkbox" id="changeCarrocaPimpadaInfo" aria-label="...">
+              {{> afQuickField id="changeEmailInfo" name="changeEmailInfo" class="form-control"}}
             </span>
-            <span class="input-group-addon">
-              &nbsp;&nbsp;Carro&ccedil;a Pimpada?&nbsp;
-            </span>
-            {{#if changeCarrocaPimpada}}
-              <input type="text" class="form-control" aria-label="..." value={{currCarrocaPimpada}}>
-            {{/if}}
+            {{> afQuickField template="bootstrap3-horizontal" label-class="col-xs-3" input-col-class="col-xs-9" name='insertFields.email' id="email" class="form-control"}}
           </div><!-- /input-group -->
           <div class="input-group">
             <span class="input-group-addon">
-              <input type="checkbox" id="changeMotorizedVehicleInfo" aria-label="...">
+              {{> afQuickField id="changeSocialNetworkInfo" name="changeSocialNetworkInfo" class="form-control"}}
             </span>
+            {{> afQuickField template="bootstrap3-horizontal" label-class="col-xs-3" input-col-class="col-xs-9" name='insertFields.socialNetwork' id="socialNetwork" class="form-control"}}
+          </div><!-- /input-group -->
+          <div class="input-group" input-group-sm>
             <span class="input-group-addon">
-              Ve&iacute;culo Motorizado?
+              {{> afQuickField id="changeComplete_addressInfo" name="changeComplete_addressInfo" class="form-control"}}
             </span>
-            {{#if changeMotorizedVehicle}}
-              <input type="text" class="form-control" aria-label="..." value={{currMotorizedVehicle}}>
-            {{/if}}
+            {{> afQuickField template="bootstrap3-horizontal" label-class="col-xs-3" input-col-class="col-xs-9" name='insertFields.complete_address' id="complete_address" type="googleplace" class="form-control"}}
           </div><!-- /input-group -->
           <div class="input-group">
             <span class="input-group-addon">
-              <input type="checkbox" id="changeObservationsInfo" aria-label="...">
+              {{> afQuickField id="changeRegionInfo" name="changeRegionInfo" class="form-control"}}
             </span>
+            {{> afQuickField template="bootstrap3-horizontal" label-class="col-xs-3" input-col-class="col-xs-9" name='insertFields.region' id="region" class="form-control"}}
+          </div><!-- /input-group -->
+          <div class="input-group">
             <span class="input-group-addon">
-              &nbsp;&nbsp;&nbsp;Observa&ccedil;&otilde;es&nbsp;&nbsp;&nbsp;&nbsp;
+              {{> afQuickField id="changeCarrocaPimpadaInfo" name="changeCarrocaPimpadaInfo" class="form-control"}}
             </span>
-            {{#if changeObservations}}
-              <input type="text" class="form-control" aria-label="..." value={{currObservations}}>
-            {{/if}}
+            {{> afQuickField template="bootstrap3-horizontal" input-col-class="col-xs-12" name='insertFields.carrocaPimpada' id="carrocaPimpada" class="form-control"}}
+          </div><!-- /input-group -->
+          <div class="input-group">
+            <span class="input-group-addon">
+              {{> afQuickField id="changeMotorizedVehicleInfo" name="changeMotorizedVehicleInfo" class="form-control"}}
+            </span>
+            {{> afQuickField template="bootstrap3-horizontal" input-col-class="col-xs-12" name='insertFields.motorizedVehicle' id="motorizedVehicle" class="form-control"}}
           </div><!-- /input-group -->
 
+          <h4>Servi&ccedil;os</h4>
+          <div class="input-group">
+            <span class="input-group-addon">
+              {{> afQuickField id="changeServices_recyclableInfo" name="changeServices_recyclableInfo" class="form-control"}}
+            </span>
+            {{> afQuickField template="bootstrap3-horizontal" input-col-class="col-xs-12" id="services_recyclable" name="insertFields.services_recyclable" class="form-control"}}
+          </div><!-- /input-group -->
+          <div class="input-group">
+            <span class="input-group-addon">
+              {{> afQuickField id="changeServices_glassInfo" name="changeServices_glassInfo" class="form-control"}}
+            </span>
+            {{> afQuickField template="bootstrap3-horizontal" input-col-class="col-xs-12" id="services_glass" name="insertFields.services_glass" class="form-control"}}
+          </div><!-- /input-group -->
+          <div class="input-group">
+            <span class="input-group-addon">
+              {{> afQuickField id="changeServices_constructionInfo" name="changeServices_constructionInfo" class="form-control"}}
+            </span>
+            {{> afQuickField template="bootstrap3-horizontal" input-col-class="col-xs-12" id="services_construction" name="insertFields.services_construction" class="form-control"}}
+          </div><!-- /input-group -->
+          <div class="input-group">
+            <span class="input-group-addon">
+              {{> afQuickField id="changeServices_volumeInfo" name="changeServices_volumeInfo" class="form-control"}}
+            </span>
+            {{> afQuickField template="bootstrap3-horizontal" input-col-class="col-xs-12" id="services_volume" name="insertFields.services_volume" class="form-control"}}
+          </div><!-- /input-group -->
+          <div class="input-group">
+            <span class="input-group-addon">
+              {{> afQuickField id="changeServices_metalsInfo" name="changeServices_metalsInfo" class="form-control"}}
+            </span>
+            {{> afQuickField template="bootstrap3-horizontal" input-col-class="col-xs-12" id="services_metals" name="insertFields.services_metals" class="form-control"}}
+          </div><!-- /input-group -->
+          <div class="input-group">
+            <span class="input-group-addon">
+              {{> afQuickField id="changeServices_electronicsInfo" name="changeServices_electronicsInfo" class="form-control"}}
+            </span>
+            {{> afQuickField template="bootstrap3-horizontal" input-col-class="col-xs-12" id="services_electronics" name="insertFields.services_electronics" class="form-control"}}              
+          </div><!-- /input-group -->
+          <div class="input-group">
+            <span class="input-group-addon">
+              {{> afQuickField id="changeServices_freightInfo" name="changeServices_freightInfo" class="form-control"}}
+            </span>
+            {{> afQuickField template="bootstrap3-horizontal" input-col-class="col-xs-12" id="services_freight" name="insertFields.services_freight" class="form-control"}}  
+          </div><!-- /input-group -->
+          <div class="input-group">
+            <span class="input-group-addon">
+              {{> afQuickField id="changeServices_other_materialsInfo" name="changeServices_other_materialsInfo" class="form-control"}}
+            </span>
+            {{> afQuickField template="bootstrap3-horizontal" input-col-class="col-xs-12" id="services_other_materials" name="insertFields.services_other_materials" class="form-control"}}
+          </div><!-- /input-group -->
+          <div class="input-group">
+            <span class="input-group-addon">
+              {{> afQuickField id="changeServices_other_materials_descriptionInfo" name="changeServices_other_materials_descriptionInfo" class="form-control"}}
+            </span>
+            {{> afQuickField template="bootstrap3-horizontal" label-class="col-xs-3" input-col-class="col-xs-9" id="services_other_materials_description" name="insertFields.services_other_materials_description" class="form-control"}}
+          </div><!-- /input-group -->
+
+          <div class="input-group">
+            <span class="input-group-addon">
+              {{> afQuickField id="changeObservationsInfo" name="changeObservationsInfo" class="form-control"}}
+            </span>
+            {{> afQuickField template="bootstrap3-horizontal" label-class="col-xs-3" input-col-class="col-xs-9" name="insertFields.observations" id="observations" class="form-control"}}
+          </div><!-- /input-group -->
           <br>
-          <button class="btn btn-default pull-right profile-button-update">
-            <i class="glyphicon glyphicon-pencil profile"></i> Atualizar
-          </button>
-          <br>
+        </fieldset>
+
+        {{> flashMessages}}
+        <button type="submit" class="btn btn-primary">Atualizar</button>
+        {{/autoForm}}
 
         </div> <!-- /modal-body -->
 

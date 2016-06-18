@@ -117,18 +117,19 @@ function add_catadores() {
   var icon = catador_icon_source;
 
   var carroceiroType = 'C';
-  var catadores = Carroceiros.find({'catador_type':carroceiroType}).fetch();
+  var catadores = Carroceiros.find({$and: [{'catador_type': carroceiroType},{'moderation_status': {$in: statusShow}}]}).fetch();
 
   catadores.forEach(function(catador) {
     // retrieve data for catador
-    var catadorID = catador._id;
+
+    var catadorID = catador.id;
     var name = catador.name;
-    var geolocation = GeolocationS.findOne({'catador_id':catador.id});
+    var geolocation = GeolocationS.findOne({$and: [{'catador_id':catador.id}, {'moderation_status': {$in: statusShow}}]});
     var locationObject = {
       'lat': geolocation.latitude,
       'lng': geolocation.longitude
     };
-    var cursor_image = Images.find({'catador_id':catador.id});
+    var cursor_image = Images.find({$and: [{'catador_id':catador.id}, {'moderation_status': {$in: statusShow}}]});
     var image_url = "";
     cursor_image.forEach(function(image) { image_url = image.url();});
 
