@@ -8,136 +8,142 @@ Template.catadorprofile.onCreated(function() {
   this.subscribe('addresses');
   this.subscribe('telephones');
   this.subscribe('services');
-  this.subscribe('posts');
+  //this.subscribe('posts');
 });
 
 Template.catadorDetails.onCreated(function() {
-  catador = Carroceiros.findOne({$and: [{'id': getCatadorIdFromUrl()},{'moderation_status': {$in: statusShow}}]});
+  //store values from database in session variables
+  setStoredValues();
 
-  telephone = TelephoneS.findOne({$and: [{'catador_id':catador.id}, {'moderation_status': {$in: statusShow}}]});
+  //retrieve image of catador from database
+  image = Images.find({$and: [{'catador_id':Session.get('catador').id}, {'moderation_status': {$in: statusShow}}]});
+});
 
-  address = AddressS.findOne({$and: [{'catador_id':catador.id}, {'moderation_status': {$in: statusShow}}]});
+Template.modalUpdateInfo.onDestroyed(function() {
+  FlashMessages.clear();
+});
 
-  services = ServiceS.findOne({$and: [{'catador_id':catador.id}, {'moderation_status': {$in: statusShow}}]});
+Template.modalPhotoInfo.onDestroyed(function() {
+  FlashMessages.clear();
 });
 
 Template.catadorDetails.helpers({
   name: function() {
-    return catador.name;
+    return Session.get('catador').name;
   },
 
   miniBio: function() {
-    return catador.miniBio;
+    return Session.get('catador').miniBio;
   },
 
   telephone1: function() {
-    return telephone.telephone1;
+    return Session.get('telephone').telephone1;
   },
 
   telephone2: function() {
-    return telephone.telephone2;
+    return Session.get('telephone').telephone2;
   },
   operator_telephone1: function() {
-    var operator = telephone.operator_telephone1;
+    var operator = Session.get('telephone').operator_telephone1;
     if (operator) return '(' + operator + ')';
     return '';
   },
   operator_telephone2: function() {
-    var operator = telephone.operator_telephone2;
+    var operator = Session.get('telephone').operator_telephone2;
     if (operator) return '(' + operator + ')';
     return '';
   },
 
   whatsapp1: function() {
-    return telephone.whatsapp1;
+    return Session.get('telephone').whatsapp1;
   },
 
   whatsapp2: function() {
-    return telephone.whatsapp2;
+    return Session.get('telephone').whatsapp2;
   },
 
   internet1: function() {
-    return telephone.internet1;
+    return Session.get('telephone').internet1;
   },
 
   internet2: function() {
-    return telephone.internet2;
+    return Session.get('telephone').internet2;
   },
 
   email: function() {
-    return catador.email;
+    return Session.get('catador').email;
   },
 
   socialNetwork: function() {
-    return catador.socialNetwork;
+    return Session.get('catador').socialNetwork;
   },
 
   complete_address: function() {
-    return address.base_address;
+    return Session.get('address').base_address;
   },
 
   region: function() {
-    return address.region;
+    return Session.get('address').region;
   },
 
   city: function() {
-    return address.city;
+    return Session.get('address').city;
   },
 
   state: function() {
-    return address.state;
+    return Session.get('address').state;
   },
 
   country: function() {
-    return address.country;
+    return Session.get('address').country;
   },
 
   zip: function() {
-    return address.zip;
+    return Session.get('address').zip;
   },
 
   carrocaPimpada: function() {
-    var returnVal = (catador.carrocaPimpada)? 'Sim' : 'N\u00e3o';
+    var returnVal = (Session.get('catador').carrocaPimpada)? 'Sim' : 'N\u00e3o';
     return returnVal;
   },
 
   motorizedVehicle: function() {
-    var returnVal = (catador.motorizedVehicle)? 'Sim' : 'N\u00e3o';
+    var returnVal = (Session.get('catador').motorizedVehicle)? 'Sim' : 'N\u00e3o';
     return returnVal;
   },
 
   observations: function() {
-    return catador.observations;
+    return Session.get('catador').observations;
   },
 
   // services
 
   services_recyclable: function() {
-    return services.services_recyclable;
+    return Session.get('services').services_recyclable;
   },
   services_glass: function() {
-    return services.services_glass;
+    return Session.get('services').services_glass;
   },
   services_construction: function() {
-    return services.services_construction;
+    return Session.get('services').services_construction;
   },
   services_volume: function() {
-    return services.services_volume;
+    return Session.get('services').services_volume;
   },
   services_metals: function() {
-    return services.services_metals;
+    return Session.get('services').services_metals;
   },      
   services_electronics: function() {
-    return services.services_electronics;
+    return Session.get('services').services_electronics;
   },
   services_freight: function() {
-    return services.services_freight;
+    return Session.get('services').services_freight;
   },      
   services_other_materials: function() {
-    return services.services_other_materials;
+    return Session.get('services').services_other_materials;
   },      
   services_other_materials_description: function() {
-    return services.services_other_materials_description;
+    return Session.get('services').services_other_materials_description;
   }
 });
 
@@ -149,6 +155,12 @@ Template.catadorDetails.events({
     // call screen of update
     Modal.show('modalUpdateInfo');
   },
+  'click .photo-button-update': function(event, template) {
+    console.log("clicked photo button");
+
+    // call screen of photo update
+    Modal.show('modalPhotoInfo');
+  },
   'click .profile-button-services': function() {
     console.log("clicked services button");
     Modal.show('modalServices');
@@ -158,8 +170,7 @@ Template.catadorDetails.events({
 Template.imageView.helpers({
   images: function () {
     // retrieve picture for selected catador
-    var img = Images.find({$and: [{'catador_id':catador.id}, {'moderation_status': {$in: statusShow}}]});
-    return img;
+    return image;
   }
 });
 
@@ -168,9 +179,6 @@ Template.modalUpdateInfo.onRendered (function() {
 });
 
 Template.modalUpdateInfo.events({
-  'submit': function(event, template) {
-    //setUpdateInitialValues(template);
-  },
   'change #changeNameInfo': function(event, template) {
     if (Session.get('changeName')) {
       Session.set('changeName', false);
@@ -179,7 +187,7 @@ Template.modalUpdateInfo.events({
     else {
       Session.set('changeName', true);
       template.find("#name").style.visibility = "visible";
-      template.find("#name").value = catador.name;
+      template.find("#name").value = Session.get('catador').name;
     }
   },
   'change #changeMiniBioInfo': function(event, template) {
@@ -190,7 +198,7 @@ Template.modalUpdateInfo.events({
     else {
       Session.set('changeMiniBio', true);
       template.find('#miniBio').style.visibility = "visible";
-      template.find('#miniBio').value = catador.miniBio;
+      template.find('#miniBio').value = Session.get('catador').miniBio;
     }
   },
   'change #changeTelephone1Info': function(event, template) {
@@ -201,7 +209,7 @@ Template.modalUpdateInfo.events({
     else {
       Session.set('changeTelephone1', true);
       template.find('#telephone1').style.visibility = "visible";
-      template.find('#telephone1').value = telephone.telephone1;
+      template.find('#telephone1').value = Session.get('telephone').telephone1;
     }
   },
   'change #changeOperator1Info': function(event, template) {
@@ -212,7 +220,7 @@ Template.modalUpdateInfo.events({
     else {
       Session.set('changeOperator1', true);
       template.find('#operator_telephone1').style.visibility = "visible";
-      template.find('#operator_telephone1').value = telephone.operator_telephone1;
+      template.find('#operator_telephone1').value = Session.get('telephone').operator_telephone1;
     }
   },
   'change #changeWhatsapp1Info': function(event, template) {
@@ -223,7 +231,7 @@ Template.modalUpdateInfo.events({
     else {
       Session.set('changeWhatsapp1', true);
       template.find('#whatsapp1').style.visibility = "visible";
-      template.find('#whatsapp1').checked = telephone.whatsapp1;
+      template.find('#whatsapp1').checked = Session.get('telephone').whatsapp1;
     }
   },
   'change #changeInternet1Info': function(event, template) {
@@ -234,7 +242,7 @@ Template.modalUpdateInfo.events({
     else {
       Session.set('changeInternet1', true);
       template.find('#internet1').style.visibility = "visible";
-      template.find('#internet1').checked = telephone.internet1;
+      template.find('#internet1').checked = Session.get('telephone').internet1;
     }
   },
   'change #changeTelephone2Info': function(event, template) {
@@ -245,7 +253,7 @@ Template.modalUpdateInfo.events({
     else {
       Session.set('changeTelephone2', true);
       template.find('#telephone2').style.visibility = "visible";
-      template.find('#telephone2').value = telephone.telephone2;
+      template.find('#telephone2').value = Session.get('telephone').telephone2;
     }
   },
   'change #changeOperator2Info': function(event, template) {
@@ -256,7 +264,7 @@ Template.modalUpdateInfo.events({
     else {
       Session.set('changeOperator2', true);
       template.find('#operator_telephone2').style.visibility = "visible";
-      template.find('#operator_telephone2').value = telephone.operator_telephone2;
+      template.find('#operator_telephone2').value = Session.get('telephone').operator_telephone2;
     }
   },
   'change #changeWhatsapp2Info': function(event, template) {
@@ -267,7 +275,7 @@ Template.modalUpdateInfo.events({
     else {
       Session.set('changeWhatsapp2', true);
       template.find('#whatsapp2').style.visibility = "visible";
-      template.find('#whatsapp2').checked = telephone.whatsapp2;
+      template.find('#whatsapp2').checked = Session.get('telephone').whatsapp2;
     }
   },
   'change #changeInternet2Info': function(event, template) {
@@ -278,10 +286,11 @@ Template.modalUpdateInfo.events({
     else {
       Session.set('changeInternet2', true);
       template.find('#internet2').style.visibility = "visible";
-      template.find('#internet2').checked = telephone.internet2;
+      template.find('#internet2').checked = Session.get('telephone').internet2;
     }
   },
   'change #changeEmailInfo': function(event, template) {
+    template.find('#email').value = Session.get('catador').email;
     if (Session.get('changeEmail')) {
       Session.set('changeEmail', false);
       template.find('#email').style.visibility = "hidden";
@@ -289,7 +298,6 @@ Template.modalUpdateInfo.events({
     else {
       Session.set('changeEmail', true);
       template.find('#email').style.visibility = "visible";
-      template.find('#email').value = catador.email;
     }
   },
   'change #changeSocialNetworkInfo': function(event, template) {
@@ -300,7 +308,7 @@ Template.modalUpdateInfo.events({
     else {
       Session.set('changeSocialNetwork', true);
       template.find('#socialNetwork').style.visibility = "visible";
-      template.find('#socialNetwork').value = catador.socialNetwork;
+      template.find('#socialNetwork').value = Session.get('catador').socialNetwork;
     }
   },
   'change #changeComplete_addressInfo': function(event, template) {
@@ -311,7 +319,7 @@ Template.modalUpdateInfo.events({
     else {
       Session.set('changeComplete_address', true);
       template.find('#complete_address').style.visibility = "visible";
-      template.find('#complete_address').value = address.base_address;
+      template.find('#complete_address').value = Session.get('address').base_address;
     }
   },
   'change #changeRegionInfo': function(event, template) {
@@ -322,7 +330,7 @@ Template.modalUpdateInfo.events({
     else {
       Session.set('changeRegion', true);
       template.find('#region').style.visibility = "visible";
-      template.find('#region').value = address.region;
+      template.find('#region').value = Session.get('address').region;
     }
   },
   'change #changeCarrocaPimpadaInfo': function(event, template) {
@@ -333,7 +341,7 @@ Template.modalUpdateInfo.events({
     else {
       Session.set('changeCarrocaPimpada', true);
       template.find('#carrocaPimpada').style.visibility = "visible";
-      template.find('#carrocaPimpada').checked = catador.carrocaPimpada;
+      template.find('#carrocaPimpada').checked = Session.get('catador').carrocaPimpada;
     }
   },
   'change #changeMotorizedVehicleInfo': function(event, template) {
@@ -344,7 +352,7 @@ Template.modalUpdateInfo.events({
     else {
       Session.set('changeMotorizedVehicle', true);
       template.find('#motorizedVehicle').style.visibility = "visible";
-      template.find('#motorizedVehicle').checked = catador.motorizedVehicle;
+      template.find('#motorizedVehicle').checked = Session.get('catador').motorizedVehicle;
     }
   },
   'change #changeObservationsInfo': function(event, template) {
@@ -355,7 +363,7 @@ Template.modalUpdateInfo.events({
     else {
       Session.set('changeObservations', true);
       template.find('#observations').style.visibility = "visible";
-      template.find('#observations').value = catador.observations;
+      template.find('#observations').value = Session.get('catador').observations;
     }
   },
   'change #changeServices_recyclableInfo': function(event, template) {
@@ -366,7 +374,7 @@ Template.modalUpdateInfo.events({
     else {
       Session.set('changeServices_recyclable', true);
       template.find('#services_recyclable').style.visibility = "visible";
-      template.find('#services_recyclable').checked = services.services_recyclable;
+      template.find('#services_recyclable').checked = Session.get('services').services_recyclable;
     }
   },
   'change #changeServices_glassInfo': function(event, template) {
@@ -377,7 +385,7 @@ Template.modalUpdateInfo.events({
     else {
       Session.set('changeServices_glass', true);
       template.find('#services_glass').style.visibility = "visible";
-      template.find('#services_glass').checked = services.services_glass;
+      template.find('#services_glass').checked = Session.get('services').services_glass;
     }
   },
   'change #changeServices_constructionInfo': function(event, template) {
@@ -388,7 +396,7 @@ Template.modalUpdateInfo.events({
     else {
       Session.set('changeServices_construction', true);
       template.find('#services_construction').style.visibility = "visible";
-      template.find('#services_construction').checked = services.services_construction;
+      template.find('#services_construction').checked = Session.get('services').services_construction;
     }
   },
   'change #changeServices_volumeInfo': function(event, template) {
@@ -399,7 +407,7 @@ Template.modalUpdateInfo.events({
     else {
       Session.set('changeServices_volume', true);
       template.find('#services_volume').style.visibility = "visible";
-      template.find('#services_volume').checked = services.services_volume;
+      template.find('#services_volume').checked = Session.get('services').services_volume;
     }
   },
   'change #changeServices_metalsInfo': function(event, template) {
@@ -410,7 +418,7 @@ Template.modalUpdateInfo.events({
     else {
       Session.set('changeServices_metals', true);
       template.find('#services_metals').style.visibility = "visible";
-      template.find('#services_metals').checked = services.services_metals;
+      template.find('#services_metals').checked = Session.get('services').services_metals;
     }
   },
   'change #changeServices_electronicsInfo': function(event, template) {
@@ -421,7 +429,7 @@ Template.modalUpdateInfo.events({
     else {
       Session.set('changeServices_electronics', true);
       template.find('#services_electronics').style.visibility = "visible";
-      template.find('#services_electronics').checked = services.services_electronics;
+      template.find('#services_electronics').checked = Session.get('services').services_electronics;
     }
   },
   'change #changeServices_freightInfo': function(event, template) {
@@ -432,7 +440,7 @@ Template.modalUpdateInfo.events({
     else {
       Session.set('changeServices_freight', true);
       template.find('#services_freight').style.visibility = "visible";
-      template.find('#services_freight').checked = services.services_freight;
+      template.find('#services_freight').checked = Session.get('services').services_freight;
     }
   },
   'change #changeServices_other_materialsInfo': function(event, template) {
@@ -440,12 +448,12 @@ Template.modalUpdateInfo.events({
       Session.set('changeServices_other_materials', false);
       template.find('#services_other_materials').style.visibility = "hidden";
 
-      setServices_Other_Materials_Description(services.services_other_materials, template);
+      setServices_Other_Materials_Description(Session.get('services').services_other_materials, template);
     }
     else {
       Session.set('changeServices_other_materials', true);
       template.find('#services_other_materials').style.visibility = "visible";
-      template.find('#services_other_materials').checked = services.services_other_materials;
+      template.find('#services_other_materials').checked = Session.get('services').services_other_materials;
     }
   },
   'change #changeServices_other_materials_descriptionInfo': function(event, template) {
@@ -456,7 +464,7 @@ Template.modalUpdateInfo.events({
     else {
       Session.set('changeServices_other_materials_description', true);
       template.find('#services_other_materials_description').style.visibility = "visible";
-      template.find('#services_other_materials_description').value = services.services_other_materials_description;
+      template.find('#services_other_materials_description').value = Session.get('services').services_other_materials_description;
     }
   },
   'change #services_other_materials': function(event, template) {

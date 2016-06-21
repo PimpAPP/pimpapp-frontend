@@ -227,9 +227,6 @@ Meteor.methods({
       var all_user_id = Meteor.userId();
       var all_created_on = new Date();
 
-      console.log("updating catador information");
-      console.log(formUpdateCatador);
-
       // if there is at least one field to update in catador table, prepare new record for insertion
       if (formUpdateCatador.changeNameInfo || formUpdateCatador.changeMiniBioInfo || formUpdateCatador.changeEmailInfo || formUpdateCatador.changeSocialNetworkInfo || formUpdateCatador.changeCarrocaPimpadaInfo || formUpdateCatador.changeMotorizedVehicleInfo || formUpdateCatador.changeObservationsInfo) {
         bol_itemChecked = true;
@@ -471,6 +468,47 @@ Meteor.methods({
     } // try
     catch (error) {
       console.log("Error in updateCatadorDetails");
+      console.log(error);
+      if (error.error) {
+        throw new Meteor.Error(error.error);
+      } else {
+        throw new Meteor.Error(err_system_msg);
+      };
+    };
+  },
+
+  //Update photo of catador
+  updatePhotoDetails: function(formPhotoCatador) {
+    try {
+      // Make sure the user is logged in before updating
+      if (!Meteor.userId()) {
+        console.log("updatePhotoDetails - " + err_no_user_msg);
+        throw new Meteor.Error(err_no_user_msg);
+      };
+
+      // Make sure the user uploaded a photo
+      if (!formPhotoCatador.full_photo) {
+        console.log("updatePhotoDetails - " + err_no_photo_msg);
+        throw new Meteor.Error(err_no_photo_msg);
+      };
+
+      //Retrieve current photo from database to know if it is needed to update previous photo moderation status to "Historic"
+      var currPhoto = Images.findOne({$and: [{'catador_id':formPhotoCatador.id}, {'moderation_status': {$in: statusShow}}]});
+
+      var responsePhotoUpd = Images.update({"_id":formPhotoCatador.full_photo},{$set:{"catador_id":formPhotoCatador.id, "moderation_status":"P"}}); 
+      if (!responsePhotoUpd) {
+        console.log(responsePhotoUpd);
+        throw new Meteor.Error(err_update_photo_msg);
+      } else if (currPhoto) {
+        var responsePhotoHistUpd = Images.update({"_id":currPhoto._id},{$set:{"moderation_status":"H"}});
+        if (!responsePhotoHistUpd) {
+          console.log(responsePhotoHistUpd);
+          throw new Meteor.Error(err_update_hist_photo_msg);
+        } //if (!responsePhotoHistUpd)
+      }; //if (!responsePhotoUpd)
+    } // try
+    catch (error) {
+      console.log("Error in updatePhotoDetails");
       console.log(error);
       if (error.error) {
         throw new Meteor.Error(error.error);

@@ -125,6 +125,10 @@
         <i class="glyphicon glyphicon-pencil profile"></i> Atualizar Informa&ccedil;&otilde;es
       </button>
 
+      <button class="btn btn-default pull-right photo-button-update">
+        <i class="glyphicon glyphicon-pencil profile"></i> Atualizar Foto
+      </button>
+
       <!-- If we think autoform is the way to go, then run:
       in terminal: meteor add yogiben:autoform-modals
       in collections.js, define CatadoresUpdate collection, then
@@ -140,13 +144,17 @@
 </template>
 
 <template name="imageView">
-  {{#each images}}
-    <div>
-      <a href="{{this.url}}" target="_blank"><img class="img-circle avatar avatar-original"
-        style="-webkit-user-select:none; display:block; margin:auto;" 
-        src="{{this.url}}" title="Clique para ver original"></a>
-    </div>
-  {{/each}}
+  {{#if images.count}}
+    {{#each images}}
+      <div>
+        <a href="{{this.url}}" target="_blank"><img class="img-circle avatar avatar-original"
+          style="-webkit-user-select:none; display:block; margin:auto;"
+          src="{{this.url}}" title="Clique para ver original"></a>
+      </div>
+    {{/each}}
+  {{else}}
+    <label>Catador sem Foto</label>
+  {{/if}}
 </template>
 
 <template name="modalServices">
@@ -413,6 +421,46 @@
             {{> afQuickField template="bootstrap3-horizontal" label-class="col-xs-3" input-col-class="col-xs-9" name="insertFields.observations" id="observations" class="form-control"}}
           </div><!-- /input-group -->
           <br>
+        </fieldset>
+
+        {{> flashMessages}}
+        <button type="submit" class="btn btn-primary">Atualizar</button>
+        {{/autoForm}}
+
+        </div> <!-- /modal-body -->
+
+        <div class="modal-footer">
+        </div>
+
+      </div>
+    </div>
+  </div>
+</template>
+
+<template name="modalPhotoInfo">
+  <div class="modal fade modal-services-info">
+    <div class="modal-dialog">
+      <div class="modal-content">
+
+        <div class="modal-header">
+          <h4 class="modal-title">Atualiza&ccedil;&atilde;o de Foto</h4>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+        </div>
+
+        <div class="modal-body">
+          <label>Foto Atual</label>
+          <div class="row">
+            <div class="col-md-12 text-center">
+              <div class="image-container">
+                {{> imageView}}
+              </div>
+            </div>
+          </div>
+
+        {{#autoForm doc=this id="updatePhotoForm" schema="CatadorProfileInsertSchema" type="method" meteormethod="updatePhotoDetails" validation="none"}}
+        <fieldset>
+          <label>Nova Foto</label>
+          {{> afQuickField name="full_photo" label=false}}
         </fieldset>
 
         {{> flashMessages}}
