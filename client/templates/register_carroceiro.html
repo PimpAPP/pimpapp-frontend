@@ -8,7 +8,10 @@
     <div class="panel-body">
 
       <h2>Cadastre um catador</h2>
+
       {{#if currentUser}}
+        <p>Encontrou um catador e quer cadastr&aacute;-lo no RECO? &Oacute;timo! &Eacute; s&oacute; preencher o formul&aacute;rio a seguir com os dados dele.</p>
+        <br>
         {{> addCarroceiroForm}}
       {{else}}
         {{> atForm}}
@@ -55,7 +58,7 @@
   <fieldset>
 
     <label>Campos com * s&atilde;o obrigat&oacute;rios</label>
-    <!-- <legend>Cadastre um catador</legend> -->
+
     {{> afQuickField name='name'}}
     {{> afQuickField name='miniBio' rows=5}}
 

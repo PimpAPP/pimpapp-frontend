@@ -16,6 +16,18 @@ p.inline {
    display: inline;
 }
 
+.bold {
+   font-weight:bold;
+}
+
+.underline {
+   text-decoration: underline;
+}
+
+img.partners {
+    height: 30px;
+}
+
 body {
   position: relative;
   background-image:url('/img/PadraoAzulejo.jpg');
