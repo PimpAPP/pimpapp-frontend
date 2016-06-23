@@ -24,8 +24,14 @@ p.inline {
    text-decoration: underline;
 }
 
-img.partners {
-    height: 30px;
+img.partners-width {
+    width: 100px;
+    padding: 5px;
+}
+
+img.partners-height {
+    height: 100px;
+    padding: 5px;
 }
 
 body {
