@@ -34,3 +34,25 @@ adb devices
 # diretorio build/ nao pode estar dentro do app
 meteor build --server-only ../build/
 ```
+## Build e distribuição do apk android
+```
+
+# definir numero de revisão
+REVISION=$(git rev-list HEAD --count)
+
+echo "cdvVersionCode = '$REVISION'" > ./cordova-build-override/platforms/android/build-extras.gradle
+
+# criar o apk sem assinatura
+meteor build ../caminho-do-build --server="https://usereco.com"
+
+# gerar chave (depois de criada e associada à Play Store, deve ser usada a mesma)
+keytool -genkey -alias reco-pimp -keyalg RSA -keysize 2048 -validity 10000
+
+# aplicar chave ao apk
+cd ../caminho-do-build/android/
+jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 release-unsigned.apk reco-pimp
+# (onde 'reco-pimp' é o mesmo nome utilizado para definir a key)
+
+# reduzir tamanho do apk removendo arquivos de debug
+zipalign 4 release-unsigned.apk reco-pimp.apk
+```
