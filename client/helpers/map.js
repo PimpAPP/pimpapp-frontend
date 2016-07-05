@@ -5,6 +5,7 @@ var MAP_ZOOM = 15;
 Meteor.startup(function() {
   T9n.setLanguage("pt");
   GoogleMaps.load({
+    key: 'AIzaSyDu33iySSD6m4Hr1fkw46-ch9csZPL1_2M',
     libraries: 'places'
   });
 });
