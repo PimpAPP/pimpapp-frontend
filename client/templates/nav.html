@@ -36,7 +36,13 @@
       </div><!-- / container-fluid -->
     </nav><!-- / navbar -->  
   </div>
-
+  <script type="text/javascript">
+    $(document).ready(function(){
+      $('.navbar-collapse a').click(function(){
+        $(".navbar-collapse").collapse('hide');
+      });
+    });
+  </script>
 </template>
 
 <template name="accountButtons">
@@ -54,7 +60,4 @@
 <template name="LogoutButton">
   <a href="/logout">SAIR</a>
 </template>
-
-
-
 
