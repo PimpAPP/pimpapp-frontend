@@ -4,213 +4,199 @@ Meteor.methods({
 
   // TODO: insert records in all tables of database related to catador 
   submitCatadorRegistration: function(formInsertCatador) {
+    try {
+      // Make sure the user is logged in before inserting
+      if (!Meteor.userId()) {
+        console.log(err_no_user_msg);
+        throw new Meteor.Error(err_no_user_msg);
+      };
 
-    // Make sure the user is logged in before inserting
-    if (! Meteor.userId()) {
-      throw new Meteor.Error('No user logged for insertion');
-    };
+      var catador = {
+        catador_user_id: String,
+        id: String,
+        moderation_status: String,
+        name: String,
+        miniBio: String,
+        email: String,
+        socialNetwork: String,
+        catador_type: String,
+        allow_public_edition: Boolean,
+        carrocaPimpada: Boolean,
+        motorizedVehicle: Boolean,
+        observations: String,
+        user_id: String,
+        created_on: Date
+      };
 
-    var catador = {
-      catador_user_id: String,
-      id: String,
-      moderation_status: String,
-      name: String,
-      miniBio: String,
-      email: String,
-      socialNetwork: String,
-      catador_type: String,
-      allow_public_edition: Boolean,
-      carrocaPimpada: Boolean,
-      motorizedVehicle: Boolean,
-      observations: String,
-      user_id: String,
-      created_on: Date
-    };
+      catador.catador_user_id = null;
+      catador.id = null;
+      catador.moderation_status = 'P';
+      catador.name = formInsertCatador.name;
+      catador.catador_type = 'C';
+      catador.allow_public_edition = true;
+      catador.miniBio = formInsertCatador.miniBio;
+      catador.email = formInsertCatador.email;
+      catador.socialNetwork = formInsertCatador.socialNetwork;
+      catador.carrocaPimpada = formInsertCatador.carrocaPimpada;
+      catador.motorizedVehicle = formInsertCatador.motorizedVehicle;
+      catador.observations = formInsertCatador.observations;
+      catador.user_id = Meteor.userId();
+      catador.created_on = new Date();
 
-    catador.catador_user_id = null;
-    catador.id = null;
-    catador.moderation_status = 'P';
-    catador.name = formInsertCatador.name;
-    catador.catador_type = 'C';
-    catador.allow_public_edition = true;
-    catador.miniBio = formInsertCatador.miniBio;
-    catador.email = formInsertCatador.email;
-    catador.socialNetwork = formInsertCatador.socialNetwork;
-    catador.carrocaPimpada = formInsertCatador.carrocaPimpada;
-    catador.motorizedVehicle = formInsertCatador.motorizedVehicle;
-    catador.observations = formInsertCatador.observations;
-    catador.user_id = Meteor.userId();
-    catador.created_on = new Date();
-
-    Carroceiros.insert(catador, function( errorCarrIns, responseCarrIns ) {
-      if ( errorCarrIns ) {
-        console.log( "errorCarrIns");
-        console.log( errorCarrIns );
-        throw new Meteor.Error('Error in Carroceiros.insert');
+      var responseCarrIns = Carroceiros.insert(catador);
+      if (!responseCarrIns) {
+        console.log(responseCarrIns);
+        throw new Meteor.Error(err_insert_cat_msg);
       } else {
         catador.id = responseCarrIns;
 
-        Carroceiros.update({"_id":catador.id},{$set:{"id":catador.id}}, function( errorCarrUpd, responseCarrUpd ) {
-          if ( errorCarrUpd ) {
-            console.log( "errorCarrUpd");
-            console.log( errorCarrUpd );
-            throw new Meteor.Error('Error in Carroceiros.update');
-          } else {
-            var geolocation = {
-              catador_id: String,
-              moderation_status: String,
-              latitude: Number,
-              longitude: Number,
-              user_id: String,
-              created_on: Date
-            };
+        var responseCarrUpd = Carroceiros.update({"_id":catador.id},{$set:{"id":catador.id}});
+        if (!responseCarrUpd) {
+          console.log(responseCarrUpd);
+          throw new Meteor.Error(err_insert_cat_id_msg);
+        };
+      };
 
-            geolocation.catador_id = catador.id;
-            geolocation.moderation_status = catador.moderation_status;
-            geolocation.latitude = formInsertCatador.complete_address.lat;
-            geolocation.longitude = formInsertCatador.complete_address.lng;
-            geolocation.user_id = catador.user_id;
-            geolocation.created_on = catador.created_on;
+      var geolocation = {
+        catador_id: String,
+        moderation_status: String,
+        latitude: Number,
+        longitude: Number,
+        user_id: String,
+        created_on: Date
+      };
 
-            GeolocationS.insert(geolocation, function( errorGeo, responseGeo ) {
-              if ( errorGeo ) {
-                console.log( "errorGeo");
-                console.log( errorGeo );
-                throw new Meteor.Error('Error in GeolocationS.insert');
-              } else {          
+      geolocation.catador_id = catador.id;
+      geolocation.moderation_status = catador.moderation_status;
+      geolocation.latitude = formInsertCatador.complete_address.lat;
+      geolocation.longitude = formInsertCatador.complete_address.lng;
+      geolocation.user_id = catador.user_id;
+      geolocation.created_on = catador.created_on;
 
-                var address = {
-                  catador_id: String,
-                  moderation_status: String,
-                  base_address: String,
-                  region: String,
-                  city: String,
-                  state: String,
-                  country: String,
-                  zip: String,
-                  user_id: String,
-                  created_on: Date
-                };
+      var responseGeoIns = GeolocationS.insert(geolocation);
+      if (!responseGeoIns) {
+        console.log(responseGeoIns);
+        throw new Meteor.Error(err_insert_geo_msg);
+      };
 
-                address.catador_id = catador.id;
-                address.moderation_status = catador.moderation_status;
-                address.base_address = formInsertCatador.complete_address.fullAddress;
-                address.region = formInsertCatador.region;
-                address.city = formInsertCatador.complete_address.city;
-                address.state = formInsertCatador.complete_address.state;
-                address.country = formInsertCatador.complete_address.country;
-                address.zip = formInsertCatador.complete_address.zip;
-                address.user_id = catador.user_id;
-                address.created_on = catador.created_on;
+      var address = {
+        catador_id: String,
+        moderation_status: String,
+        base_address: String,
+        region: String,
+        city: String,
+        state: String,
+        country: String,
+        zip: String,
+        user_id: String,
+        created_on: Date
+      };
 
-                AddressS.insert(address, function( errorAddr, responseAddr ) {
-                  if ( errorAddr ) {
-                    console.log( "errorAddr");
-                    console.log( errorAddr );
-                    throw new Meteor.Error('Error in AddressS.insert');
-                  } else {
+      address.catador_id = catador.id;
+      address.moderation_status = catador.moderation_status;
+      address.base_address = formInsertCatador.complete_address.fullAddress;
+      address.region = formInsertCatador.region;
+      address.city = formInsertCatador.complete_address.city;
+      address.state = formInsertCatador.complete_address.state;
+      address.country = formInsertCatador.complete_address.country;
+      address.zip = formInsertCatador.complete_address.zip;
+      address.user_id = catador.user_id;
+      address.created_on = catador.created_on;
 
-                    var telephone = {
-                      catador_id: String,
-                      moderation_status: String,
-                      telephone1: Number,
-                      operator_telephone1: String,
-                      whatsapp1: Boolean,
-                      internet1: Boolean,
-                      telephone2: Number,
-                      operator_telephone2: String,
-                      whatsapp2: Boolean,
-                      internet2: Boolean,
-                      user_id: String,
-                      created_on: Date
-                    };
-
-                    telephone.catador_id = catador.id;
-                    telephone.moderation_status = catador.moderation_status;
-                    telephone.telephone1 = formInsertCatador.telephone1;
-                    telephone.operator_telephone1 = formInsertCatador.operator_telephone1;
-                    telephone.whatsapp1 = formInsertCatador.whatsapp1;
-                    telephone.internet1 = formInsertCatador.internet1;
-                    telephone.telephone2 = formInsertCatador.telephone2;
-                    telephone.operator_telephone2 = formInsertCatador.operator_telephone2;
-                    telephone.whatsapp2 = formInsertCatador.whatsapp2;
-                    telephone.internet2 = formInsertCatador.internet2;
-                    telephone.user_id = catador.user_id;
-                    telephone.created_on = catador.created_on;
-
-                    TelephoneS.insert(telephone, function( errorTel, responseTel ) {
-                      if ( errorTel ) {
-                        console.log( "errorTel");
-                        console.log( errorTel );
-                        throw new Meteor.Error('Error in TelephoneS.insert');
-                      } else {
-
-                        var service = {
-                          catador_id: String,
-                          moderation_status: String,
-                          services_recyclable: Boolean,
-                          services_glass: Boolean,
-                          services_construction: Boolean,
-                          services_volume: Boolean,
-                          services_metals: Boolean,
-                          services_electronics: Boolean,
-                          services_freight: Boolean,
-                          services_other_materials: Boolean,
-                          services_other_materials_description: String,
-                          user_id: String,
-                          created_on: Date
-                        };
-
-                        service.catador_id = catador.id;
-                        service.moderation_status = catador.moderation_status;
-                        service.services_recyclable = formInsertCatador.services_recyclable;
-                        service.services_glass = formInsertCatador.services_glass;
-                        service.services_construction = formInsertCatador.services_construction;
-                        service.services_volume = formInsertCatador.services_volume;
-                        service.services_metals = formInsertCatador.services_metals;
-                        service.services_electronics = formInsertCatador.services_electronics;
-                        service.services_freight = formInsertCatador.services_freight;
-                        service.services_other_materials = formInsertCatador.services_other_materials;
-                        service.services_other_materials_description = formInsertCatador.services_other_materials_description;
-
-                        service.user_id = catador.user_id;
-                        service.created_on = catador.created_on;
-
-                        ServiceS.insert(service, function( errorServ, responseServ ) {
-                          if ( errorServ ) {
-                            console.log( "errorServ");
-                            console.log( errorServ );
-                            throw new Meteor.Error('Error in ServiceS.insert');
-                          } else {
-
-                            Images.update({"_id":formInsertCatador.full_photo},{$set:{"catador_id":catador.id, "moderation_status":catador.moderation_status}}, function( errorImageUpd, responseImageUpd ) {
-                              if ( errorImageUpd ) {
-                                console.log( "errorImageUpd");
-                                console.log( errorImageUpd );
-                                throw new Meteor.Error('Error in Images.update');
-                              } else {
-                                console.log( "responseImageUpd = " );
-                                console.log( responseImageUpd );
-                              }
-                            }); // Images update
-
-                          }
-                        }); // Service insert
-
-                      }
-                    }); // Telephone insert
-
-                  }
-                }); //Addresses insert
-
-              }
-            }); //Geolocation insert
-
-          }
-        }); //Carroceiros update
-
+      var responseAddrIns = AddressS.insert(address);
+      if (!responseAddrIns) {
+        console.log(responseAddrIns);
+        throw new Meteor.Error(err_insert_addr_msg);
       }
-    }); //Carroceiros insert
+
+      var telephone = {
+        catador_id: String,
+        moderation_status: String,
+        telephone1: Number,
+        operator_telephone1: String,
+        whatsapp1: Boolean,
+        internet1: Boolean,
+        telephone2: Number,
+        operator_telephone2: String,
+        whatsapp2: Boolean,
+        internet2: Boolean,
+        user_id: String,
+        created_on: Date
+      };
+
+      telephone.catador_id = catador.id;
+      telephone.moderation_status = catador.moderation_status;
+      telephone.telephone1 = formInsertCatador.telephone1;
+      telephone.operator_telephone1 = formInsertCatador.operator_telephone1;
+      telephone.whatsapp1 = formInsertCatador.whatsapp1;
+      telephone.internet1 = formInsertCatador.internet1;
+      telephone.telephone2 = formInsertCatador.telephone2;
+      telephone.operator_telephone2 = formInsertCatador.operator_telephone2;
+      telephone.whatsapp2 = formInsertCatador.whatsapp2;
+      telephone.internet2 = formInsertCatador.internet2;
+      telephone.user_id = catador.user_id;
+      telephone.created_on = catador.created_on;
+
+      var responseTelIns = TelephoneS.insert(telephone);
+      if (!responseTelIns) {
+        console.log(responseTelIns);
+        throw new Meteor.Error(err_insert_tel_msg);
+      };
+
+      var service = {
+        catador_id: String,
+        moderation_status: String,
+        services_recyclable: Boolean,
+        services_glass: Boolean,
+        services_construction: Boolean,
+        services_volume: Boolean,
+        services_metals: Boolean,
+        services_electronics: Boolean,
+        services_freight: Boolean,
+        services_other_materials: Boolean,
+        services_other_materials_description: String,
+        user_id: String,
+        created_on: Date
+      };
+
+      service.catador_id = catador.id;
+      service.moderation_status = catador.moderation_status;
+      service.services_recyclable = formInsertCatador.services_recyclable;
+      service.services_glass = formInsertCatador.services_glass;
+      service.services_construction = formInsertCatador.services_construction;
+      service.services_volume = formInsertCatador.services_volume;
+      service.services_metals = formInsertCatador.services_metals;
+      service.services_electronics = formInsertCatador.services_electronics;
+      service.services_freight = formInsertCatador.services_freight;
+      service.services_other_materials = formInsertCatador.services_other_materials;
+      service.services_other_materials_description = formInsertCatador.services_other_materials_description;
+
+      service.user_id = catador.user_id;
+      service.created_on = catador.created_on;
+
+      var responseServIns = ServiceS.insert(service);
+      if (!responseServIns) {
+        console.log(responseServIns);
+        throw new Meteor.Error(err_insert_serv_msg);
+      };
+
+      if (formInsertCatador.full_photo) {
+        var responsePhotoUpd = Images.update({"_id":formInsertCatador.full_photo},{$set:{"catador_id":catador.id, "moderation_status":catador.moderation_status}}); 
+        if (!responsePhotoUpd) {
+          console.log(responsePhotoUpd);
+          throw new Meteor.Error(err_insert_photo_msg);
+        };
+      };
+    } // try
+    catch (error) {
+      console.log("Error in submitCatadorRegistration");
+      console.log(error);
+      if (error.error) {
+        throw new Meteor.Error(error.error);
+      } else {
+        throw new Meteor.Error(err_system_msg);
+      };
+    };
   },
 
   // Insert new records according fields that user wants to update and update previous record with moderation status equal to "Historic" - "H"
@@ -218,7 +204,7 @@ Meteor.methods({
     try {
       // Make sure the user is logged in before updating
       if (!Meteor.userId()) {
-        console.log("updateCatadorDetails - " + err_no_user_msg);
+        console.log(err_no_user_msg);
         throw new Meteor.Error(err_no_user_msg);
       };
 
@@ -482,13 +468,13 @@ Meteor.methods({
     try {
       // Make sure the user is logged in before updating
       if (!Meteor.userId()) {
-        console.log("updatePhotoDetails - " + err_no_user_msg);
+        console.log(err_no_user_msg);
         throw new Meteor.Error(err_no_user_msg);
       };
 
       // Make sure the user uploaded a photo
       if (!formPhotoCatador.full_photo) {
-        console.log("updatePhotoDetails - " + err_no_photo_msg);
+        console.log(err_no_photo_msg);
         throw new Meteor.Error(err_no_photo_msg);
       };
 
