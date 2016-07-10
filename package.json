@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "jquery": "^1.12.4",
+    "cordova":"^6.2.0",
+    "meteor-node-stubs":"0.2.3"
+  }
+}
