@@ -1,0 +1,42 @@
+<template name="undeleteCatador">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="panel panel-default">
+        <div class="panel-body">
+          {{#if currentUser}}
+            {{> catadorListUndel}}
+          {{else}}
+            {{> atForm}}
+          {{/if}}
+        </div> <!-- /panel-body -->
+      </div> <!-- /panel -->
+    </div>
+  </div> <!-- /row -->
+</template>
+
+<template name="catadorListUndel">
+  <h2>Recupera&ccedil;&atilde;o de Catadores</h2>
+  {{#if isUserAdm}}
+    <label>Ordenar por</label>
+    <select id="orderSelect">
+      <option value="name">Nome &uarr;</option>
+      <option value="deletionDate" selected>Data de Remo&ccedil;&atilde;o &darr;</option>
+    </select>
+    <ul class="delUndel">
+      {{#each carroceiros}}
+        {{> catadorItemUndel}}
+      {{/each}}
+    </ul>
+  {{else}}
+    {{> flashMessages}}
+  {{/if}}
+</template>
+
+<template name="catadorItemUndel">
+  <li class="delUndel">
+    <button id="undelete">&cularr;</button>
+    <span class="text"><strong>{{name}}</strong> - Removido em {{prettifyDate deleted_on}}</span>
+  </li> 
+</template>
+
+

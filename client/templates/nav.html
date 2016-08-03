@@ -11,7 +11,6 @@
             <span class="icon-bar"></span>
           </button>
 
-          <!-- TODO: reduce resolution of image -->
           <a class="navbar-brand" href="/map">
             <img src="/img/LogoRECO_final-12.png">
           </a>
@@ -61,3 +60,60 @@
   <a href="/logout">SAIR</a>
 </template>
 
+<template name="NavAdm">
+  <div class="nav-container">
+    <!-- Fernando 04/24/16 - I removed "navbar-default" class because it generated  a blank line between nav bar and main screen and its letters for nav items was opaque and in a color difficult to see -->
+    <nav class="navbar navbar-fixed-top">
+      <div class="container-fluid navbar-inner">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-pimp" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+
+          <a class="navbar-brand" href="/adm">
+            <img src="/img/LogoRECO_final-12.png">
+          </a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="navbar-collapse-pimp">
+          <ul class="nav navbar-nav">
+            <li><a href="/adm">VIS&Atilde;O GERAL</a></li>
+            <li><a href="/delete">REMOVER CATADOR</a></li>
+            <li><a href="/undelete">RECUPERAR CATADOR</a></li>
+            <!--li><a href="/moderation">MODERA&Ccedil;&Atilde;O</a></li-->
+          </ul>
+
+          <ul class="nav navbar-nav navbar-right">
+            <li>{{> accountButtonsAdm}}</li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- / container-fluid -->
+    </nav><!-- / navbar -->
+  </div>
+  <script type="text/javascript">
+    $(document).ready(function(){
+      $('.navbar-collapse a').click(function(){
+        $(".navbar-collapse").collapse('hide');
+      });
+    });
+  </script>
+</template>
+
+<template name="accountButtonsAdm">
+  {{#if currentUser}}
+    {{> LogoutButtonAdm}}
+  {{else}}
+    {{> LoginButtonAdm}}
+  {{/if}}
+</template>
+
+<template name="LoginButtonAdm">
+  <a href="/loginAdm">CADASTRE-SE/ENTRE</a>
+</template>
+
+<template name="LogoutButtonAdm">
+  <a href="/logoutAdm">SAIR</a>
+</template>

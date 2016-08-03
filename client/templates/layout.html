@@ -1,13 +1,17 @@
 <template name="ApplicationLayout">
-    
   {{> Nav}}
-
   <div class="container-responsive">
     <div class="container-fluid">
-      
       {{> yield}}
-      
     </div>
   </div>
-  
+</template>
+
+<template name="AdmApplicationLayout">
+  {{> NavAdm}}
+  <div class="container-responsive">
+    <div class="container-fluid">
+      {{> yield}}
+    </div>
+  </div>
 </template>

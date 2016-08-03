@@ -502,5 +502,31 @@ Meteor.methods({
         throw new Meteor.Error(err_system_msg);
       };
     };
+  },
+
+  //Sets status of catador according to parameters - available only for admin users
+  'setStatusCatador' (_id, status) {
+    try {
+      // Make sure the user is logged in before inserting
+      if (!isUserAdm()) {
+        console.log(err_access_adm_msg);
+        throw new Meteor.Error(err_access_adm_msg);
+      };
+
+      var deletedOn = null;
+      if (status == 'D') {
+        deletedOn = new Date();
+      }
+      Carroceiros.update({"_id": _id}, {$set:{"moderation_status":status, deleted_on: deletedOn}});
+    } // try
+    catch (error) {
+      console.log("Error in setStatusCatador");
+      console.log(error);
+      if (error.error) {
+        throw new Meteor.Error(error.error);
+      } else {
+        throw new Meteor.Error(err_system_msg);
+      };
+    };
   }
 });

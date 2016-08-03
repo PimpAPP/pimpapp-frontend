@@ -1,0 +1,44 @@
+<template name="deleteCatador">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="panel panel-default">
+        <div class="panel-body">
+          {{#if currentUser}}
+            {{> catadorListDel}}
+          {{else}}
+            {{> atForm}}
+          {{/if}}
+        </div> <!-- /panel-body -->
+      </div> <!-- /panel -->
+    </div>
+  </div> <!-- /row -->
+</template>
+
+<template name="catadorListDel">
+  <h2>Remo&ccedil;&atilde;o de Catadores</h2>
+  {{#if isUserAdm}}
+    <label>Ordenar por</label>
+    <select id="orderSelect">
+      <option value="name" selected>Nome &uarr;</option>
+      <option value="creationDate">Data de Cria&ccedil;&atilde;o &darr;</option>
+    </select>
+    <ul class="delUndel">
+      {{#each carroceiros}}
+        {{> catadorItemDel}}
+      {{/each}}
+    </ul>
+  {{else}}
+    {{> flashMessages}}
+  {{/if}}
+
+</template>
+
+<template name="catadorItemDel">
+  <li class="delUndel">
+    <button id="delete">&times;</button>
+    <span class="text"><strong><a href='/catadorprofile/{{id}}?adm=true'>{{name}}</a>
+</strong> - Criado em {{prettifyDate created_on}}</span>
+  </li> 
+</template>
+
+

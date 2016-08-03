@@ -34,6 +34,14 @@ img.partners-height {
     padding: 5px;
 }
 
+li.delUndel {
+  list-style: none;
+}
+
+ul.delUndel {
+  padding: 0px;
+}
+
 body {
   position: relative;
   background-image:url('/img/PadraoAzulejo.jpg');
