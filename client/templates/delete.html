@@ -22,7 +22,7 @@
       <option value="name" selected>Nome &uarr;</option>
       <option value="creationDate">Data de Cria&ccedil;&atilde;o &darr;</option>
     </select>
-    <ul class="delUndel">
+    <ul class="delUndelMod">
       {{#each carroceiros}}
         {{> catadorItemDel}}
       {{/each}}
@@ -34,7 +34,7 @@
 </template>
 
 <template name="catadorItemDel">
-  <li class="delUndel">
+  <li class="delUndelMod">
     <button id="delete">&times;</button>
     <span class="text"><strong><a href='/catadorprofile/{{id}}?adm=true'>{{name}}</a>
 </strong> - Criado em {{prettifyDate created_on}}</span>

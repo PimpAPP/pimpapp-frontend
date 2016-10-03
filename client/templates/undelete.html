@@ -22,7 +22,7 @@
       <option value="name">Nome &uarr;</option>
       <option value="deletionDate" selected>Data de Remo&ccedil;&atilde;o &darr;</option>
     </select>
-    <ul class="delUndel">
+    <ul class="delUndelMod">
       {{#each carroceiros}}
         {{> catadorItemUndel}}
       {{/each}}
@@ -33,7 +33,7 @@
 </template>
 
 <template name="catadorItemUndel">
-  <li class="delUndel">
+  <li class="delUndelMod">
     <button id="undelete">&cularr;</button>
     <span class="text"><strong>{{name}}</strong> - Removido em {{prettifyDate deleted_on}}</span>
   </li> 

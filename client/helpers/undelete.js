@@ -15,7 +15,7 @@ Template.catadorListUndel.helpers({
 
 Template.catadorListUndel.events({
   'click #undelete'() {
-    Meteor.call('setStatusCatador', this._id, 'P');
+    Meteor.call('setStatusCatador', this._id, 'D', 'P');
   },
   'change #orderSelect'(event, template) {
      Session.set('orderSelect', template.find("#orderSelect").value);

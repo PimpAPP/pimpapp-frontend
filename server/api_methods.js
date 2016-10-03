@@ -505,19 +505,23 @@ Meteor.methods({
   },
 
   //Sets status of catador according to parameters - available only for admin users
-  'setStatusCatador' (_id, status) {
+  'setStatusCatador' (_id, currentStatus, targetStatus) {
     try {
       // Make sure the user is logged in before inserting
       if (!isUserAdm()) {
         console.log(err_access_adm_msg);
         throw new Meteor.Error(err_access_adm_msg);
       };
-
-      var deletedOn = null;
-      if (status == 'D') {
-        deletedOn = new Date();
-      }
-      Carroceiros.update({"_id": _id}, {$set:{"moderation_status":status, deleted_on: deletedOn}});
+      if (currentStatus == 'D' || targetStatus == 'D') { // if it is delete or undelete
+        var deletedOn = null;
+        if (targetStatus == 'D') {
+          deletedOn = new Date();
+        }
+        Carroceiros.update({"_id": _id}, {$set:{"moderation_status":targetStatus, deleted_on: deletedOn}});
+      } else { // if it is moderation
+        moderatedOn = new Date();
+        Carroceiros.update({"_id": _id}, {$set:{"moderation_status":targetStatus, moderated_on: moderatedOn}});
+      };
     } // try
     catch (error) {
       console.log("Error in setStatusCatador");
