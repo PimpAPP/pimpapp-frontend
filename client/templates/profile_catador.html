@@ -14,7 +14,7 @@
             {{/if}}
 
           {{else}}
-            {{> atForm}}
+            {{> atForm}}  <!-- standard login form - need to be logged in -->
           {{/if}}
 
         </div> <!-- /panel-body -->
@@ -34,7 +34,7 @@
   <div class="row">
     <div class="col-md-12 text-center">
       <div class="image-container">
-        {{> imageView}}
+        {{> imageView}}  <!-- load photo (in avatar format) of catador -->
       </div>
     </div>
   </div>
@@ -51,7 +51,7 @@
       <hr>
       <span class="text-muted">Telefone 1: </span>{{telephone1}} {{operator_telephone1}}
       {{#if whatsapp1}}
-        <i class="fa fa-whatsapp"></i>
+        <i class="fa fa-whatsapp"></i>  <!-- whatsapp symbol -->
       {{/if}}
       {{#if internet1}}
         <span class="text-muted"> - Acessa internet na rua</span>
@@ -59,7 +59,7 @@
       <br>
       <span class="text-muted">Telefone 2: </span>{{telephone2}} {{operator_telephone2}}
       {{#if whatsapp2}}
-        <i class="fa fa-whatsapp"></i>
+        <i class="fa fa-whatsapp"></i> <!-- whatsapp symbol -->
       {{/if}}
       {{#if internet2}}
         <span class="text-muted"> - Acessa internet na rua</span>
@@ -82,6 +82,7 @@
   <div class="row">
     <div class="col-md-12">
       <hr>
+      <!-- images of symbols that represent services made by this catador -->
       <div class="profile-services">
         <h4>Servi&ccedil;os</h4>
         {{#if services_recyclable}}
@@ -129,17 +130,6 @@
       <button class="btn btn-default pull-right photo-button-update">
         <i class="glyphicon glyphicon-pencil profile"></i> Atualizar Foto
       </button>
-
-      <!-- If we think autoform is the way to go, then run:
-      in terminal: meteor add yogiben:autoform-modals
-      in collections.js, define CatadoresUpdate collection, then
-      code here:
-      {{> autoformModals}}
-      {{#afModal class="btn btn-default pull-right profile-button-update" 
-        schema="CatadorProfileInsertSchema" meteormethod="updateCatadorDetails" operation="insert"}}
-        Atualizar
-      {{/afModal}}-->
-
     </div>
   </div> <!-- /row -->
 </template>
@@ -147,6 +137,7 @@
 <template name="imageView">
   {{#if images.count}}
     {{#each images}}
+      <!-- photo (in avatar format) of catador -->
       <div>
         <a href="{{this.url}}" target="_blank"><img class="img-circle avatar avatar-original"
           style="-webkit-user-select:none; display:block; margin:auto;"
@@ -158,6 +149,7 @@
   {{/if}}
 </template>
 
+<!-- modal template that shows legend of all symbols of services and describes each service -->
 <template name="modalServices">
     <div class="modal fade modal-services-info">
         <div class="modal-dialog">
@@ -245,6 +237,8 @@
     </div>
 </template>
 
+<!-- modal template that permits update all information of catador record, except its photo -->
+<!-- It works this way: there is a checkbox before each field name. When loaded these checkboxes are unchecked and there are no space to update any field. If user check one box, it is enabled a field in front of its name with a space filled with current recorded value in database, that can be edited. When form is submitted, only items checked will be considered for update. Every time user uncheck a field, its value comes back to original value in database and any update of it is lost -->
 <template name="modalUpdateInfo">
   <div class="modal fade modal-services-info">
     <div class="modal-dialog">
@@ -424,7 +418,7 @@
           <br>
         </fieldset>
 
-        {{> flashMessages}}
+        {{> flashMessages}}  <!-- messages for user -->
         <button type="submit" class="btn btn-primary">Atualizar Catador</button>
         {{/autoForm}}
 
@@ -438,6 +432,7 @@
   </div>
 </template>
 
+<!-- modal template that shows current photo of catador and permits update it -->
 <template name="modalPhotoInfo">
   <div class="modal fade modal-services-info">
     <div class="modal-dialog">
@@ -453,7 +448,7 @@
           <div class="row">
             <div class="col-md-12 text-center">
               <div class="image-container">
-                {{> imageView}}
+                {{> imageView}}  <!-- current photo (in avatar format) of catador -->
               </div>
             </div>
           </div>
@@ -464,7 +459,7 @@
           {{> afQuickField name="full_photo" label=false}}
         </fieldset>
 
-        {{> flashMessages}}
+        {{> flashMessages}}  <!-- messages for user -->
         <button type="submit" class="btn btn-primary">Atualizar Catador</button>
         {{/autoForm}}
 

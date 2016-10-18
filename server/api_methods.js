@@ -2,7 +2,7 @@
 
 Meteor.methods({
 
-  // TODO: insert records in all tables of database related to catador 
+  // inserts records in all tables of database related to catador
   submitCatadorRegistration: function(formInsertCatador) {
     try {
       // Make sure the user is logged in before inserting
@@ -11,6 +11,7 @@ Meteor.methods({
         throw new Meteor.Error(err_no_user_msg);
       };
 
+      // first inserts catador main data
       var catador = {
         catador_user_id: String,
         id: String,
@@ -30,9 +31,9 @@ Meteor.methods({
 
       catador.catador_user_id = null;
       catador.id = null;
-      catador.moderation_status = 'P';
+      catador.moderation_status = 'P';   // pending
       catador.name = formInsertCatador.name;
-      catador.catador_type = 'C';
+      catador.catador_type = 'C';        // catador
       catador.allow_public_edition = true;
       catador.miniBio = formInsertCatador.miniBio;
       catador.email = formInsertCatador.email;
@@ -46,10 +47,11 @@ Meteor.methods({
       var responseCarrIns = Carroceiros.insert(catador);
       if (!responseCarrIns) {
         console.log(responseCarrIns);
-        throw new Meteor.Error(err_insert_cat_msg);
+        throw new Meteor.Error(err_insert_cat_prof_msg);
       } else {
         catador.id = responseCarrIns;
 
+        // puts _id (primary key) in id field that points to original record from what this record comes - in first insertion they are the same, but in updates, _id and id becomes different - id field is used to track historic of a catador
         var responseCarrUpd = Carroceiros.update({"_id":catador.id},{$set:{"id":catador.id}});
         if (!responseCarrUpd) {
           console.log(responseCarrUpd);
@@ -57,6 +59,7 @@ Meteor.methods({
         };
       };
 
+      // inserts catador geolocation data based on address filled by user
       var geolocation = {
         catador_id: String,
         moderation_status: String,
@@ -79,6 +82,7 @@ Meteor.methods({
         throw new Meteor.Error(err_insert_geo_msg);
       };
 
+      // inserts catador address data, split automatically by autocomplete package
       var address = {
         catador_id: String,
         moderation_status: String,
@@ -90,6 +94,7 @@ Meteor.methods({
         zip: String,
         user_id: String,
         created_on: Date
+
       };
 
       address.catador_id = catador.id;
@@ -109,6 +114,7 @@ Meteor.methods({
         throw new Meteor.Error(err_insert_addr_msg);
       }
 
+      // inserts catador telephones data
       var telephone = {
         catador_id: String,
         moderation_status: String,
@@ -143,6 +149,7 @@ Meteor.methods({
         throw new Meteor.Error(err_insert_tel_msg);
       };
 
+      // inserts catador services data
       var service = {
         catador_id: String,
         moderation_status: String,
@@ -180,6 +187,7 @@ Meteor.methods({
         throw new Meteor.Error(err_insert_serv_msg);
       };
 
+      // inserts catador photo
       if (formInsertCatador.full_photo) {
         var responsePhotoUpd = Images.update({"_id":formInsertCatador.full_photo},{$set:{"catador_id":catador.id, "moderation_status":catador.moderation_status}}); 
         if (!responsePhotoUpd) {
@@ -188,7 +196,7 @@ Meteor.methods({
         };
       };
     } // try
-    catch (error) {
+    catch (error) {  // handle any occurred error
       console.log("Error in submitCatadorRegistration");
       console.log(error);
       if (error.error) {
@@ -199,7 +207,7 @@ Meteor.methods({
     };
   },
 
-  // Insert new records according fields that user wants to update and update previous record with moderation status equal to "Historic" - "H"
+  // Insert new records according fields that user wants to update and updates previous record with moderation status equal to "Historic" - "H"
   updateCatadorDetails: function(formUpdateCatador) {
     try {
       // Make sure the user is logged in before updating
@@ -209,7 +217,7 @@ Meteor.methods({
       };
 
       var bol_itemChecked = false;
-      var all_moderation_status = 'P';
+      var all_moderation_status = 'P';   // pending
       var all_user_id = Meteor.userId();
       var all_created_on = new Date();
 
@@ -225,7 +233,7 @@ Meteor.methods({
         // don't change catador.id field - it is always the same for all historic records of one catador
         catador.catador_user_id = null;
         catador.moderation_status = all_moderation_status;
-        catador.catador_type = 'C';
+        catador.catador_type = 'C';   // catador
         catador.allow_public_edition = true;
         catador.user_id = all_user_id;
         catador.created_on = all_created_on;
@@ -253,11 +261,12 @@ Meteor.methods({
           catador.observations = formUpdateCatador.insertFields.observations;
         };
 
+        // inserts a new catador record
         var responseCarrIns = Carroceiros.insert(catador);
         if (!responseCarrIns) {
           console.log(responseCarrIns);
-          throw new Meteor.Error(err_update_cat_msg);
-        } else {
+          throw new Meteor.Error(err_update_cat_prof_msg);
+        } else {  // updates previous record for this catador with status = Historic
           var responseCarrUpd = Carroceiros.update({"_id":_idCatador},{$set:{"moderation_status":"H"}});
           if (!responseCarrUpd) {
             console.log(responseCarrUpd);
@@ -306,11 +315,12 @@ Meteor.methods({
           telephone.internet2 = formUpdateCatador.insertFields.internet2;
         };
 
+        // inserts a new telephone record for this catador
         var responseTelIns = TelephoneS.insert(telephone);
         if (!responseTelIns) {
           console.log(responseTelIns);
           throw new Meteor.Error(err_update_tel_msg);
-        } else {
+        } else { // updates previous record for this telephone with status = Historic
           var responseTelUpd = TelephoneS.update({"_id":_idTelephone},{$set:{"moderation_status":"H"}});
           if (!responseTelUpd) {
             console.log(responseTelUpd);
@@ -352,11 +362,12 @@ Meteor.methods({
           geolocation.user_id = all_user_id;
           geolocation.created_on = all_created_on;
 
+          // inserts a new geolocation record for this catador
           var responseGeoIns = GeolocationS.insert(geolocation);
           if (!responseGeoIns) {
             console.log(responseGeoIns);
             throw new Meteor.Error(err_update_geo_msg);
-          } else {
+          } else {  // updates previous record for this geolocation with status = Historic
             var responseGeoUpd = GeolocationS.update({$and: [{'catador_id':formUpdateCatador.id}, {'moderation_status': {$in: statusShow}}]},{$set:{"moderation_status":"H"}});
             if (!responseGeoUpd) {
               console.log(responseGeoUpd);
@@ -364,7 +375,7 @@ Meteor.methods({
             }; //if (!responseGeoUpd)
           }; //if (!responseGeoIns)
 
-          // Change addresses fields
+          // Change addresses fields split by autocomplete package
           address.base_address = formUpdateCatador.insertFields.complete_address.fullAddress;
           address.city = formUpdateCatador.insertFields.complete_address.city;
           address.state = formUpdateCatador.insertFields.complete_address.state;
@@ -375,11 +386,12 @@ Meteor.methods({
           address.region = formUpdateCatador.insertFields.region;
         };
 
+        // inserts a new address record for this catador
         var responseAddrIns = AddressS.insert(address);
         if (!responseAddrIns) {
           console.log(responseAddrIns);
           throw new Meteor.Error(err_update_addr_msg);
-        } else {
+        } else {  // updates previous record for this address with status = Historic
           var responseAddrUpd = AddressS.update({"_id":_idAddress},{$set:{"moderation_status":"H"}});
           if (!responseAddrUpd) {
             console.log(responseAddrUpd);
@@ -435,11 +447,12 @@ Meteor.methods({
           service.services_other_materials_description = formUpdateCatador.insertFields.services_other_materials_description;
         };
 
+        // inserts a new services record for this catador
         var responseServIns = ServiceS.insert(service);
         if (!responseServIns) {
           console.log(responseServIns);
           throw new Meteor.Error(err_update_serv_msg);
-        } else {
+        } else {  // updates previous record for these services with status = Historic
           var responseServUpd = ServiceS.update({"_id":_idService},{$set:{"moderation_status":"H"}});
           if (!responseServUpd) {
             console.log(responseServUpd);
@@ -448,11 +461,11 @@ Meteor.methods({
         }; //if (!responseServIns)
       }; //if (formUpdateCatador.changeServices_recyclableInfo || ...
 
-      if (!bol_itemChecked) {
+      if (!bol_itemChecked) {  // if none item was chosen to update by user
         throw new Meteor.Error(err_no_item_msg);
       };
     } // try
-    catch (error) {
+    catch (error) {  // handle any occurred error
       console.log("Error in updateCatadorDetails");
       console.log(error);
       if (error.error) {
@@ -485,7 +498,7 @@ Meteor.methods({
       if (!responsePhotoUpd) {
         console.log(responsePhotoUpd);
         throw new Meteor.Error(err_update_photo_msg);
-      } else if (currPhoto) {
+      } else if (currPhoto) {  // if there is a previous photo, update its status to Historic
         var responsePhotoHistUpd = Images.update({"_id":currPhoto._id},{$set:{"moderation_status":"H"}});
         if (!responsePhotoHistUpd) {
           console.log(responsePhotoHistUpd);
@@ -493,7 +506,7 @@ Meteor.methods({
         } //if (!responsePhotoHistUpd)
       }; //if (!responsePhotoUpd)
     } // try
-    catch (error) {
+    catch (error) {  // handle any occurred error
       console.log("Error in updatePhotoDetails");
       console.log(error);
       if (error.error) {
@@ -507,7 +520,7 @@ Meteor.methods({
   //Sets status of catador according to parameters - available only for admin users
   'setStatusCatador' (_id, currentStatus, targetStatus) {
     try {
-      // Make sure the user is logged in before inserting
+      // Make sure the user is logged in and he/she is administrator
       if (!isUserAdm()) {
         console.log(err_access_adm_msg);
         throw new Meteor.Error(err_access_adm_msg);
@@ -523,7 +536,7 @@ Meteor.methods({
         Carroceiros.update({"_id": _id}, {$set:{"moderation_status":targetStatus, moderated_on: moderatedOn}});
       };
     } // try
-    catch (error) {
+    catch (error) {  // handle any occurred error
       console.log("Error in setStatusCatador");
       console.log(error);
       if (error.error) {

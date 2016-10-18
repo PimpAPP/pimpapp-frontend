@@ -8,7 +8,6 @@ Template.catadorprofile.onCreated(function() {
   this.subscribe('addresses');
   this.subscribe('telephones');
   this.subscribe('services');
-  //this.subscribe('posts');
 });
 
 Template.catadorDetails.onCreated(function() {
@@ -19,14 +18,17 @@ Template.catadorDetails.onCreated(function() {
   image = Images.find({$and: [{'catador_id':Session.get('catador').id}, {'moderation_status': {$in: statusShow}}]});
 });
 
+// clear all messages sent to user to don't dirty future pages
 Template.modalUpdateInfo.onDestroyed(function() {
   FlashMessages.clear();
 });
 
+// clear all messages sent to user to don't dirty future pages
 Template.modalPhotoInfo.onDestroyed(function() {
   FlashMessages.clear();
 });
 
+// retrieve data from session variables
 Template.catadorDetails.helpers({
   name: function() {
     return Session.get('catador').name;
@@ -147,23 +149,22 @@ Template.catadorDetails.helpers({
   }
 });
 
-
 Template.catadorDetails.events({
   'click .profile-button-update': function(event, template) {
     console.log("clicked update button");
 
-    // call screen of update
+    // call screen for update catador data, except photo
     Modal.show('modalUpdateInfo');
   },
   'click .photo-button-update': function(event, template) {
     console.log("clicked photo button");
 
-    // call screen of photo update
+    // call screen for update photo of catador
     Modal.show('modalPhotoInfo');
   },
   'click .profile-button-services': function() {
     console.log("clicked services button");
-    Modal.show('modalServices');
+    Modal.show('modalServices');  // call screen of services legends and descriptions
   }
 });
 
@@ -175,9 +176,10 @@ Template.imageView.helpers({
 });
 
 Template.modalUpdateInfo.onRendered (function() {
-  setUpdateInitialValues(this);
+  setUpdateInitialValues(this);  // call function to load initial (database) data to fields that can be updated
 });
 
+// when receive an event that user clicked on a check box, changes session values of this check box to checked or unchecked, depending on its previous state, puts corresponding field to visible or hidden and fill this field with value loaded from database, if it is visible
 Template.modalUpdateInfo.events({
   'change #changeNameInfo': function(event, template) {
     if (Session.get('changeName')) {
@@ -290,7 +292,6 @@ Template.modalUpdateInfo.events({
     }
   },
   'change #changeEmailInfo': function(event, template) {
-    template.find('#email').value = Session.get('catador').email;
     if (Session.get('changeEmail')) {
       Session.set('changeEmail', false);
       template.find('#email').style.visibility = "hidden";
@@ -298,6 +299,7 @@ Template.modalUpdateInfo.events({
     else {
       Session.set('changeEmail', true);
       template.find('#email').style.visibility = "visible";
+      template.find('#email').value = Session.get('catador').email;
     }
   },
   'change #changeSocialNetworkInfo': function(event, template) {
@@ -448,6 +450,7 @@ Template.modalUpdateInfo.events({
       Session.set('changeServices_other_materials', false);
       template.find('#services_other_materials').style.visibility = "hidden";
 
+      //handles other materials description field according database value of other materials field
       setServices_Other_Materials_Description(Session.get('services').services_other_materials, template);
     }
     else {
@@ -468,15 +471,16 @@ Template.modalUpdateInfo.events({
     }
   },
   'change #services_other_materials': function(event, template) {
+      //handles other materials description field according what user put in other materials field
       setServices_Other_Materials_Description(event.target.checked, template);
   }
 });
 
 function setServices_Other_Materials_Description(servicesChecked, template) {
-    if (servicesChecked) {
+    if (servicesChecked) {  // if other materials is checked (catador works with other materials)
       template.find('#changeServices_other_materials_descriptionInfo').disabled = false;
     }
-    else {
+    else { // if other materials is unchecked (catador doesn't work with other materials)
       template.find('#changeServices_other_materials_descriptionInfo').disabled = true;
       template.find('#changeServices_other_materials_descriptionInfo').checked = false;
       Session.set('changeServices_other_materials_description', false);

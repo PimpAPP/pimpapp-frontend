@@ -6,7 +6,7 @@
           {{#if currentUser}}
             {{> moderationList}}
           {{else}}
-            {{> atForm}}
+            {{> atForm}}  <!-- standard login form - need to be logged in -->
           {{/if}}
         </div> <!-- /panel-body -->
       </div> <!-- /panel -->
@@ -16,12 +16,13 @@
 
 <template name="moderationList">
   <h2>Modera&ccedil;&atilde;o de Catadores</h2>
+  <!-- functionality just allowed for admin users -->
   {{#if isUserAdm}}
     <label>Ordenar por</label>
     <select id="orderSelect">
-      <option value="name" selected>Nome &uarr;</option>
+      <option value="name" selected>Nome &uarr;</option>  <!-- name ascending -->
       <option value="moderationDate">Data de Modera&ccedil;&atilde;o &darr;
-</option>
+</option> <!-- moderation date descending -->
     </select>
     &nbsp;&nbsp;
     <label>Filtrar por Situa&ccedil;&atilde;o</label>
@@ -39,20 +40,19 @@
       {{/each}}
     </ul>
   {{else}}
-    {{> flashMessages}}
+    {{> flashMessages}}  <!-- messages for user during some seconds -->
   {{/if}}
 
 </template>
 
 <template name="moderationItem">
+  <!-- radio with P (Pending), A (Approved) and R (Rejected) options -->
   <li class="delUndelMod">
     <input id="{{_id}}_P" type="radio" name="{{_id}}" value="P" {{pending}}>P
     &nbsp;&nbsp;
     <input id="{{_id}}_A" type="radio" name="{{_id}}" value="A" {{approved}}>A
     &nbsp;&nbsp;
     <input id="{{_id}}_R" type="radio" name="{{_id}}" value="R" {{rejected}}>R
-    <span class="text"><strong><a href='/catadorprofile/{{id}}?adm=true'> - {{name}}</a></strong> {{#if moderated_on}} - Moderado em {{prettifyDate moderated_on}}{{/if}}</span>
+    <span class="text"><strong><a href='/catadorprofile/{{id}}?adm=true'> - {{name}}</a></strong> {{#if moderated_on}} - Moderado em {{prettifyDate moderated_on}}{{/if}}</span>  <!-- moderation date with standard format for human reading -->
   </li> 
 </template>
-
-

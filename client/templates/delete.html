@@ -6,7 +6,7 @@
           {{#if currentUser}}
             {{> catadorListDel}}
           {{else}}
-            {{> atForm}}
+            {{> atForm}}  <!-- standard login form - need to be logged in -->
           {{/if}}
         </div> <!-- /panel-body -->
       </div> <!-- /panel -->
@@ -16,11 +16,12 @@
 
 <template name="catadorListDel">
   <h2>Remo&ccedil;&atilde;o de Catadores</h2>
+  <!-- functionality just allowed for admin users -->
   {{#if isUserAdm}}
     <label>Ordenar por</label>
     <select id="orderSelect">
-      <option value="name" selected>Nome &uarr;</option>
-      <option value="creationDate">Data de Cria&ccedil;&atilde;o &darr;</option>
+      <option value="name" selected>Nome &uarr;</option> <!-- name ascending -->
+      <option value="creationDate">Data de Cria&ccedil;&atilde;o &darr;</option> <!-- creation date descending -->
     </select>
     <ul class="delUndelMod">
       {{#each carroceiros}}
@@ -28,16 +29,17 @@
       {{/each}}
     </ul>
   {{else}}
-    {{> flashMessages}}
+    {{> flashMessages}}  <!-- messages for user during some seconds -->
+
   {{/if}}
 
 </template>
 
 <template name="catadorItemDel">
   <li class="delUndelMod">
-    <button id="delete">&times;</button>
+    <button id="delete">&times;</button> <!-- X symbol - for deletion when clicked -->
     <span class="text"><strong><a href='/catadorprofile/{{id}}?adm=true'>{{name}}</a>
-</strong> - Criado em {{prettifyDate created_on}}</span>
+</strong> - Criado em {{prettifyDate created_on}}</span> <!-- creation date with standard format for human reading -->
   </li> 
 </template>
 

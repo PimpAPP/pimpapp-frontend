@@ -2,7 +2,6 @@
   Layout of page to register catadores, cooperativas, and ponto de entregas
  -->
 
-
 <template name="Registercarroceiro">
   <div class="panel panel-default">
     <div class="panel-body">
@@ -14,8 +13,7 @@
         <br>
         {{> addCarroceiroForm}}
       {{else}}
-        {{> atForm}}
-        <!-- <p>Sign in first.</p> -->
+        {{> atForm}}  <!-- standard login form - need to be logged in -->
       {{/if}}
     </div>
   </div>
@@ -50,7 +48,7 @@
 </template>
 
 
-<!-- Form to register catador -->
+<!-- Form to register catador -- used autoform package, that automatically maps collections and schemas to form and vice versa, makes most of validation and has manages attributes of fields defined in collections or schemas -->
 <template name="catadorForm">
   {{#autoForm doc=this id="insertCatadorForm" schema="CatadorProfileInsertSchema"
     type="method" meteormethod="submitCatadorRegistration"}}
@@ -105,6 +103,7 @@
     </div>
 
     {{> afQuickField name='socialNetwork'}}
+    <!-- uses a special type for Google autocomplete function works when user types in address field -->
     {{> afQuickField id='complete_address' name='complete_address' type="googleplace"}}
     {{> afQuickField name='region'}}
     {{> afQuickField name='carrocaPimpada'}}
@@ -136,7 +135,7 @@
     {{> afQuickField name="full_photo"}}
 
   </fieldset>
-  {{> flashMessages}}
+  {{> flashMessages}}   <!-- messages for user -->
   <button type="submit" class="btn btn-primary">Cadastrar Catador</button>
   {{/autoForm}}
 </template>

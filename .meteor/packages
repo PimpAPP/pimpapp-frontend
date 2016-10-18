@@ -27,7 +27,6 @@ accounts-password
 accounts-ui
 aldeed:autoform
 aldeed:collection2
-insecure
 lukemadera:autoform-googleplace
 service-configuration
 google

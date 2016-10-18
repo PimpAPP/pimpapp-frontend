@@ -3,14 +3,15 @@ var MAP_ZOOM = 15;
 
 // Load GoogleMaps on startup
 Meteor.startup(function() {
-  T9n.setLanguage("pt");
+  T9n.setLanguage("pt");   // sets language to Portuguese
   GoogleMaps.load({
+    // key to identify this appliaction for Google for purpose of authorization and limits
     key: 'AIzaSyDu33iySSD6m4Hr1fkw46-ch9csZPL1_2M',
     libraries: 'places'
   });
 });
 
-// Create map and geolocate
+// Create map and geolocate according user current location
 Template.map.onCreated(function() {
   this.subscribe('carroceiros');
   this.subscribe('geolocations');
@@ -29,7 +30,7 @@ Template.map.onCreated(function() {
       }
     }
 
-    // create marker at coordinates
+    // create current location marker at coordinates
     marker = new google.maps.Marker({
         position: new google.maps.LatLng(latLng.lat, latLng.lng),
         map: map.instance
@@ -83,7 +84,7 @@ function attachSearchBox(map, marker) {
   var searchBox = new google.maps.places.SearchBox(input);
   map.instance.controls[google.maps.ControlPosition.TOP_CENTER].push(input);
 
-  // move marker and set new map center when user inputs place
+  // move location marker and set new map center when user inputs place
   searchBox.addListener('places_changed', function() {
     var places = searchBox.getPlaces();
     if (places.length == 0) {
@@ -117,19 +118,24 @@ $(document).on('input', '.clearable', function(){
 function add_catadores() {
   var icon = catador_icon_source;
 
+  // query catadores in database
   var carroceiroType = 'C';
   var catadores = Carroceiros.find({$and: [{'catador_type': carroceiroType},{'moderation_status': {$in: statusShow}}]}).fetch();
 
   catadores.forEach(function(catador) {
-    // retrieve data for catador
+    // retrieves data for catador
 
     var catadorID = catador.id;
     var name = catador.name;
+
+    // retrieves geolocation of catador
     var geolocation = GeolocationS.findOne({$and: [{'catador_id':catador.id}, {'moderation_status': {$in: statusShow}}]});
     var locationObject = {
       'lat': geolocation.latitude,
       'lng': geolocation.longitude
     };
+
+    // retrieves photo of catador
     var cursor_image = Images.find({$and: [{'catador_id':catador.id}, {'moderation_status': {$in: statusShow}}]});
     var image_url = "";
     cursor_image.forEach(function(image) { image_url = image.url();});
@@ -145,14 +151,12 @@ function add_catadores() {
     contentString += "<a href='/catadorprofile/" + catadorID + "''>";
     contentString += "Veja mais</a>";    
 
-    // to include photo in infowindow, retrieve image here.
-    // then include in html an image tag with src=<url source of image>
-
+    // calls function to put catador icon and associated information in its location of map
     addMarkerInfowindow(locationObject, icon, contentString);
   });
 };
 
-// Adds marker and associated info window to map
+// Adds catador marker and associated info window to map
 function addMarkerInfowindow(addressObject, iconUrl, contentString) {
   var map = GoogleMaps.maps.map.instance;
   var marker = new google.maps.Marker({

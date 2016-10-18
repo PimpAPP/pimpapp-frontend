@@ -4,7 +4,7 @@
       <div class="panel panel-default">
         <div class="panel-body">
           {{#if currentUser}}
-            {{> catadorListUndel}}
+            {{> catadorListUndel}}  <!-- standard login form - need to be logged in -->
           {{else}}
             {{> atForm}}
           {{/if}}
@@ -16,11 +16,12 @@
 
 <template name="catadorListUndel">
   <h2>Recupera&ccedil;&atilde;o de Catadores</h2>
+  <!-- functionality just allowed for admin users -->
   {{#if isUserAdm}}
     <label>Ordenar por</label>
     <select id="orderSelect">
-      <option value="name">Nome &uarr;</option>
-      <option value="deletionDate" selected>Data de Remo&ccedil;&atilde;o &darr;</option>
+      <option value="name">Nome &uarr;</option>  <!-- name ascending -->
+      <option value="deletionDate" selected>Data de Remo&ccedil;&atilde;o &darr;</option> <!-- deletion date descending -->
     </select>
     <ul class="delUndelMod">
       {{#each carroceiros}}
@@ -28,14 +29,14 @@
       {{/each}}
     </ul>
   {{else}}
-    {{> flashMessages}}
+    {{> flashMessages}}  <!-- messages for user during some seconds -->
   {{/if}}
 </template>
 
 <template name="catadorItemUndel">
   <li class="delUndelMod">
-    <button id="undelete">&cularr;</button>
-    <span class="text"><strong>{{name}}</strong> - Removido em {{prettifyDate deleted_on}}</span>
+    <button id="undelete">&cularr;</button>  <!-- undo symbol - for undeletion when clicked -->
+    <span class="text"><strong>{{name}}</strong> - Removido em {{prettifyDate deleted_on}}</span>  <!-- deletion date with standard format for human reading -->
   </li> 
 </template>
 
