@@ -22,7 +22,7 @@ Para mais detalhes veja: http://askubuntu.com/questions/162391/how-do-i-fix-my-l
 ## Criar o APP
 https://recopimp.herokuapp.com/
 
-## Rodando no Andriod:
+## Rodando no Android:
 ```
 export BIND_IP=$(/sbin/ip -o -4 addr list eth0 | awk '{print $4}' | cut -d/ -f1)
 meteor run android --verbose
